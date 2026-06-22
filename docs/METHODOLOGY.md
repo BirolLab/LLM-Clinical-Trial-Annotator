@@ -570,7 +570,7 @@ Phase 5 ran the full atomic family against prod's 94-NCT training cohort on 2026
 
 **outcome_atomic** — 36/94 raw agreement (62% on R1-scoreable). Rule-level: R7 Terminated 8/9 (89%), R1 POSITIVE-pub 8/12 (67%). Architecture health: 1 Cat 2 question gap, 0 Cat 3 aggregator gaps across 94 NCTs. The main remaining lever is Cat 1 evidence gaps (23 NCTs where R1 had a pub our literature pipeline didn't find). Post-hoc: R4 and R5 removed (both had ~46% precision on Positive class), eliminating 14 drug-level false positives.
 
-**classification_atomic** — 92% raw / 75% AMP recall (up from 25% before the DBAASP Tier 0 fix; see 5.4.3). Six of eight AMPs in the cohort caught via deterministic registry hit. Two remaining misses (NCT00002363 SPC3, NCT01639638 CIGB-300) have zero AMP-registry signals and would require a Tier 1b LLM upgrade or an additional research source.
+**classification_atomic** — 92% raw / 75% AMP recall (up from 25% before the DBAASP Tier 0 fix; see 5.4.3). Six of eight AMPs in the cohort caught via deterministic registry hit. The two remaining misses are named peptide compounds with zero AMP-registry signals and would require a Tier 1b LLM upgrade or an additional research source.
 
 **reason_for_failure_atomic** — 4/6 scoreable (67%, up from 50% after web_context Tier 2 addition). The web_context research agent now surfaces press-release evidence for business-reason terminations that registries don't disclose.
 
@@ -759,9 +759,9 @@ Concordance analysis compares agent annotations against human annotations to eva
 
 The human annotation dataset consists of two independent replication passes over the same 1,846 clinical trials:
 
-- **R1 ("Trials Replicate 1")**: Annotated by a team of 7 annotators — Mercan (rows 1-309), Maya (310-617), Anat (617-822), Ali (823-926, 1417-1544), Emre (926-1186), Iris (1187-1417), Berke (1545-1846). Each annotator was assigned a contiguous block of trials. The R1 sheet is therefore a composite of 7 annotators with potentially different working definitions and annotation thoroughness.
+- **R1 ("Trials Replicate 1")**: Annotated by a team of 7 annotators — Annotator 1 (rows 1-309), Annotator 2 (310-617), Annotator 3 (617-822), Annotator 4 (823-926, 1417-1544), Annotator 5 (926-1186), Annotator 6 (1187-1417), Annotator 7 (1545-1846). Each annotator was assigned a contiguous block of trials. The R1 sheet is therefore a composite of 7 annotators with potentially different working definitions and annotation thoroughness.
 
-- **R2 ("Trials Replicate 2")**: Annotated by multiple independent annotators including Emily (rows 1-461, 481-922, 941-1383), Anat (462-480), Ali (923-941), and Iris (1384-1405).
+- **R2 ("Trials Replicate 2")**: Annotated by multiple independent annotators including Annotator 8 (rows 1-461, 481-922, 941-1383), Annotator 3 (462-480), Annotator 4 (923-941), and Annotator 6 (1384-1405).
 
 This structure means that R1 vs R2 concordance measures agreement between two multi-annotator composites — not between two single equivalent independent raters. The 8:1 Peptide ratio (R1=451 True vs R2=56 True) likely reflects inter-annotator variability within R1, not a single coherent disagreement between two replication passes.
 
@@ -837,7 +837,7 @@ All concordance computations, annotator counts, and data displays follow one sta
 **An NCT is considered "annotated" by a human only if at least one of the five annotation fields has a non-blank value.** Rows where all five fields are blank/None are treated as unannotated — the annotator was assigned the row but did not engage with it.
 
 This standard applies everywhere:
-1. **Annotator NCT counts**: Only count rows with at least one filled field. Many annotators left large portions of their assigned rows blank (Ali 12%, Emre 7%, Berke 11% coverage in R1; Emily filled 817 of 1789 assigned rows in R2). Without this filter, counts are misleadingly inflated.
+1. **Annotator NCT counts**: Only count rows with at least one filled field. Many annotators left large portions of their assigned rows blank (Annotator 4 12%, Annotator 5 7%, Annotator 7 11% coverage in R1; Annotator 8 filled 817 of 1789 assigned rows in R2). Without this filter, counts are misleadingly inflated.
 2. **Annotator-filtered concordance**: Only include annotated rows when computing per-annotator concordance.
 3. **R1/R2 flat data**: The `_human_data_as_flat()` function excludes completely blank rows, so overlapping NCT counts and concordance denominators reflect actual annotations only.
 4. **Per-field blank handling**: Within annotated rows, individual fields may still be blank. For `blank_means_skip=True` fields (classification, delivery_mode, outcome, peptide), the pair is skipped if either side is blank. For `reason_for_failure`, outcome-aware handling applies (blank reason + blank outcome = unannotated, blank reason + non-failure outcome = legitimate "no failure").

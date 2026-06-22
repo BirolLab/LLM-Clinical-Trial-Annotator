@@ -3,11 +3,11 @@
 
 **Methodology** (matches `compare_jobs.py` / `heldout_analysis.sh`):
 - Reads post-verifier `verification.fields[].final_value` (with annotation
-  fallback) — the 3-pass verifier can flip outcomes (e.g. NCT03081676
-  milestone: annotation=Unknown → final=Positive on db_confirmed grade).
+  fallback) — the 3-pass verifier can flip outcomes (e.g. a milestone trial:
+  annotation=Unknown → final=Positive on db_confirmed grade).
 - GT consensus rule: R1==R2 (or only one annotator filled in).
 - Exact string matching after normalisation; sequence uses set-containment
-  via `app.services.concordance_service.sequences_match`.
+  via `app.services.value_normalization.sequences_match`.
 
 The two scorers (this + heldout_analysis) should agree on classification,
 peptide, delivery_mode, outcome. Sequence and RfF may differ by denominator
@@ -105,7 +105,7 @@ def get_pred(trial: dict, name: str) -> str:
     """Return the post-verifier final_value for `name`, falling back to the
     pre-verifier annotation value. Matches `scripts/compare_jobs.py:get_pred`
     (the canonical scorer) — the 3-pass verifier can flip outcomes
-    (e.g. NCT03081676 milestone: annotation=Unknown → final=Positive)."""
+    (e.g. a milestone trial: annotation=Unknown → final=Positive)."""
     pipeline_fld = "failure_reason" if name == "reason_for_failure" else name
     for f in (trial.get("verification") or {}).get("fields", []) or []:
         if isinstance(f, dict) and f.get("field_name") in (pipeline_fld, name):
@@ -141,7 +141,7 @@ def score_field(trials: list[dict], gt: dict, field: str) -> dict:
 def score_sequence(trials: list[dict], gt: dict) -> dict:
     """Use sequences_match for set-containment scoring."""
     sys.path.insert(0, str(PKG_ROOT))
-    from app.services.concordance_service import sequences_match
+    from app.services.value_normalization import sequences_match
 
     hits = 0
     misses = 0

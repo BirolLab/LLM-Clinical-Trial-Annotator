@@ -17,7 +17,7 @@ from app.config import CORS_ORIGINS, FRONTEND_DIR, LOGS_DIR
 PATH_PREFIX = "/agent-annotate"
 from app.services.config_service import config_service
 
-from app.routers import health, jobs, status, results, review, settings, concordance
+from app.routers import health, jobs, status, results, review, settings
 
 
 def setup_logging():
@@ -117,8 +117,6 @@ app.include_router(status.router)
 app.include_router(results.router)
 app.include_router(review.router)
 app.include_router(settings.router)
-app.include_router(concordance.router)
-app.include_router(concordance.legacy_router)
 
 # Serve frontend SPA (production build)
 if FRONTEND_DIR.exists():

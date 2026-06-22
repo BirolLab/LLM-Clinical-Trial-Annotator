@@ -14,7 +14,6 @@ from pydantic import BaseModel, Field
 
 from app.services.orchestrator import orchestrator
 from app.services.ollama_client import ollama_client
-from app.services.memory.edam_config import TRAINING_NCTS, ALL_GT_NCTS, TEST_BATCH_NCTS
 
 logger = logging.getLogger("agent_annotate.jobs")
 
@@ -26,7 +25,6 @@ MAX_BATCH_SIZE = 500
 
 class CreateJobRequest(BaseModel):
     nct_ids: list[str]
-    allow_test_batch: bool = False
 
 
 @router.post("")
@@ -70,34 +68,9 @@ async def create_job(req: CreateJobRequest):
             detail="Ollama is unreachable. Ensure Ollama is running at localhost:11434.",
         )
 
-    # Deduplicate
+    # Deduplicate. Any well-formed NCT ID is accepted — Agent Annotate is
+    # annotation-only and does not gate submissions against a ground-truth roster.
     valid_ids = list(dict.fromkeys(valid_ids))
-
-    # Validate against training CSV — only NCTs with human annotations are
-    # scoreable. With allow_test_batch=True the validator widens to the full
-    # 680-NCT GT universe (training + held-out test_batch); EDAM learning
-    # remains gated on TRAINING_NCTS in the orchestrator, so the test-batch
-    # annotations never feed back into memory.
-    allowed = ALL_GT_NCTS if (req.allow_test_batch and ALL_GT_NCTS) else TRAINING_NCTS
-    if allowed:
-        outside = [nct for nct in valid_ids if nct not in allowed]
-        if outside:
-            raise HTTPException(
-                status_code=400,
-                detail=(
-                    f"{len(outside)}/{len(valid_ids)} NCT IDs are not in the training CSV "
-                    f"(human_ground_truth_train_df.csv) and have no human annotations for scoring. "
-                    f"First 10: {outside[:10]}"
-                ),
-            )
-    if req.allow_test_batch and TEST_BATCH_NCTS:
-        n_tb = sum(1 for nct in valid_ids if nct in TEST_BATCH_NCTS)
-        if n_tb:
-            logger.warning(
-                "Job submission includes %d test-batch NCT(s); allow_test_batch=True. "
-                "These annotations will NOT contaminate EDAM (gated on TRAINING_NCTS).",
-                n_tb,
-            )
 
     job = orchestrator.create_job(valid_ids)
     orchestrator.enqueue_job(job.job_id)

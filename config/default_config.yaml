@@ -173,10 +173,9 @@ orchestrator:
   # Atomic pipelines stay running in shadow mode (writes <field>_atomic for
   # audit/comparison) but legacy stays authoritative. Reason: classification
   # atomic and failure_reason atomic both regressed vs legacy on the v42.6.x
-  # 50/100-NCT validations — atomic classification missed AMPs where the
-  # peptide field was correctly True (Curodont, Self-assembling peptide P11-4,
-  # EOM613, NCT05584878, etc.); atomic failure_reason returned empty 0/7
-  # because the chain only fires on outcome=="Failed" and never on
+  # 50/100-NCT validations — atomic classification missed some obvious AMPs
+  # where the peptide field was correctly True; atomic failure_reason returned
+  # empty 0/7 because the chain only fires on outcome=="Failed" and never on
   # Terminated/Withdrawn. Re-evaluate after atomic pipelines beat legacy in
   # head-to-head shadow comparison on a held-out batch.
   prefer_atomic_classification: false
@@ -186,10 +185,9 @@ orchestrator:
   # skip_legacy_when_atomic: false — legacy is the trusted ground truth, must
   #   always run. Atomic stays shadow-only.
   # deterministic_peptide_pregate: false — bidirectional INN-suffix pregate
-  #   had spurious matches ("NS"→peptide via 2-letter sequence, "Curodont"
-  #   brand-name match) and ChEMBL Small-molecule false-negatives on obvious
-  #   peptides ("Liver-enriched antimicrobial peptide 2", "Neoantigen
-  #   Peptides"). Net negative on peptide accuracy vs LLM judgment.
+  #   had spurious matches (e.g. short 2-letter sequences and brand-name
+  #   collisions) and ChEMBL Small-molecule false-negatives on obvious
+  #   peptides. Net negative on peptide accuracy vs LLM judgment.
   # skip_amp_research_for_non_peptides: false — gated AMP research on the
   #   flawed pregate, propagating its FN rate into AMP recall.
   skip_legacy_when_atomic: false

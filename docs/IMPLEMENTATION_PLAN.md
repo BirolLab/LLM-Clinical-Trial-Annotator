@@ -237,7 +237,7 @@ Research agents make **direct HTTP calls** to external APIs via `httpx`. Agent A
 - Marks reliability as supplementary
 
 ### Phase 1 Verification
-- Each agent tested with known NCT ID (e.g., NCT04043065)
+- Each agent tested with a known NCT ID (e.g., NCT12345678)
 - Returns valid ResearchResult with populated SourceCitations
 - Edge case: trial with no publications, no UniProt matches
 - Rate limiting works under concurrent execution

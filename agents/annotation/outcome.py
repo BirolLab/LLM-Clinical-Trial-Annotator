@@ -95,7 +95,7 @@ def _classify_publication(title_or_snippet: str, nct_id: str) -> str:
         "phase i:", "phase ii:", "phase 1:", "phase 2:",
         # v42.7.20: explicit trial-report markers — "Clinical Trial" alone
         # is a strong signal even without phase number (e.g. "A 12-Month
-        # Clinical Trial of CBX129801"). NCT01681290 missed under earlier
+        # Clinical Trial of [compound]"). An example trial missed under earlier
         # _TRIAL_SIGNALS that required phase markers.
         "clinical trial", "clinical study",
         "primary endpoint", "primary outcome", "secondary endpoint",
@@ -121,8 +121,8 @@ def _classify_publication(title_or_snippet: str, nct_id: str) -> str:
         "systematic review", "meta-analysis", "narrative review", "mini-review",
         "recent developments", "recent advances",
         # v42.6.15 (2026-04-24): review-shape patterns that Job #81 missed
-        # and caused 2 Positive over-calls (NCT04449926 BCG vaccines for
-        # dementia; NCT04461795 CGRP monoclonal antibodies). These titles
+        # and caused 2 Positive over-calls (a BCG vaccines for
+        # dementia review; a CGRP monoclonal antibodies review). These titles
         # lacked the word "review" but are structurally reviews — they
         # describe drug CLASSES, list multiple drugs, or cover a treatment
         # topic without reporting from a specific trial.
@@ -156,7 +156,7 @@ def _classify_publication(title_or_snippet: str, nct_id: str) -> str:
     # v42.7.20 (2026-04-28): default flipped to "general". Cross-job
     # analysis of Jobs #95/#96/#97/#98 showed `positive → unknown` is
     # the dominant outcome miss class (~9-12 misses per slice). Spot
-    # inspection (NCT01677676 FP-01.1 / NCT05137314 PLG0206 / etc.)
+    # inspection of several peptide-candidate trials
     # revealed pubs whose titles describe the drug CLASS or MECHANISM
     # but contain no explicit trial signal — these were defaulting to
     # `trial_specific` under v41b's rule, leading the LLM to see many
@@ -345,9 +345,8 @@ def _build_evidence_dossier(research_results: list, nct_id: str = "") -> dict:
     # Phase 1 vaccine trials' primary endpoints are immunogenicity, not
     # efficacy in the traditional sense; treating "induces immune response"
     # as a Positive signal IFF the trial is a vaccine/immunotherapy trial
-    # closes the under-call gap surfaced in Job #83 (NCT03199872 RhoC,
-    # NCT03272269 peptide immunotherapy, NCT03645148 pancreatic vaccine,
-    # NCT03380871 lung cancer vaccine).
+    # closes the under-call gap surfaced in Job #83 (several cancer-vaccine /
+    # peptide-immunotherapy trials).
     _IMMUNOGENICITY_KW = [
         "induces immune response", "induces immune responses",
         "induces long-lasting immune", "long-lasting immune response",
@@ -774,8 +773,8 @@ def _format_dossier_for_llm(dossier: dict, nct_id: str) -> str:
     # which can mis-tag review articles that mention the drug.
     # v42.7.13 (2026-04-27): ALWAYS print this line (even when count=0) so
     # the LLM can see the absence of registered pubs and apply Rule 7's
-    # fallback. Job #93 surfaced an over-call (NCT01673217) where the LLM
-    # hallucinated "PMC:12563070 is CT.gov-registered" because the dossier
+    # fallback. Job #93 surfaced an over-call (an example trial) where the LLM
+    # hallucinated a PMC ID was "CT.gov-registered" because the dossier
     # didn't tell it the registered-pubs count was zero — the LLM then
     # conflated the heuristic [TRIAL-SPECIFIC] tag with sponsor registration.
     cnt = dossier.get("registered_trial_pubs_count", 0)
@@ -1054,8 +1053,8 @@ class OutcomeAgent(BaseAnnotationAgent):
     # the primary endpoint was met; loose efficacy words are NOT sufficient.
     #
     # v42.6.14 (2026-04-24): narrowed the "approved" family. Bare "approved"
-    # caught review-article language like "EpiVacCorona was approved for
-    # emergency use in Russia" and over-called NCT04527575 in Job #81. Require
+    # caught review-article language like "[vaccine] was approved for
+    # emergency use" and over-called an example trial in Job #81. Require
     # a regulatory qualifier ("FDA approved", "EMA approved", "regulatory
     # approval") or explicit approval/authorization for this indication.
     _STRONG_EFFICACY = [
@@ -1172,7 +1171,7 @@ class OutcomeAgent(BaseAnnotationAgent):
         # v42.7.7 + v42.7.12: vaccine-immunogenicity gate (TIGHTENED in v42.7.12).
         # Original v42.7.7 trusted the pub_classifier's "trial_specific" tag,
         # which Job #92 showed mis-classifies review articles that mention
-        # the drug name (NCT01673217: review on epigenetic immunology
+        # the drug name (an example trial: a review on epigenetic immunology
         # tagged trial-specific). v42.7.12 adds a CT.gov-REGISTERED
         # publications requirement — PMIDs registered in
         # protocolSection.referencesModule are PROVEN trial-specific
@@ -1209,7 +1208,7 @@ class OutcomeAgent(BaseAnnotationAgent):
         # signals → Failed, BUT only when CT.gov status confirms the trial
         # has actually ended. For status=UNKNOWN trials, the registry
         # itself doesn't know the trial's state — auto-flipping to Failed
-        # based on mixed pub signals is an over-call (Job #92's NCT03018665
+        # based on mixed pub signals is an over-call (a Job #92 example trial
         # was status=UNKNOWN with mixed pubs and got mis-called Failed
         # when GT was Unknown).
         if (trial_specific > 0

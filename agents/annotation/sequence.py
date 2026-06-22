@@ -97,7 +97,7 @@ _KNOWN_SEQUENCES: dict[str, str] = {
     # v28: Radiolabeled peptide imaging agents
     "68ga-rm2": "FQWAVGHSL",                                 # Bombesin antagonist RM2, 9aa (D-Phe→F, Sta→S)
     "rm2": "FQWAVGHSL",                                      # Same (BAY86-7548)
-    # v33: Peptide hormones — glucagon false negative fix (NCT03490942)
+    # v33: Peptide hormones — glucagon false negative fix
     "glucagon": "HSQGTFTSDYSKYLDSRRAQDFVQWLMNT",             # Mature glucagon, 29aa, UniProt P01275
     # v38: New sequences from v37b error analysis and training CSV frequency analysis
     # GLP-2 (17x in training as R1 errors — agent was returning glucagon instead)
@@ -143,7 +143,7 @@ _KNOWN_SEQUENCES: dict[str, str] = {
     # v42.7.18 (2026-04-28): from Job #97 held-out-C sequence misses on
     # peptide=True trials. Per memory feedback: sequences OK to expand
     # (vs _KNOWN_PEPTIDE_DRUGS which is frozen).
-    "solnatide": "CGQRETPEGAEAKPWYC",                        # AP301, 17aa cyclic, TIP-peptide derivative (NCT03567577)
+    "solnatide": "CGQRETPEGAEAKPWYC",                        # AP301, 17aa cyclic, TIP-peptide derivative
     "ap301": "CGQRETPEGAEAKPWYC",                            # solnatide synonym
     "tip peptide": "CGQRETPEGAEAKPWYC",                      # solnatide TNF lectin-domain derivative
     # IO103 PD-L1 peptide vaccine — was in _KNOWN_SEQUENCES under
@@ -155,20 +155,20 @@ _KNOWN_SEQUENCES: dict[str, str] = {
     # fallback so the agent has SOMETHING when intervention=Apraglutide.
     "apraglutide": "HGDGSFSDELSTILDLLAARDFINWLIQTKITD",      # 33aa GLP-2 analog backbone (FE 203799)
     # v42.7.21 (2026-04-28): from Job #98 held-out-D sequence misses.
-    # CBX129801 IS Long-Acting C-Peptide (Cebix Inc.) — the canonical
+    # CBX129801 IS Long-Acting C-Peptide — the canonical
     # 31-aa proinsulin C-peptide cleaved during insulin maturation.
-    # NCT01681290 (Type 1 Diabetes neuropathy trial) emitted N/A despite
+    # An example diabetic-neuropathy trial emitted N/A despite
     # the published "Long-Acting C-Peptide" 12-month clinical trial paper.
-    "cbx129801": "EAEDLQVGQVELGGGPGAGSLQPLALEGSLQ",          # 31aa, proinsulin C-peptide (NCT01681290)
+    "cbx129801": "EAEDLQVGQVELGGGPGAGSLQPLALEGSLQ",          # 31aa, proinsulin C-peptide
     "long-acting c-peptide": "EAEDLQVGQVELGGGPGAGSLQPLALEGSLQ",  # CBX129801 alias
     # SARTATE = (Sar)0,Tyr3-octreotate, an octreotide/octreotate analog
     # used in 64Cu-SARTATE PET imaging and 67Cu-SARTATE radiotherapy
     # for SSTR2-positive neuroendocrine tumors. Sequence is the
     # canonical TATE octapeptide with D-Phe1, D-Trp4 (lowercase = D-isomer):
     # D-Phe-Cys-Tyr-D-Trp-Lys-Thr-Cys-Thr (8aa, disulfide-bonded).
-    "sartate": "fCYwKTCT",                                    # octreotate analog (NCT04440956 64Cu-SARTATE)
+    "sartate": "fCYwKTCT",                                    # octreotate analog (64Cu-SARTATE)
     "octreotate": "fCYwKTCT",                                 # canonical name alias
-    # v42.7.22 (2026-04-28): from Job #98 NCT03481400 sequence false-match.
+    # v42.7.22 (2026-04-28): from a Job #98 sequence false-match.
     # The CGRP migraine trial intervention is "Calcitonin Gene-Related
     # Peptide" — a 37-aa peptide hormone DIFFERENT from calcitonin
     # (32-aa). The shorter "calcitonin" key was matching via word
@@ -176,7 +176,7 @@ _KNOWN_SEQUENCES: dict[str, str] = {
     # Adding the longer key + cgrp alias; longest-first iteration
     # ensures the more specific key is preferred (same v42.6.18 pattern
     # as the glucagon/GLP-1 fix).
-    "calcitonin gene-related peptide": "ACDTATCVTHRLAGLLSRSGGVVKNNFVPTNVGSKAF",  # 37aa alpha-CGRP (NCT03481400)
+    "calcitonin gene-related peptide": "ACDTATCVTHRLAGLLSRSGGVVKNNFVPTNVGSKAF",  # 37aa alpha-CGRP
     "cgrp": "ACDTATCVTHRLAGLLSRSGGVVKNNFVPTNVGSKAF",          # CGRP product-code alias
     # Romidepsin / FK228 (cyclic depsipeptide)
     "romidepsin": "ASTTTNYT",                                 # 8aa (approximate, cyclic depsipeptide)
@@ -271,7 +271,7 @@ def resolve_known_sequence(name_lower: str) -> tuple[str, str] | None:
     v42.6.18 (2026-04-25): substring search now prefers the LONGEST matching
     key to avoid 'glucagon' matching inside 'glucagon-like peptide 1' and
     returning glucagon's sequence (HSQGTFTSDY...) instead of GLP-1's
-    (HAEGTFTSDV...). Job #83 NCT01689051 surfaced this — GLP-1 trial got
+    (HAEGTFTSDV...). A Job #83 example trial surfaced this — a GLP-1 trial got
     glucagon's sequence because dict iteration order put 'glucagon' first.
     """
     # Direct key match
@@ -634,7 +634,7 @@ class SequenceAgent(BaseAnnotationAgent):
         # '-' is in the word-boundary set, so 'glucagon-' is a valid match for
         # the 'glucagon' key). Longest-first ensures the more specific drug name
         # is checked first. Same root cause as resolve_known_sequence(); fixing
-        # both call sites for consistency. Job #83 NCT01689051 surfaced this.
+        # both call sites for consistency. A Job #83 example trial surfaced this.
         _sorted_seq_keys = sorted(_KNOWN_SEQUENCES.keys(), key=len, reverse=True)
         for intervention in interventions:
             lookup_name = _strip_formulation(intervention).lower()

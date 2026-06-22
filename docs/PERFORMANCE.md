@@ -161,7 +161,7 @@ For 30k NCTs, **option 1 is most pragmatic** — no code changes, sub-week deplo
 
 Currently each NCT runs 16 research agents independently. Many of those agents make identical or near-identical API calls:
 
-- `chembl`: each NCT queries by drug name. Many NCTs share interventions (e.g., 200+ trials test semaglutide). A single ChEMBL batch call for 50 drug names at once would replace 50 individual calls.
+- `chembl`: each NCT queries by drug name. Many NCTs share interventions (e.g., a single popular intervention can appear across 200+ trials). A single ChEMBL batch call for 50 drug names at once would replace 50 individual calls.
 - `openalex`: NCT-ID search is already batchable — OpenAlex accepts comma-separated IDs.
 - `semantic_scholar`: supports bulk paper lookup.
 - `crossref`: supports batch DOI lookup.

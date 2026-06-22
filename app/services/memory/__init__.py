@@ -48,7 +48,7 @@ _GT_FIELD_MAP = {
     "sequence": "Sequence_ann1",
 }
 
-# Value normalization for comparison (same as concordance_service)
+# Value normalization for comparison (same as value_normalization)
 _CLASSIFICATION_NORM = {
     "amp": "AMP", "amp(infection)": "AMP", "amp(other)": "AMP",
     "amp (infection)": "AMP", "amp (other)": "AMP", "other": "Other",

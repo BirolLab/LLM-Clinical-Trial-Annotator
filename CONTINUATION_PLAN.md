@@ -1,6 +1,6 @@
 # Agent Annotate — Continuation Plan
 
-**Last updated:** 2026-05-06 (FULL-CORPUS CANONICAL RESULT — Jobs #102+#103 merged, 630 NCTs, commit `771ecb10`. classification 513/530=96.8% ✅ ±1.5pp (beats human IRA 91.6% by +5.2pp), peptide 466/537=86.8% ✅ ±2.9pp (beats human 48.4% by +38.4pp), delivery 448/511=87.7% ✅ ±2.9pp (beats human 68.2% by +19.5pp), **RfF 25/29=86.2% ❌ ±12.6pp (LOSES to human 91.3% by −5.1pp; n too small)**, **outcome 143/338=42.3% ❌ ±5.3pp (LOSES to human 55.6% by −13.3pp; gate certification at 60.7% does NOT generalize to recent trials)**, sequence 94/364=25.8% ❌ ±4.5pp. Per-class outcome: positive 54/119=45.4%, unknown 65/83=78.3%, terminated 18/20=90.0%, **failed 0/11=0%**, withdrawn 6/6=100%. Recency stratification: Job #102 (older NCTs ≤NCT05021016) outcome 49.3%; Job #103 (NCT05+, all 2021+) outcome ~31% — recency is the dominant outcome accuracy axis at full scale. v42.7.24 reasoning caps merged to main; agent dev-complete; Job #104 test-batch certification next.)
+**Last updated:** 2026-05-06 (FULL-CORPUS CANONICAL RESULT — Jobs #102+#103 merged, 630 NCTs, commit `771ecb10`. classification 513/530=96.8% ✅ ±1.5pp (beats human IRA 91.6% by +5.2pp), peptide 466/537=86.8% ✅ ±2.9pp (beats human 48.4% by +38.4pp), delivery 448/511=87.7% ✅ ±2.9pp (beats human 68.2% by +19.5pp), **RfF 25/29=86.2% ❌ ±12.6pp (LOSES to human 91.3% by −5.1pp; n too small)**, **outcome 143/338=42.3% ❌ ±5.3pp (LOSES to human 55.6% by −13.3pp; gate certification at 60.7% does NOT generalize to recent trials)**, sequence 94/364=25.8% ❌ ±4.5pp. Per-class outcome: positive 54/119=45.4%, unknown 65/83=78.3%, terminated 18/20=90.0%, **failed 0/11=0%**, withdrawn 6/6=100%. Recency stratification: Job #102 (older NCTs) outcome 49.3%; Job #103 (newer NCTs, all 2021+) outcome ~31% — recency is the dominant outcome accuracy axis at full scale. v42.7.24 reasoning caps merged to main; agent dev-complete; Job #104 test-batch certification next.)
 
 **Last updated (prior):** 2026-05-04 (Job #102 COMPLETE — full-corpus batch 1, 315 NCTs, commit `771ecb10`, 49.7h, finished 05:08 PT. classification 271/277=97.8% ✅, peptide 230/267=86.1% ✅, delivery 232/260=89.2% ✅, outcome 103/209=49.3% ❌ (GT-ceiling pos→unk + 0/7 failed-completed), sequence 54/200=27.0% ❌, RfF 18/20=90.0% ⚠️ (n too small). Per-class outcome: positive 41/84=48.8%, unknown 44/53=83.0%, terminated 13/14=92.9%, **failed 0/7=0%**, withdrawn 5/5=100%. Pattern matches Job #101 production gate. Job #103 (full-corpus batch 2, 315 NCTs) submitted to prod 2026-05-04 as `a3138340e531`, ETA ~50-80h.)
 
@@ -71,7 +71,7 @@ Per IMPROVEMENT_STRATEGY §1.2, the GT itself has substantial human-vs-human dis
 
 5. **Full-corpus annotation** (POST-production-gate, infrastructure READY)
    - Goal: annotate the full 630-NCT training universe with the validated agent.
-   - Slices (PREBUILT): `scripts/full_corpus_batch_1.json` (315 NCTs, NCT00001703→NCT05021016) + `scripts/full_corpus_batch_2.json` (315 NCTs, NCT05025267→NCT07012330).
+   - Slices (PREBUILT): `scripts/full_corpus_batch_1.json` (315 NCTs, older half of the corpus) + `scripts/full_corpus_batch_2.json` (315 NCTs, newer half of the corpus).
    - Submit: `bash scripts/submit_holdout_validation.sh --full-corpus-1 --check-sync` (then `--full-corpus-2` after batch 1 completes).
    - Cost: ~50-80h per batch on prod (sequential, only one job at a time). Total ~4-7 days.
    - Output: combined annotation dataset across all 630 NCTs, ready to publish + use downstream.
@@ -96,7 +96,7 @@ Per IMPROVEMENT_STRATEGY §1.2, the GT itself has substantial human-vs-human dis
    | 1 | ✅ **LANDED 2026-05-06 as v42.8.1** — RfF emission gate covers Terminated/Withdrawn/Failed-completed. Commit `9b8ed95c` on dev. Trip-wire: `test_v42_8_1_failure_reason_emission_gate`. | RfF recall | closes 9/12 audit misses (+~30pp recall) | few days | low risk, addresses the 75% blank-when-GT-had-reason class from Job #101 audit |
    | 2 | ✅ **LANDED 2026-05-06 as v42.8.2** — strong-failure publication override (_STRONG_FAILURE keyword class + `_has_strong_failure` + override before v42.7.14 mixed gate). Commit `91e4cbe0` on dev. Trip-wire: `test_v42_8_2_strong_failure_override`. | outcome | 0/11 → ~6/11 (+1.5pp at full-corpus scale) | ~1 week | distinct signal; not a drug-name lookup; reasoning-grounded |
    | 3 | Pub-to-trial matcher — NCT-mention scan + sponsor + drug + year-window matching against the existing literature corpus | outcome | catches 15-25 of 65 pos→unk misses (+4-7pp) | ~1-2 weeks | currently CT.gov is the only path to "is this pub about this trial" — many Phase I pubs aren't formally registered |
-   | 4 | RxNorm / DrugBank drug-code resolver | sequence (primary), outcome (secondary) | unblocks UniProt on ~40% of N/A cases (+15-20pp on sequence) | ~1-2 weeks | new external API integration; resolves drug codes (PLG0206, CBX129801, etc.) to biological names |
+   | 4 | RxNorm / DrugBank drug-code resolver | sequence (primary), outcome (secondary) | unblocks UniProt on ~40% of N/A cases (+15-20pp on sequence) | ~1-2 weeks | new external API integration; resolves pharma drug codes to biological names |
    | 5 | Sponsor press-release / conference-abstract agent — sponsor newsroom pages, ASH/ASCO/AAD/SfN abstract DBs | outcome | 10-15 more pos→unk recoveries (+3-4pp) | ~2-3 weeks | new external research agent; same evidence sources humans use |
 
    **Combined plausible end-state:** outcome 52-58% (above human IRA 55.6%), sequence 45-55% (at/near 50% target), RfF recall pulled up.
@@ -116,26 +116,26 @@ Per IMPROVEMENT_STRATEGY §1.2, the GT itself has substantial human-vs-human dis
 - **v42.8 architectural candidates** (post-production-gate, not blocking shipping):
   - Drug-code → biological-name resolver (RxNorm / DrugBank API) — would let UniProt return the right protein for drug codes that currently get "no_structured_match". Same root cause as outcome's positive-recall gap and sequence's drug-code under-extraction.
   - Sponsor press-release / conference abstract search agent — captures positive-result reporting that doesn't reach peer-reviewed literature within Phase I trial timelines.
-  - **Failed-completed-trial recall (NEW from Job #101 production-gate analysis 2026-05-02):** GT=failed-completed-trial scored 0/11 = 0.0% at scale. Miss anatomy from 11 NCTs:
-    - 5× agent → `unknown` (45%) — same GT-ceiling as pos→unk: agent reads pub, can't deterministically extract "did not meet primary endpoint" signal, defaults to unknown. NCTs: NCT01651715, NCT02603614, NCT03285737, NCT04524442, NCT04747002.
-    - 2× agent → `terminated` (18%) — failed-completed (trial ran fully, missed endpoint) collapsed onto terminated (stopped early). NCTs: NCT05142228, NCT05162027.
-    - 2× agent → `positive` (18%) — over-call. NCTs: NCT00052026, NCT03734718.
-    - 2× agent → `recruiting` (18%) — agent reading current CT.gov status; trials reactivated/re-listed. NCTs: NCT05243862, NCT05269381.
+  - **Failed-completed-trial recall (NEW from Job #101 production-gate analysis 2026-05-02):** GT=failed-completed-trial scored 0/11 = 0.0% at scale. Miss anatomy across the 11 trials:
+    - 5× agent → `unknown` (45%) — same GT-ceiling as pos→unk: agent reads pub, can't deterministically extract "did not meet primary endpoint" signal, defaults to unknown.
+    - 2× agent → `terminated` (18%) — failed-completed (trial ran fully, missed endpoint) collapsed onto terminated (stopped early).
+    - 2× agent → `positive` (18%) — over-call.
+    - 2× agent → `recruiting` (18%) — agent reading current CT.gov status; trials reactivated/re-listed.
     - **Fix candidates:** (a) explicit "did not meet primary endpoint" pub-classifier signal (similar to v42.7.20 trial-specificity work); (b) registry-status-vs-publication-evidence override (when pub says trial completed-and-failed but CT.gov says recruiting, trust pub); (c) failed-completed vs terminated disambiguation rule (failed-completed implies trial reached planned completion date — distinct from early termination).
   - **Reason-for-failure recall (NEW from Job #101 audit 2026-05-02):** RfF scored 19/31 = 61.3% on heldout methodology (and 86.4% on gate-scorer's blank-skipping methodology — the gate-scorer hides under-emission). Anatomy of the 12 RfF misses on the 31-NCT GT-consensus pool: **9/12 are agent-blank when GT had a reason** (75% of misses). Pattern breakdown:
-    - 3× GT=`business reason` → agent=blank (NCT00001827, NCT04524442, NCT05269381)
-    - 2× GT=`ineffective for purpose` → agent=blank (NCT00052026, NCT03285737)
-    - 2× GT=`recruitment issues` → agent=blank (NCT04590872, NCT04747002)
-    - 1× GT=`toxic/unsafe` → agent=blank (NCT01651715)
-    - 1× GT=`due to covid` → agent=blank (NCT03567577)
-    - 2× GT=`business reason` → agent=`recruitment issues` (close-but-wrong: NCT03912337, NCT05284019)
-    - 1× GT=`business reason` → agent=`no reason for failure` (NCT03069989)
+    - 3× GT=`business reason` → agent=blank
+    - 2× GT=`ineffective for purpose` → agent=blank
+    - 2× GT=`recruitment issues` → agent=blank
+    - 1× GT=`toxic/unsafe` → agent=blank
+    - 1× GT=`due to covid` → agent=blank
+    - 2× GT=`business reason` → agent=`recruitment issues` (close-but-wrong)
+    - 1× GT=`business reason` → agent=`no reason for failure`
     - **Fix candidates:** (a) RfF agent should emit a reason for any trial in `outcome ∈ {terminated, failed-completed-trial, withdrawn}` even if low-confidence (currently can default to blank); (b) "business reason" cluster (6/12 misses) suggests adding signals for slow-enrollment / sponsor-pivot / funding-cut from CT.gov `why_stopped` field; (c) the close-but-wrong "business→recruitment" pair shows the categories overlap by definition — possible that GT itself has 50/50 cases where annotators picked different valid labels.
   - All candidates require new external API integrations or substantial classifier work (unlike v42.7.X which were all logic refinements within the existing 19-agent pipeline).
 
 ---
 
-**Current state:** Job #99 PASS — outcome 11/20 = 55.0% on held-out-E (vs Job #98's 35% on slice-D, +20pp). v42.7.20 classifier tightening EMPIRICALLY VALIDATED — enabled 2 confident positive calls (NCT01680653, NCT05721586) on trials with unambiguous pub-title evidence (literally "reduces the risk", "statistically significant... remineralizing"), which may even be agent-correct-vs-GT-uncertain. Conservative under-call pattern still present (11× pos→unk) but not worsened. Per-field on slice-E: peptide 17/18 = 94.4% ⭐, classification 18/19 = 94.7% ⭐, delivery 16/18 = 88.9%, sequence 2/7 = 28.6%. Job #100 milestone validation triggered (147 NCTs, ~24h overnight, ±8pp CI). 19 research agents stable.
+**Current state:** Job #99 PASS — outcome 11/20 = 55.0% on held-out-E (vs Job #98's 35% on slice-D, +20pp). v42.7.20 classifier tightening EMPIRICALLY VALIDATED — enabled 2 confident positive calls on trials with unambiguous pub-title evidence (literally "reduces the risk", "statistically significant... remineralizing"), which may even be agent-correct-vs-GT-uncertain. Conservative under-call pattern still present (11× pos→unk) but not worsened. Per-field on slice-E: peptide 17/18 = 94.4% ⭐, classification 18/19 = 94.7% ⭐, delivery 16/18 = 88.9%, sequence 2/7 = 28.6%. Job #100 milestone validation triggered (147 NCTs, ~24h overnight, ±8pp CI). 19 research agents stable.
 
 **Main at:** `0795788e` (v42.7.19 merge). v42.7.20 + v42.7.21 + v42.7.22 staged on dev.
 **Prod status:** autoupdater synced; serving v42.7.19.
@@ -159,12 +159,12 @@ Per IMPROVEMENT_STRATEGY §1.2, the GT itself has substantial human-vs-human dis
 `scripts/submit_holdout_validation.sh --production-gate --check-sync` triggers the 250-NCT certification (only after #100 PASS).
 
 ### Active iteration line (post-Phase-6 cycles)
-v42.6.10–.19 → v42.7.0 (SEC EDGAR + FDA Drugs) → v42.7.1 (5-tier evidence_grade) → v42.7.2 (pub-classifier expansion + commit_accuracy report) → v42.7.3 (per-field DB grading) → v42.7.4 (two-tier source weighting) → v42.7.5 (code-sync diagnostic) → v42.7.6 (NIH RePORTER) → v42.7.7 (vaccine-immunogenicity Positive override) → v42.7.8 (wire FDA Drugs/SEC EDGAR signals into dossier) → v42.7.9 (FDA Drugs `products.*` query) → v42.7.10 (CRITICAL: orchestrator preserves intervention `type`) → v42.7.11 (surface intervention names) → v42.7.12 (FDA label indications + CT.gov registered-pubs gate) → v42.7.13 (LLM hallucination fix — explicit "0" line + Rule 7 restructure) → v42.7.14 (Failed override status-gating) → v42.7.15 (_NEGATIVE_KW tightening) → v42.7.16 (sequence chemistry-suffix canonicalization) → v42.7.17 (Rule 7 over-correction fix — accept pub-title-pattern as alternative trial-specificity) → v42.7.18 (`_KNOWN_SEQUENCES` expansion: solnatide/io103/apraglutide) → v42.7.19 (delivery_mode ambiguous-keyword relevance gate — addresses 6 NCTs spurious-oral pattern across Jobs #92/#95/#96/#97) → v42.7.20 (`_classify_publication` default flipped to 'general' — addresses Job #95-#98 over-tagging that was confusing the LLM) → v42.7.21 (sequences: CBX129801 + SARTATE) → **v42.7.22 (CGRP / calcitonin disambiguation — fixes NCT03481400 wrong-sequence emission via longest-first iteration on the longer key)**.
+v42.6.10–.19 → v42.7.0 (SEC EDGAR + FDA Drugs) → v42.7.1 (5-tier evidence_grade) → v42.7.2 (pub-classifier expansion + commit_accuracy report) → v42.7.3 (per-field DB grading) → v42.7.4 (two-tier source weighting) → v42.7.5 (code-sync diagnostic) → v42.7.6 (NIH RePORTER) → v42.7.7 (vaccine-immunogenicity Positive override) → v42.7.8 (wire FDA Drugs/SEC EDGAR signals into dossier) → v42.7.9 (FDA Drugs `products.*` query) → v42.7.10 (CRITICAL: orchestrator preserves intervention `type`) → v42.7.11 (surface intervention names) → v42.7.12 (FDA label indications + CT.gov registered-pubs gate) → v42.7.13 (LLM hallucination fix — explicit "0" line + Rule 7 restructure) → v42.7.14 (Failed override status-gating) → v42.7.15 (_NEGATIVE_KW tightening) → v42.7.16 (sequence chemistry-suffix canonicalization) → v42.7.17 (Rule 7 over-correction fix — accept pub-title-pattern as alternative trial-specificity) → v42.7.18 (`_KNOWN_SEQUENCES` expansion: 3 new peptide sequences) → v42.7.19 (delivery_mode ambiguous-keyword relevance gate — addresses a spurious-oral pattern across 6 trials in Jobs #92/#95/#96/#97) → v42.7.20 (`_classify_publication` default flipped to 'general' — addresses Job #95-#98 over-tagging that was confusing the LLM) → v42.7.21 (sequences: 2 new peptide drug codes) → **v42.7.22 (CGRP / calcitonin disambiguation — fixes a wrong-sequence emission via longest-first iteration on the longer key)**.
 
 ### Dev smoke validation (v42.7.7+8 prototype, 2026-04-27)
 Job `e46797571504`, 2 NCTs, 28 min. **Both flipped from Job #83 Unknown → Positive, matching GT:**
-  - **NCT03199872 (RhoC vaccine):** Positive, evidence_grade=pub_trial_specific. LLM reasoning explicitly quoted the v42.7.7 Rule 7 vaccine exception ("immunogenicity is the primary endpoint for Phase I vaccine trials"). Vaccine override fired through the prompt-driven path.
-  - **NCT00002228 (Enfuvirtide):** Positive, evidence_grade=pub_trial_specific. LLM resolved on trial-specific publication evidence.
+  - **A cancer vaccine trial:** Positive, evidence_grade=pub_trial_specific. LLM reasoning explicitly quoted the v42.7.7 Rule 7 vaccine exception ("immunogenicity is the primary endpoint for Phase I vaccine trials"). Vaccine override fired through the prompt-driven path.
+  - **An antiviral peptide trial:** Positive, evidence_grade=pub_trial_specific. LLM resolved on trial-specific publication evidence.
   - **Hidden bug surfaced:** FDA Drugs / SEC EDGAR / NIH RePORTER all reported "No interventions to search" — led directly to v42.7.10 fix.
 
 ### Validation baselines (47-NCT outcome-clean slice)
@@ -208,7 +208,7 @@ Job `e46797571504`, 2 NCTs, 28 min. **Both flipped from Job #83 Unknown → Posi
 | reason_for_failure | 152/239 = 64% | 330 | 1133 |
 | sequence | 13/239 = 5% (naturally short) | 63 | 514 |
 
-**Decisions are unaffected** — Job #101 audit showed 60.6% accuracy on truncated-reasoning trials vs 60.7% on complete (essentially identical). The LLM's value emission is independent of stored reasoning; truncation is a logging-side artifact only. **Publication-grade auditability suffers**: post-hoc miss analysis runs into reasoning ending mid-sentence (e.g. NCT03734718's reasoning ended `"...not posted on CT.go"` in the middle of `"CT.gov"`).
+**Decisions are unaffected** — Job #101 audit showed 60.6% accuracy on truncated-reasoning trials vs 60.7% on complete (essentially identical). The LLM's value emission is independent of stored reasoning; truncation is a logging-side artifact only. **Publication-grade auditability suffers**: post-hoc miss analysis runs into reasoning ending mid-sentence (e.g. one trial's reasoning ended `"...not posted on CT.go"` in the middle of `"CT.gov"`).
 
 **Fix:** raise caps consistently across all 5 annotation agents:
 - `_parse_reasoning` 500 → 2000 chars
@@ -219,9 +219,9 @@ No agent decision logic changed. All 5 agents import OK. Trip-wire / unit test f
 
 ### v42.7.23 priorities (post-Job-#100)
 1. **Investigate delivery -6.7pp regression** — likely v42.7.19's relevance gate over-filtering on the 100 new milestone NCTs OR backlog #7 (OpenFDA multi-formulation aggregation, design pre-coded). Run evidence_grade_miss_analysis on delivery_mode for Job #100. **Pattern audit (2026-05-01, milestone n=19 misses, POST-VERIFIER per scoring fix dc39b09d):**
-   - 6× `injection/infusion → other` — vaccine/biologic without explicit route. Examples NCT03069989, NCT03164486, NCT05940298, NCT06081322, NCT06443762.
-   - 6× `other → injection/infusion` — over-extraction. NCT03339453, NCT03359239, NCT05171686, NCT05428943, NCT05568017.
-   - 2× `oral → injection/infusion` (NCT03081676, NCT03707171); 1× each of `injection/infusion → oral`, `injection/infusion,oral → oral`, `oral → topical`, `other → topical`, `topical → other`.
+   - 6× `injection/infusion → other` — vaccine/biologic without explicit route.
+   - 6× `other → injection/infusion` — over-extraction.
+   - 2× `oral → injection/infusion`; 1× each of `injection/infusion → oral`, `injection/infusion,oral → oral`, `oral → topical`, `other → topical`, `topical → other`.
    - **v42.7.24 candidate (DEFERRED until Job #101):** the under/over-detect of injection is now SYMMETRIC at the milestone scale (6 vs 6) — the 3-pass verifier has already corrected the directional bias visible in pre-verifier audits (which showed 8 inj→other, 3 other→inj). Defaulting biologicals to injection would close one pattern but open the symmetric one; needs different fix. Wait for Job #101 to confirm whether the post-verifier symmetry holds at 239 NCTs before scoping any change.
    - Earlier cross-job notes about pre-verifier patterns (e.g. "5× injection/infusion → injection/infusion, oral") were artifacts of pre-verifier reads; verifier closes those.
 2. **Investigate RfF -8pp drop** — was 91.7% on Job #89 with 12 NCTs, now 54.5% on 22. Sample-size variance + per-NCT investigation needed.
@@ -229,7 +229,7 @@ No agent decision logic changed. All 5 agents import OK. Trip-wire / unit test f
 5. **Production gate REMAINS PREBUILT** — `scripts/production_gate_v42_7_22.json` ready to fire when outcome gets clearer.
 
 ### v42.7.20 prediction (validated against Job #98 data 2026-04-28)
-Re-classifying Job #98 publications with the new (v42.7.20) classifier rule shows DRAMATIC drops in `[TRIAL-SPECIFIC]` tag count on every trial — most went from 6-48 tags down to 0-5. Examples: NCT03143465 (sildenafil migraine) 48 → 0; NCT03481400 (CGRP) 23 → 0; NCT03841526 25 → 0; NCT05824767 28 → 5; NCT05137314 (PLG0206) 15 → 0. This empirically validates the over-tagging hypothesis — under v41b's "default to trial_specific" rule, the LLM was being shown 6-48 [TRIAL-SPECIFIC]-tagged pubs per trial, ALL of which were field reviews lacking trial signals. The LLM correctly distrusted them in aggregate but couldn't selectively apply Rule 7 condition (b2). v42.7.20 makes the small set of remaining [TRIAL-SPECIFIC] tags actually reliable.
+Re-classifying Job #98 publications with the new (v42.7.20) classifier rule shows DRAMATIC drops in `[TRIAL-SPECIFIC]` tag count on every trial — most went from 6-48 tags down to 0-5 (e.g. several trials dropped from 23-48 tags down to 0-5). This empirically validates the over-tagging hypothesis — under v41b's "default to trial_specific" rule, the LLM was being shown 6-48 [TRIAL-SPECIFIC]-tagged pubs per trial, ALL of which were field reviews lacking trial signals. The LLM correctly distrusted them in aggregate but couldn't selectively apply Rule 7 condition (b2). v42.7.20 makes the small set of remaining [TRIAL-SPECIFIC] tags actually reliable.
 
 **Predicted Job #99 effects:**
 - Trials with REAL trial-design pubs (drug name + phase descriptor in title) → LLM confidently applies Rule 7 EXCEPTION (b2) → MORE Positive recall expected
@@ -243,7 +243,7 @@ Re-classifying Job #98 publications with the new (v42.7.20) classifier rule show
 - classification 19/19 = 100% (perfect again)
 - delivery_mode 14/18 = 77.8% (-14pp; 5 misses across 5 distinct patterns — not the v42.7.19 spurious-oral class, which means v42.7.19's catchment is genuinely a different distribution than Job #98)
 - outcome 7/20 = 35.0% (slice-specific positive recall variance; #97 was 68% on a similarly positive-heavy slice — confirms outcome accuracy is highly slice-dependent and the under-recall is systemic across positive-class trials)
-- sequence 2/11 = 18.2% (v42.7.18 dict didn't fire as predicted — none of solnatide/io103/apraglutide in slice-D)
+- sequence 2/11 = 18.2% (v42.7.18 dict didn't fire as predicted — none of the newly added sequence entries appeared in slice-D)
 - v42.7.18 NO REGRESSIONS — peptide and classification strong; outcome variance reflects slice composition not code change
 - 12 of 13 outcome misses follow `positive → unknown` pattern; LLM consistently rejects field-review pubs even when tagged [TRIAL-SPECIFIC] — directly motivates v42.7.20 classifier tightening
 
@@ -251,18 +251,18 @@ Re-classifying Job #98 publications with the new (v42.7.20) classifier rule show
 The v42.7.7-13 cycle aimed to fix the Job #92 over-call class (drug FDA-approved for indication X, trial tested indication Y). v42.7.12+13 succeeded on the over-calls (Job #93/#94 confirmed) but v42.7.13's strict FALLBACK ("default to Unknown if Registered Trial Publications: 0") was too literal — Job #96 on held-out-B revealed the LLM rigidly applied it even when pub titles were unambiguous trial reports. Outcome dropped from 60% (held-out-A) to 36% (held-out-B). v42.7.17 softened Rule 7 with an alternative path: pub TITLE explicitly describes THIS trial (drug name + phase/first-in-human/clinical-trial descriptor in title; field reviews still excluded). **Job #97 (held-out-C) closed at 17/25 = 68% — PASS, +32pp vs #96, +8pp vs #92. v42.7 cycle now design-complete on outcome.**
 
 ### Next focus area: sequence under-extraction (v42.7.18+)
-Job #97 surfaced the next clear gap: 8/10 peptide=True trials emitted `sequence=N/A` despite GT carrying canonical sequences. Three of those (NCT03567577 Solnatide, NCT04964986 Apraglutide, NCT05898763 IO103-style) have public sequences addable to `_KNOWN_SEQUENCES` — the deterministic, no-LLM-cost path. v42.7.18 adds those entries (sequences-only; peptide.py untouched per `feedback_frozen_drug_lists.md`). Held-out-D will measure whether the dict expansion improves sequence accuracy without affecting other fields. After v42.7.18 validates, remaining sequence misses go to LLM-reasoning prompt improvements (no further dict expansion expected on the held-out frontier).
+Job #97 surfaced the next clear gap: 8/10 peptide=True trials emitted `sequence=N/A` despite GT carrying canonical sequences. Three of those have public sequences addable to `_KNOWN_SEQUENCES` — the deterministic, no-LLM-cost path. v42.7.18 adds those entries (sequences-only; peptide.py untouched per `feedback_frozen_drug_lists.md`). Held-out-D will measure whether the dict expansion improves sequence accuracy without affecting other fields. After v42.7.18 validates, remaining sequence misses go to LLM-reasoning prompt improvements (no further dict expansion expected on the held-out frontier).
 
 ### v42.7.19 candidate backlog (post-Job #98)
 Recorded from Job #97 miss analysis (do not act on these while Job #98 in flight; risk of over-fitting to retired slice):
 
-1. **Outcome positive recall** — `positive → unknown` is the dominant outcome miss class across ALL 6 measured jobs and is essentially independent of v42.7.X version after v42.7.13 (#92 3, #95 9, #96 12, #97 9, #98 11, #99 11). v42.7.20 ADDED 2× unknown→positive on #99 (first since #96) — confirms it enables Positive calls on clean pub-title evidence, but does NOT reduce the under-call rate. **This is the GT-quality ceiling, not a v42.7 bug** — Phase I trials with no explicit primary-endpoint statement systematically resolve to "Unknown" by the agent's correct application of Rule 7. Beating this rate requires either (i) new evidence sources beyond literature/openalex (sponsor press releases, conference abstracts), or (ii) accepting that humans use out-of-band knowledge the agent cannot replicate. Cross-job analysis (#92/#95/#96/#97/#98/#99): NO NCT misses in ≥2 INDEPENDENT slices (the 6 cross-job NCTs are all from #92+#95 = same retired-A slice). Original detail: v42.7.12-17 successfully eliminated the `unknown → positive` over-call class (4+3 in #92/#96 → 0 in #95/#97), but at the cost of pushing the agent more conservative on `positive → unknown` recall (3 in #92 → 9 in #95/#97 — held-out-A retired). Spot inspection of Job #97 misses (NCT05898763 TEIPP, NCT05851027 romiplostim) shows the LLM citing the "[TRIAL-SPECIFIC] is HEURISTIC" warning even when pub titles unambiguously match Rule 7 EXCEPTION condition (ii) — e.g. NCT05898763's pub "TEIPP-vaccination in checkpoint-resistant non-small cell lung cancer: a first-in-human phase I/II dose-escalation study" contains drug name + multiple trial descriptors. Hypothesis: LLM is collapsing the AND clause in line 786 ("Registered=0 AND no matching title") into "Registered=0 → default Unknown". **Risk of any Rule 7 wording change: Job #96-style over-correction redux. Two prior iterations (v42.7.13, v42.7.17) on the same area — a third without a clear reason would be hill-climbing.** Defer until Job #98 lands and we have signal on whether v42.7.18 changed anything in this region.
+1. **Outcome positive recall** — `positive → unknown` is the dominant outcome miss class across ALL 6 measured jobs and is essentially independent of v42.7.X version after v42.7.13 (#92 3, #95 9, #96 12, #97 9, #98 11, #99 11). v42.7.20 ADDED 2× unknown→positive on #99 (first since #96) — confirms it enables Positive calls on clean pub-title evidence, but does NOT reduce the under-call rate. **This is the GT-quality ceiling, not a v42.7 bug** — Phase I trials with no explicit primary-endpoint statement systematically resolve to "Unknown" by the agent's correct application of Rule 7. Beating this rate requires either (i) new evidence sources beyond literature/openalex (sponsor press releases, conference abstracts), or (ii) accepting that humans use out-of-band knowledge the agent cannot replicate. Cross-job analysis (#92/#95/#96/#97/#98/#99): NO trial misses recur in ≥2 INDEPENDENT slices (the cross-job recurrences are all from #92+#95 = same retired-A slice). Original detail: v42.7.12-17 successfully eliminated the `unknown → positive` over-call class (4+3 in #92/#96 → 0 in #95/#97), but at the cost of pushing the agent more conservative on `positive → unknown` recall (3 in #92 → 9 in #95/#97 — held-out-A retired). Spot inspection of Job #97 misses shows the LLM citing the "[TRIAL-SPECIFIC] is HEURISTIC" warning even when pub titles unambiguously match Rule 7 EXCEPTION condition (ii) — e.g. a first-in-human phase I/II dose-escalation pub whose title contains the drug name + multiple trial descriptors. Hypothesis: LLM is collapsing the AND clause in line 786 ("Registered=0 AND no matching title") into "Registered=0 → default Unknown". **Risk of any Rule 7 wording change: Job #96-style over-correction redux. Two prior iterations (v42.7.13, v42.7.17) on the same area — a third without a clear reason would be hill-climbing.** Defer until Job #98 lands and we have signal on whether v42.7.18 changed anything in this region.
 
 2. **Delivery_mode multi-route over-collection** — 2 of 4 delivery misses on Job #97 are the agent emitting `"injection/infusion, oral"` when GT is single-route `"injection/infusion"`. The deterministic collector aggregates routes across citations indiscriminately; when a citation mentions oral administration of a comparator or food restriction, "oral" gets attributed to the experimental arm. **Cross-job confirmation:** the same pattern appears in Jobs #92, #95, #96 (2 spurious-oral misses each), but is absent from Job #83 baseline — emerged in v42.7.x with the broadened research-agent footprint. 6 distinct NCTs across the four held-out runs. **Shipped as v42.7.19 (pending merge):** ambiguous-keyword relevance gate — `_AMBIGUOUS_KEYWORDS` matches now require the citation snippet to mention an experimental intervention name. Non-ambiguous keywords (subcutaneous, intravenous, intradermal, etc.) remain unaffected. 5 unit tests + trip-wire. Will validate on next held-out cycle.
 
 3. **Sequence dict expansion (further)** — wait for Job #98 to see whether held-out-D's 13 GT-sequence trials surface additional N/A patterns. New entries should only land if a public canonical sequence exists.
 
-7. **OpenFDA multi-formulation route aggregation** (EXPLORED + REJECTED 2026-04-29). Initial diagnosis: Job #99 had 2× spurious-oral, Job #100 milestone had 5× same class — hypothesized as OpenFDA returning multiple formulations of the same drug (Ozempic SC + Rybelsus oral both for "semaglutide"). Implemented v42.7.23.a OpenFDA route gate, ran 5-NCT smoke (`5a6efc1cd0db` on dev). **Result: 0/5 fixed.** Root cause investigation showed the "Oral" routes in these specific NCTs come from the **intervention-description scan** (delivery_mode.py:308-341), not the OpenFDA path. The experimental arms genuinely contain multiple drugs (Vacc-4X intradermal + Lenalidomide oral capsules; PEP-CMV vaccine + oral Temozolomide). The agent reports both routes accurately; GT picks one (the primary biological/vaccine). **Decision: accept as GT-quality / definition limitation** (per user 2026-04-29). Reverted v42.7.23.a code; preserving lesson here. Unit test design + smoke methodology preserved in git history (commit b6ba9162). Future v42.7.X work focuses on cases where the agent is *genuinely wrong* (radiotracer-with-explicit-injection, etc.), not multi-drug-arm cases where humans simplified.
+7. **OpenFDA multi-formulation route aggregation** (EXPLORED + REJECTED 2026-04-29). Initial diagnosis: Job #99 had 2× spurious-oral, Job #100 milestone had 5× same class — hypothesized as OpenFDA returning multiple formulations of the same drug (e.g. a subcutaneous and an oral formulation of the same GLP-1 agonist). Implemented v42.7.23.a OpenFDA route gate, ran 5-NCT smoke (`5a6efc1cd0db` on dev). **Result: 0/5 fixed.** Root cause investigation showed the "Oral" routes in these specific trials come from the **intervention-description scan** (delivery_mode.py:308-341), not the OpenFDA path. The experimental arms genuinely contain multiple drugs (an injected vaccine/biologic plus an oral small-molecule co-administered in the same arm). The agent reports both routes accurately; GT picks one (the primary biological/vaccine). **Decision: accept as GT-quality / definition limitation** (per user 2026-04-29). Reverted v42.7.23.a code; preserving lesson here. Unit test design + smoke methodology preserved in git history (commit b6ba9162). Future v42.7.X work focuses on cases where the agent is *genuinely wrong* (radiotracer-with-explicit-injection, etc.), not multi-drug-arm cases where humans simplified.
 
    **Original design (preserved for reference, do NOT re-implement):**
    ```python
@@ -283,7 +283,7 @@ Recorded from Job #97 miss analysis (do not act on these while Job #98 in flight
            delivery_value = _OPENFDA_ROUTE_MAP[route_lower]
            # v42.7.23: when protocol explicitly states route(s), restrict
            # OpenFDA results to that set. Skips spurious formulations
-           # (e.g. Rybelsus oral when trial uses Ozempic SC).
+           # (e.g. an oral formulation when the trial uses the subcutaneous one).
            if (protocol_routes_explicit
                    and delivery_value not in protocol_routes_explicit):
                logger.debug(
@@ -294,15 +294,15 @@ Recorded from Job #97 miss analysis (do not act on these while Job #98 in flight
            # ... (existing add logic)
    ```
 
-   **Risks**: (a) true multi-route trials where protocol mentions one route but drug genuinely uses both — would lose the second. Conservative; under-call risk. (b) Misclassifying "oral cavity" or "oral hygiene" context as oral route — handled by v32 ambiguous-keyword logic upstream. **Trip-wire**: assert NCT05788965-style cases (semaglutide SC trial) emit only "Injection/Infusion", not "Injection/Infusion, Oral".
+   **Risks**: (a) true multi-route trials where protocol mentions one route but drug genuinely uses both — would lose the second. Conservative; under-call risk. (b) Misclassifying "oral cavity" or "oral hygiene" context as oral route — handled by v32 ambiguous-keyword logic upstream. **Trip-wire**: assert subcutaneous-injection-only cases (a GLP-1-agonist SC trial) emit only "Injection/Infusion", not "Injection/Infusion, Oral".
 
    **When to ship**: after Job #100 lands. If milestone outcome ≥65% AND delivery_mode ≥80%, ship as part of v42.7.23 alongside any other backlog items that surfaced. If milestone reveals delivery_mode regressed, prioritize this.
 
-6. **Drug-code → UniProt resolution gap** (v42.8 candidate, structural). On all 16 of Job #98's sequence=N/A peptide=True trials, the `peptide_identity` agent (UniProt + DRAMP) returned "no_structured_match" because the intervention names are pharma drug codes (CBX129801, PLG0206, GT-001, "64Cu-SARTATE", etc.) and UniProt indexes biological protein names. For NCT05585658 (Erythropoietin alpha), UniProt incorrectly returned "Erythropoietin RECEPTOR" P19235 (similar name match) instead of erythropoietin P01588. **Milestone (Job #100, 147 NCTs) breakdown** — of 90 NCTs where GT carries a real sequence: 43 (47.8%) the agent returned empty/N/A; on the 47 where it provided a value, 29 matched (61.7%). Under-extraction is the dominant failure mode (47.8% N/A vs 38.3% wrong-extraction), so the architectural fix has higher headroom than the prompt-tuning fix on the agent-provided cases. **Root cause**: no drug-code → biological-name resolution layer between intervention extraction and UniProt query. **Fix candidates (multi-week scope)**: (a) RxNorm / DrugBank API as resolver — public API, query "PLG0206" → biological aliases → UniProt; (b) ChEMBL drug→target lookup — already integrated, may have richer mapping than UniProt; (c) explicit alias map maintained as code (high curation cost; conflicts with frozen-drug-list discipline if applied to peptides). **Why this is v42.8 not v42.7.X**: requires architectural addition (new agent or reframing peptide_identity), not a narrow fix.
+6. **Drug-code → UniProt resolution gap** (v42.8 candidate, structural). On all 16 of Job #98's sequence=N/A peptide=True trials, the `peptide_identity` agent (UniProt + DRAMP) returned "no_structured_match" because the intervention names are pharma drug codes and UniProt indexes biological protein names. In one case (a recombinant erythropoietin trial), UniProt incorrectly returned the erythropoietin RECEPTOR (a similar name match) instead of erythropoietin itself. **Milestone (Job #100, 147 NCTs) breakdown** — of 90 NCTs where GT carries a real sequence: 43 (47.8%) the agent returned empty/N/A; on the 47 where it provided a value, 29 matched (61.7%). Under-extraction is the dominant failure mode (47.8% N/A vs 38.3% wrong-extraction), so the architectural fix has higher headroom than the prompt-tuning fix on the agent-provided cases. **Root cause**: no drug-code → biological-name resolution layer between intervention extraction and UniProt query. **Fix candidates (multi-week scope)**: (a) RxNorm / DrugBank API as resolver — public API, query a drug code → biological aliases → UniProt; (b) ChEMBL drug→target lookup — already integrated, may have richer mapping than UniProt; (c) explicit alias map maintained as code (high curation cost; conflicts with frozen-drug-list discipline if applied to peptides). **Why this is v42.8 not v42.7.X**: requires architectural addition (new agent or reframing peptide_identity), not a narrow fix.
 
-5. **Topical-detection under-call** — cross-slice pattern (Jobs #97 + #98 each had 1 `topical → other` miss). When CT.gov protocol says "Route: not specified" and intervention descriptions don't match `_TOPICAL_FORMULATION_KEYWORDS`, the agent defaults to "Other". Examples: NCT05137314 PLG0206 antibacterial peptide for prosthetic joint infection (topically applied during DAIR surgery). **Fix candidate (low priority, low impact):** detect "joint", "wound", "skin lesion" in trial conditions; if intervention is BIOLOGICAL/DRUG and condition implies localized application AND no other route signal, infer Topical. Risk: false-positive on systemic antibiotics for joint infections. Defer until multiple slices show >2 of this pattern.
+5. **Topical-detection under-call** — cross-slice pattern (Jobs #97 + #98 each had 1 `topical → other` miss). When CT.gov protocol says "Route: not specified" and intervention descriptions don't match `_TOPICAL_FORMULATION_KEYWORDS`, the agent defaults to "Other". Example: an antibacterial peptide for prosthetic joint infection (topically applied during DAIR surgery). **Fix candidate (low priority, low impact):** detect "joint", "wound", "skin lesion" in trial conditions; if intervention is BIOLOGICAL/DRUG and condition implies localized application AND no other route signal, infer Topical. Risk: false-positive on systemic antibiotics for joint infections. Defer until multiple slices show >2 of this pattern.
 
-4. **Vaccine-without-explicit-route default** — Job #96 had 4 cases of `injection/infusion → other`. Two were radiotracers (by-design `_RADIOTRACER_PATTERNS` rule, NOT a fix candidate). The other two (NCT00005779 C4-V3 HIV vaccine, NCT03300817 MUC1 antibody vaccine) had `BIOLOGICAL` intervention type but no explicit route in protocol, intervention description, OpenFDA, or citations — Pass 1 LLM emitted "route not specified" → Pass 2 picked "Other". GT says Injection/Infusion (humans inferred vaccines are injected by default). **Fix candidate (risky):** when intervention type is BIOLOGICAL AND drug-class keywords match vaccine/vaccination/antibody AND no route found via any other path, default to Injection/Infusion. Risk: not all biologics are injected (oral polio, intranasal flu) — over-default would create new misses. Defer until cross-job confirmation across multiple slices.
+4. **Vaccine-without-explicit-route default** — Job #96 had 4 cases of `injection/infusion → other`. Two were radiotracers (by-design `_RADIOTRACER_PATTERNS` rule, NOT a fix candidate). The other two (both antibody/peptide vaccines) had `BIOLOGICAL` intervention type but no explicit route in protocol, intervention description, OpenFDA, or citations — Pass 1 LLM emitted "route not specified" → Pass 2 picked "Other". GT says Injection/Infusion (humans inferred vaccines are injected by default). **Fix candidate (risky):** when intervention type is BIOLOGICAL AND drug-class keywords match vaccine/vaccination/antibody AND no route found via any other path, default to Injection/Infusion. Risk: not all biologics are injected (oral polio, intranasal flu) — over-default would create new misses. Defer until cross-job confirmation across multiple slices.
 
 **Discipline:** all three candidates are notable patterns from a now-retired slice. Confirm pattern recurrence on Job #98's fresh slice before scoping any of them. Per memory `feedback_no_cheat_sheets.md` / `feedback_no_verifier_cheatsheet.md`, fixes must be reasoning/logic improvements, not specific drug-name shortcuts.
 
@@ -325,14 +325,14 @@ Slice progression so far: A (30, seed 4242, retired post-#95) → B (25, seed 52
 - outcome 60.0% — **within ~3pp noise floor of Job #83's 61.7% baseline**
 - v42.7.10 fix VALIDATED: NIH RePORTER 67%, FDA Drugs 40%, SEC EDGAR 50% (vs 0/0/4.3% pre-fix)
 
-**Pattern surfaced:** outcome was flat because 4 over-calls (Positive when GT=Unknown) canceled the v42.7.7+8 gains. The over-calls shared a pattern: drug is FDA-approved for indication X, trial tested it for indication Y. Examples: calcitonin (approved for osteoporosis, trial tested thyroid); exenatide (approved for diabetes, trial tested Parkinson's). **Resolved by v42.7.12** (FDA label indications + CT.gov registered-pubs gate) and v42.7.13 (LLM hallucination fix); over-correction caught + fixed by v42.7.17.
+**Pattern surfaced:** outcome was flat because 4 over-calls (Positive when GT=Unknown) canceled the v42.7.7+8 gains. The over-calls shared a pattern: drug is FDA-approved for indication X, trial tested it for indication Y (e.g. a hormone approved for one condition being trialed for an unrelated one). **Resolved by v42.7.12** (FDA label indications + CT.gov registered-pubs gate) and v42.7.13 (LLM hallucination fix); over-correction caught + fixed by v42.7.17.
 
 ### Next steps (queued)
 1. Wait for Job #99 to complete (held-out-E, ETA ~16:00-17:00 PT, autonomous cron `ba73eb40` checks every 30 min).
 2. Score Job #99 with `bash scripts/heldout_analysis.sh 87aece73b9ef 51a6c2a308f8`, `scripts/cross_job_miss_patterns.py`, and `scripts/evidence_grade_miss_analysis.py 87aece73b9ef` (new — see Diagnostics tooling).
 3. If outcome ≥55% on slice-E AND a 2nd slice corroborates: trigger 147-NCT milestone validation against `scripts/milestone_validation_v42_7_22.json` — overnight ~24h.
 4. If outcome <50% on slice-E: investigate misses for v42.7.23 candidates. **Do NOT modify Rule 7 wording** — that's the over-correction risk (v42.7.13 → v42.7.17 history). Look for upstream fixes: classifier signal additions, structural overrides for narrow well-gated patterns.
-5. Sequence dict expansion (v42.7.23): research deferred Job #98 candidates (FP-01.1, GT-001, PLG0206, EPO alpha, P11-4) with verified public sequences.
+5. Sequence dict expansion (v42.7.23): research deferred Job #98 candidate drug codes with verified public sequences.
 
 ### Diagnostics tooling
 - `scripts/heldout_analysis.sh JOB BASELINE` — 7-section job analysis (per-field accuracy, per-NCT outcome, research-agent firing, v42.7.7-11 paths, evidence_grade distribution, miss-pattern tally, evidence-grade stratified outcome misses with LLM reasoning)
@@ -381,10 +381,10 @@ First end-to-end prod run post-Phase-6. Same 94 NCTs as Phase 5 shadow preview (
 - 94/94 complete, 8h 27min, 324s/trial avg
 - 0 final warnings / 0 errors
 - **classification atomic: 93% vs R1** (vs 80% legacy shadow); **AMP recall 86%** (vs Phase 5 shadow 75%)
-- classification atomic-vs-legacy disagreements: 13 — atomic correct more often (e.g. calcitonin trials called AMP by legacy, Other by atomic; calcitonin is a bone hormone, not an AMP)
+- classification atomic-vs-legacy disagreements: 13 — atomic correct more often (e.g. bone-hormone trials called AMP by legacy, Other by atomic; the drug is a hormone, not an AMP)
 - outcome_atomic: 40% scoreable (R8 floor 30% on 46 trials); legacy outcome still 50%
 - delivery_mode: 79% — pre-existing multi-intervention route-list issue, not Phase 6 regression
-- bioRxiv underperformed (3/94 trials) — metadata-shape bug fixed (see `biorxiv_client._extract_interventions` handling dict form); live-tested on Omiganan NCT, returns relevant preprint
+- bioRxiv underperformed (3/94 trials) — metadata-shape bug fixed (see `biorxiv_client._extract_interventions` handling dict form); live-tested on an example trial, returns relevant preprint
 
 ### Phase 6 — current (partial cut-over + research pipeline expansion + efficiency pack)
 
@@ -470,7 +470,7 @@ Wiring:
 - `app/models/config_models.py` OrchestratorConfig — adds `outcome_atomic_shadow: bool = False` (default OFF to protect prod from premature Phase 5 spend) and `outcome_atomic_model: str = ""` (empty → module default gemma3:12b).
 - `scripts/test_atomic_shadow.py` — integration test: loads real annotation JSONs, runs the full atomic stack via the real ollama_client, prints legacy outcome vs atomic rule/value per NCT.
 
-Smoke-tested NCT01661192 on dev: Tier 1a classified 1 trial-specific pub, Tier 1b gemma3:12b LLM call succeeded (HTTP 200), Tier 3 R8 Unknown fall-through (insufficient atomic signal on that single pub). Pipeline emits no crashes end-to-end.
+Smoke-tested one trial on dev: Tier 1a classified 1 trial-specific pub, Tier 1b gemma3:12b LLM call succeeded (HTTP 200), Tier 3 R8 Unknown fall-through (insufficient atomic signal on that single pub). Pipeline emits no crashes end-to-end.
 
 To enable for the 94-NCT Phase 5 run: set `orchestrator.outcome_atomic_shadow: true` in `config/default_config.yaml` on dev before submitting the job. The atomic annotation will be stored under field_name `outcome_atomic`, independent of the legacy `outcome` field — downstream concordance scripts compare the two.
 
@@ -508,17 +508,17 @@ The 3 fixes eliminated ALL overcalling (0 false positives, was 9). But they over
 #### Root cause analysis: 2 specific issues
 
 **Issue 1: `_classify_publication()` default too aggressive.**
-The default return value `"general"` means any paper without explicit trial-methodology language is tagged as a review. The literature agent searches by NCT ID — most results ARE about the trial. Result: 20 of 20 pubs tagged general (NCT03559413), 32 of 33 (NCT03872778), etc. With 0 trial-specific pubs, zero keywords extracted, LLM follows "no evidence = Unknown."
+The default return value `"general"` means any paper without explicit trial-methodology language is tagged as a review. The literature agent searches by NCT ID — most results ARE about the trial. Result: trials commonly had 20-of-20 or 32-of-33 pubs tagged general. With 0 trial-specific pubs, zero keywords extracted, LLM follows "no evidence = Unknown."
 
-| NCT | Total pubs | Trial-specific | General | v41 value | R1 |
+| Trial | Total pubs | Trial-specific | General | v41 value | R1 |
 |---|---|---|---|---|---|
-| NCT03559413 | 20 | 0 | 20 | Unknown | Positive |
-| NCT03872778 | 33 | 1 | 32 | Unknown | Positive |
-| NCT03784040 | 17 | 1 | 16 | Unknown | Positive |
-| NCT03314987 | 6 | 0 | 6 | Unknown | Positive |
+| trial 1 | 20 | 0 | 20 | Unknown | Positive |
+| trial 2 | 33 | 1 | 32 | Unknown | Positive |
+| trial 3 | 17 | 1 | 16 | Unknown | Positive |
+| trial 4 | 6 | 0 | 6 | Unknown | Positive |
 
 **Issue 2: Active guard `days_since <= 180` threshold too broad.**
-NCT04706962 completed 136 days ago — results exist, R1 says Positive, but guard forced Active. Only 1 extra trial caught, but it's wrong.
+One trial completed 136 days ago — results exist, R1 says Positive, but guard forced Active. Only 1 extra trial caught, but it's wrong.
 
 #### v41b fix (2 targeted changes, outcome.py only)
 
@@ -526,7 +526,7 @@ NCT04706962 completed 136 days ago — results exist, R1 says Positive, but guar
 Papers are only tagged general when they explicitly match review/overview signals (the _GENERAL_SIGNALS list). Everything else assumed trial-related. This is correct because: (a) literature agent searches by NCT ID, most results are relevant; (b) the review signal list is comprehensive; (c) false negatives (missing a review) are far less harmful than false positives (blocking a real trial paper).
 
 **Fix B: Remove `days_since <= 180` condition from Active guard.**
-Only fire when `days_since <= 0` (completion genuinely in future). Stale trials with past completion go to LLM. The `days_since <= 0` condition stays — it correctly catches NCT03989947 (completion 2038).
+Only fire when `days_since <= 0` (completion genuinely in future). Stale trials with past completion go to LLM. The `days_since <= 0` condition stays — it correctly catches a trial with a far-future completion date (2038).
 
 **What stays unchanged from v41:** efficacy/safety keyword split, prompt rewrite, Phase I/Phase II backstop removal, publication override using efficacy keywords, skip_verification using efficacy keywords. These all prevent overcalling and are working correctly.
 
@@ -547,7 +547,7 @@ qwen3:14b improved all fields except RfF. Outcome still has 9 false Positive cal
 
 #### Root cause: 3 types of Positive overcalling
 
-**Type A (3 cases): Agent=Positive, R1=Active.** Agent overrides ACTIVE_NOT_RECRUITING status when publications exist. NCT03989947 (completion 2038!) still called Positive.
+**Type A (3 cases): Agent=Positive, R1=Active.** Agent overrides ACTIVE_NOT_RECRUITING status when publications exist. One trial (completion 2038!) still called Positive.
 
 **Type B (5 cases): Agent=Positive, R1=Unknown.** Generic review articles (not trial results) from OpenAlex/CrossRef inject false keywords. The prompt says "safe/tolerable" = Positive.
 
@@ -633,25 +633,25 @@ For delivery, LLM-based "Other" calls don't get `skip_verification` (only determ
 #### Per-field ceiling analysis (v38 94-NCT, all non-outcome/delivery fields)
 
 **Classification (92.2%, 4 disagreements) — GT-limited, no code fix**
-All 4: agent=Other vs R1=AMP (NCT04843761, NCT05122312, NCT05125718, NCT05584878). Per v33 investigation, this pattern is consistently R1 annotation errors — HIV antivirals, immunomodulators, peptide vaccines that humans mislabel as AMP. Agent's strict definition (direct antimicrobial / innate immune / anti-biofilm) is correct. 92% is effectively 100% agent accuracy with 4 human labeling errors.
+All 4: agent=Other vs R1=AMP. Per v33 investigation, this pattern is consistently R1 annotation errors — HIV antivirals, immunomodulators, peptide vaccines that humans mislabel as AMP. Agent's strict definition (direct antimicrobial / innate immune / anti-biofilm) is correct. 92% is effectively 100% agent accuracy with 4 human labeling errors.
 
 **Peptide (88.3%, 11 disagreements) — Above human ceiling (86.0%), diminishing returns**
-- 7 FP (agent=TRUE, R1=FALSE): NCT03255629, NCT03457948, NCT03591614, NCT04007809, NCT05834296, NCT05940428, NCT06430671. v36 investigation found 42% of FPs are GT errors → ~3 of 7 are real agent errors.
-- 4 FN (agent=FALSE, R1=TRUE): NCT03285737, NCT03994198, NCT06512584, NCT06869824. Genuinely missed peptides, but improving further means expanding known-drug lists (frozen) or tuning LLM prompts for marginal gains.
+- 7 FP (agent=TRUE, R1=FALSE). v36 investigation found 42% of FPs are GT errors → ~3 of 7 are real agent errors.
+- 4 FN (agent=FALSE, R1=TRUE). Genuinely missed peptides, but improving further means expanding known-drug lists (frozen) or tuning LLM prompts for marginal gains.
 - Net: ~7 real errors out of 94 NCTs = ~92.5% true accuracy. No actionable fix.
 
 **RfF (92.1%, 5 disagreements) — Outcome-coupled, v39 should recover**
-- NCT01723813: agent=empty, R1=business reason
-- NCT03207295: agent=empty, R1=ineffective for purpose
-- NCT04445064: agent=ineffective, R1=empty
-- NCT04843761: agent=empty, R1=ineffective
-- NCT05589597: agent=business reason, R1=empty
+- 1× agent=empty, R1=business reason
+- 1× agent=empty, R1=ineffective for purpose
+- 1× agent=ineffective, R1=empty
+- 1× agent=empty, R1=ineffective
+- 1× agent=business reason, R1=empty
 - 3 of 5 involve outcome coupling — when outcome changes, RfF cascades wrong. v39 outcome fix should recover RfF to ~95% without touching the RfF agent.
 
 **Sequence (58.3%, 10 disagreements) — Above human ceiling (52.0%), notation-dominated**
-- 5 NCTs: agent returns 1 chain, R1 returns 2 joined by `|` (multi-chain gap). v38 added multi-chain UniProt but not catching all cases. NCTs: NCT03381768, NCT03867656, NCT06132477, NCT06374875, NCT06801015.
-- 3 NCTs: missing terminal modifications (`h-`..`-nh2`, beta prefix, `x` prefix). NCTs: NCT03314987, NCT05709444, NCT06722560.
-- 2 NCTs: different sequence variant selected. NCTs: NCT05184322, NCT06621017.
+- 5 trials: agent returns 1 chain, R1 returns 2 joined by `|` (multi-chain gap). v38 added multi-chain UniProt but not catching all cases.
+- 3 trials: missing terminal modifications (`h-`..`-nh2`, beta prefix, `x` prefix).
+- 2 trials: different sequence variant selected.
 - Actionable: multi-chain extraction could gain +2-3pp. Terminal modification normalization in agreement comparison could gain +1-2pp. Neither changes the annotation agent — one is research pipeline, the other is evaluation logic.
 
 ### v38 Changes (2026-04-15) — Outcome dossier redesign + delivery Other fix + sequence expansion
@@ -659,13 +659,13 @@ All 4: agent=Other vs R1=AMP (NCT04843761, NCT05122312, NCT05125718, NCT05584878
 #### Root cause analysis (from v37b 94-NCT validation)
 
 **Outcome (59.4%, 13 disagreements):** Three failure modes identified:
-1. **Deterministic ACTIVE_NOT_RECRUITING blocking (4 cases):** NCT03164486, NCT03299309, NCT03300817, NCT04706962 — returned "Active, not recruiting" immediately at confidence 0.95 with skip_verification=True, bypassing the entire research pipeline. Stale status detection (v36) only ran in the LLM path.
-2. **Reconciler overriding correct Positive (5 cases):** NCT03314987, NCT03559413, NCT03682172, NCT05709444, NCT03207295 — annotator correctly read publications and called Positive, but reconciler overrode to Unknown because it couldn't independently verify publications. Reconciler contradicted evidence it was given.
-3. **False keyword rescue (2 cases):** NCT04445064, NCT04843761 — v36 keyword rescue triggered on generic drug-class literature.
+1. **Deterministic ACTIVE_NOT_RECRUITING blocking (4 cases):** trials returned "Active, not recruiting" immediately at confidence 0.95 with skip_verification=True, bypassing the entire research pipeline. Stale status detection (v36) only ran in the LLM path.
+2. **Reconciler overriding correct Positive (5 cases):** annotator correctly read publications and called Positive, but reconciler overrode to Unknown because it couldn't independently verify publications. Reconciler contradicted evidence it was given.
+3. **False keyword rescue (2 cases):** v36 keyword rescue triggered on generic drug-class literature.
 
 **Delivery (82.4%, 9 disagreements):** Two failure modes:
-1. **Reconciler overriding correct Other (3 cases):** NCT03597893 (intranasal→Injection, factually wrong), NCT03974685 (radiotracer→Injection, overrode deterministic), NCT05428943 (no route→Injection, assumption).
-2. **LLM ignoring "do NOT guess" (4 cases):** NCT03223103, NCT03381768, NCT05111769, NCT05610826 — Pass 1 said "not specified" for all sources, Pass 2 guessed Injection/Infusion anyway.
+1. **Reconciler overriding correct Other (3 cases):** intranasal→Injection (factually wrong), radiotracer→Injection (overrode deterministic), no route→Injection (assumption).
+2. **LLM ignoring "do NOT guess" (4 cases):** Pass 1 said "not specified" for all sources, Pass 2 guessed Injection/Infusion anyway.
 
 **Sequence (47.4%, 10 disagreements):** Wrong-molecule (glucagon returned for GLP-2 trials), missing multi-chain, missing drugs from known sequences table.
 
@@ -715,8 +715,8 @@ Replaced 9-layer cascade (deterministic → Pass 1 → Pass 2 → pub override �
 #### v35 Smoke Test Results (9 NCTs, commit c4a1175, job 16e46a1d1492)
 - Outcome: 100% (n=2) — v35 status injection + confidence floor rescued both Unknown cases
 - Classification: 100% (n=4), RfF: 100% (n=7)
-- Peptide: 77.8% (n=9) — 1 FP (NCT03069989 radiolabeled), 1 FN (NCT05107219)
-- Delivery: 50% (n=2) — NCT05111912 injection vs other (injection bias)
+- Peptide: 77.8% (n=9) — 1 FP (a radiolabeled compound), 1 FN
+- Delivery: 50% (n=2) — one trial injection vs other (injection bias)
 - Sequence: 0% (n=1) — found glucagon instead of GLP-1
 
 #### Classification Agent (`classification.py`)
@@ -808,26 +808,24 @@ Per-job variance is high: delivery ranged 77.3–93.3%, RfF 76.6–97.2%, sequen
 6. **Expanded _infer_from_pass1 keywords**: Added "adverse event", "dose-limiting toxicity", "hepatotoxicity", "nephrotoxicity", "serious adverse" for Toxic/Unsafe. Added "lack of efficacy", "did not demonstrate", "failed to achieve", "no difference", "suboptimal", "no clinical benefit" for Ineffective. Also expanded whyStopped keywords.
 
 #### Peptide Fix
-7. **Glucagon added to _KNOWN_SEQUENCES**: 29aa mature form (UniProt P01275). Fixes NCT03490942 false negative where LLM correctly extracted "Peptide / peptide hormone, 29 amino acids" but still returned False.
+7. **Glucagon added to _KNOWN_SEQUENCES**: 29aa mature form (UniProt P01275). Fixes a false negative where the LLM correctly extracted "Peptide / peptide hormone, 29 amino acids" but still returned False.
 
 #### v33b Additional Fixes (062a7fd)
 8. **_publication_priority_override() generic publication filter**: Same trial-specificity gate as _infer_from_pass1. Was incorrectly overriding Unknown → Positive based on generic drug-class keywords like "efficacy" in unrelated publications.
 9. **Delivery mode injection priority `>=` → `>` (strict)**: Equal confidence (both 0.95 from OpenFDA) was always dropping Topical in Topical+Injection combinations. Now preserves both routes for multi-drug trials.
 
 #### Classification Investigation Results
-- All 8 classification disagreements (kappa=0) are **R1 annotation errors**, not agent bugs:
-  - NCT00000391-393: Peptide T (HIV CCR5 blocker, NOT antimicrobial)
-  - NCT00000435: dnaJ peptide (immunosuppressive for RA)
-  - NCT00001118: Enfuvirtide (viral fusion inhibitor)
-  - NCT00001386: Synthetic HIV peptide vaccines (adaptive immunity)
-  - NCT04672083: CPT31 (D-peptide HIV entry inhibitor)
-  - NCT04771013: Thymic peptides (immunomodulatory)
+- All 8 classification disagreements (kappa=0) are **R1 annotation errors**, not agent bugs. They cluster into the same definitional class — peptides humans mislabel as AMP:
+  - HIV entry/fusion inhibitors (CCR5 blockers, viral fusion inhibitors)
+  - immunosuppressive / immunomodulatory peptides
+  - synthetic HIV peptide vaccines (adaptive immunity)
+  - thymic peptides
 - Agent's strict AMP definition (direct antimicrobial / innate immune / anti-biofilm) is correct. 81.8% agreement is actually 100% agent accuracy with 8 human labeling errors.
 - consensus.py bug fix (item 1) still critical — unblocks future LLM AMP predictions.
 
 #### Peptide Investigation Results
-- NCT03490942 (glucagon): Genuine agent error — fixed by adding to _KNOWN_SEQUENCES
-- NCT06833931 (PGN-EDO51): R1 annotation error — drug is an antisense oligonucleotide, not a peptide
+- A glucagon trial: Genuine agent error — fixed by adding to _KNOWN_SEQUENCES
+- An antisense-oligonucleotide trial: R1 annotation error — drug is an antisense oligonucleotide, not a peptide
 
 ## v24 Changes
 
@@ -850,24 +848,24 @@ Per-job variance is high: delivery ranged 77.3–93.3%, RfF 76.6–97.2%, sequen
 ### v27 Changes (2026-04-02)
 - **Concordance scripts CSV migration**: concordance_jobs.py and concordance_test.py now use `human_ground_truth_train_df.csv` instead of the Excel file. Removed openpyxl dependency.
 - **Batch file fix**: Removed 11 non-training NCTs from batch files. Replaced with training-set NCTs. All future jobs must use only training-set NCTs.
-- **Known sequences**: Added insulin (preproinsulin, 110aa) and cv-mg01 (AChR peptide, 17aa) to `_KNOWN_SEQUENCES`.
+- **Known sequences**: Added insulin (preproinsulin, 110aa) and an AChR peptide-conjugate (17aa) to `_KNOWN_SEQUENCES`.
 
 ### v27b Changes (2026-04-02) — Peptide boundary fix
 - **Raised AA boundary 50→100**: Definition changed from "2-50 amino acids" to "typically ≤100 amino acids" across all prompts. This correctly classifies insulin (51 aa) as a peptide hormone while still excluding interferons (166+ aa), EPO (165 aa), growth hormone (191 aa).
 - **Added "Peptide / peptide hormone" molecular class**: Replaced "Short peptide chain" label in Pass 1 options. LLM now has explicit category for peptide hormones including multi-chain.
-- **Added peptide-conjugate INCLUDES**: "Peptide-conjugate therapeutics where the peptide IS the active component" — addresses CV-MG01 (two short synthetic peptides conjugated to carrier protein).
+- **Added peptide-conjugate INCLUDES**: "Peptide-conjugate therapeutics where the peptide IS the active component" — addresses a peptide-conjugate case (two short synthetic peptides conjugated to carrier protein).
 - **Added insulin as True worked example**: Replaced deleted False example with True example (51 aa, multi-chain, UniProt P01308).
 - **Consistency engine threshold raised**: Rule 3 cross-validation now 2-100 AA → force peptide=True (was 2-50).
-- **Test job 3e35811b7698 results**: Albiglutide fixed (TRUE). Insulin and CV-MG01 still FALSE with v27 prompts — root cause was the "2-50 aa" hard boundary in molecular class options causing LLM to pick "Protein" for 51 aa insulin. v27b fixes this.
+- **Test job 3e35811b7698 results**: A GLP-1 agonist case fixed (TRUE). The insulin and peptide-conjugate cases still FALSE with v27 prompts — root cause was the "2-50 aa" hard boundary in molecular class options causing LLM to pick "Protein" for 51 aa insulin. v27b fixes this.
 
 ### v27c Changes (2026-04-02) — Definition consistency fixes
 - **self_audit.py AA range fixed**: 2-50→2-100 (was contradicting orchestrator and verifier definitions).
 - **memory_store.py learning patterns fixed**: 2-50→2-100, >50→>100, multi-chain rule now excludes peptide hormones.
-- **Test job ea9bc98d1ae8 results**: LLM correctly classified insulin as True (Peptide / peptide hormone), but verifiers flipped to False (2/3 disagreed at high confidence). Root cause: verifier 2 cited 110 aa (preproinsulin precursor) instead of mature insulin (51 aa). Needs better verifier reasoning, not cheat-sheet examples or threshold lowering.
-- **CV-MG01 evidence investigation**: Arm group description ("two short synthetic peptides conjugated to carrier protein") IS in the citations passed to the LLM. The 14B model simply ignored it — classified as "Unknown" molecular class. This is an LLM reasoning limit, not a data pipeline issue.
+- **Test job ea9bc98d1ae8 results**: LLM correctly classified the insulin case as True (Peptide / peptide hormone), but verifiers flipped to False (2/3 disagreed at high confidence). Root cause: verifier 2 cited 110 aa (preproinsulin precursor) instead of mature insulin (51 aa). Needs better verifier reasoning, not cheat-sheet examples or threshold lowering.
+- **Peptide-conjugate evidence investigation**: Arm group description ("two short synthetic peptides conjugated to carrier protein") IS in the citations passed to the LLM. The 14B model simply ignored it — classified as "Unknown" molecular class. This is an LLM reasoning limit, not a data pipeline issue.
 - **Reverted**: Consensus threshold stays at 1.0 (lowering to 0.667 would weaken verification across ALL fields). Verifier examples reverted (no cheat-sheet drug names).
 - **UniProt snippet fix (data pipeline)**: peptide_identity.py and ebi_proteins_client.py now report mature chain lengths from CHAIN/PEPTIDE features instead of just precursor length. For insulin, snippet now says "Precursor length: 110 aa. Mature form: Insulin B chain 30 aa, Insulin A chain 21 aa (51 aa total)" instead of just "Length: 110 aa".
-- **Test job 02c65e21dfc7 results**: UniProt snippet fix deployed but verifiers STILL cited precursor 110 aa and ignored "Mature form: 51 aa total" in the same snippet. The data is correct — the small models (qwen2.5:7b, phi4-mini:3.8b) cherry-pick the larger number. CV-MG01 also still False — primary LLM ignores arm group description evidence.
+- **Test job 02c65e21dfc7 results**: UniProt snippet fix deployed but verifiers STILL cited precursor 110 aa and ignored "Mature form: 51 aa total" in the same snippet. The data is correct — the small models (qwen2.5:7b, phi4-mini:3.8b) cherry-pick the larger number. The peptide-conjugate case also still False — primary LLM ignores arm group description evidence.
 
 ### v27d Changes (2026-04-03) — Structured data injection
 - **Structured facts extraction**: New `_extract_structured_facts()` in verifier.py and `_extract_peptide_signals()` in peptide.py. Pulls two types of signal:
@@ -878,20 +876,20 @@ Per-job variance is high: delivery ranged 77.3–93.3%, RfF 76.6–97.2%, sequen
 - **Primary peptide annotator updated**: Same structured facts injected before Pass 1 evidence, so the 14B model can't miss arm group peptide-conjugate descriptions.
 - **No cheat sheets**: Facts are extracted programmatically from authoritative database results — no drug names hardcoded.
 - **Test job c5de1e0049b0 results (v27d)**:
-  - **Insulin (NCT00004984)**: Primary=True ✓, but verifier_1 (gemma2:9b) and verifier_2 (qwen2.5:7b) produced long summaries instead of following the response format — parser returned None (counts as disagreement). Verifier_3 (phi4-mini:3.8b) said False with wrong reasoning ("parenteral insulin is not peptide therapy" — confused delivery route with molecular class). Agreement=0.0 → reconciler → False. **Root cause**: gemma2 and qwen2.5:7b don't follow the structured response format when given long evidence with structured facts prepended. Parser gets None.
-  - **CV-MG01 (NCT03165435)**: Primary=False ✗ (still ignores arm group description). BUT verifier_1=True, verifier_2=True (both cited structured facts!). Verifier_3=False. Agreement=0.333. Reconciler sided with False, reasoning that "conjugated to carrier protein" means not a peptide. **Progress**: Structured facts worked for 2/3 verifiers on CV-MG01. Primary LLM and reconciler remain the blockers.
-  - **Next steps**: (1) Investigate why gemma2:9b and qwen2.5:7b fail to follow verifier response format with structured facts — may need shorter evidence or format enforcement. (2) CV-MG01 needs the primary to get it right OR the verification flow needs to be able to correct a wrong primary when 2/3 verifiers agree.
+  - **Insulin case**: Primary=True ✓, but verifier_1 (gemma2:9b) and verifier_2 (qwen2.5:7b) produced long summaries instead of following the response format — parser returned None (counts as disagreement). Verifier_3 (phi4-mini:3.8b) said False with wrong reasoning ("parenteral insulin is not peptide therapy" — confused delivery route with molecular class). Agreement=0.0 → reconciler → False. **Root cause**: gemma2 and qwen2.5:7b don't follow the structured response format when given long evidence with structured facts prepended. Parser gets None.
+  - **Peptide-conjugate case**: Primary=False ✗ (still ignores arm group description). BUT verifier_1=True, verifier_2=True (both cited structured facts!). Verifier_3=False. Agreement=0.333. Reconciler sided with False, reasoning that "conjugated to carrier protein" means not a peptide. **Progress**: Structured facts worked for 2/3 verifiers on this case. Primary LLM and reconciler remain the blockers.
+  - **Next steps**: (1) Investigate why gemma2:9b and qwen2.5:7b fail to follow verifier response format with structured facts — may need shorter evidence or format enforcement. (2) The peptide-conjugate case needs the primary to get it right OR the verification flow needs to be able to correct a wrong primary when 2/3 verifiers agree.
 
 ### v27e Changes (2026-04-03) — Fix format compliance + reconciler majority logic
 - **Root cause of v27d regression**: Compared v26 (job 86fdce46, 50 trials, 0 None verifiers on insulin) with v27d (job c5de1e0049b0, 2/3 None verifiers on insulin). v26 system template was clean; v27d added a STRUCTURED FACTS paragraph that competed with the "Respond EXACTLY in this format" instruction. v26 also put structured facts BEFORE evidence, priming small models into summary mode.
 - **Fix 1 — System template restored**: Removed the STRUCTURED FACTS instruction paragraph from SYSTEM_TEMPLATE. Back to v26 original. Models don't need to be told to address facts — they just need to see them.
 - **Fix 2 — Facts moved to END of evidence**: Leverages recency bias in small LLMs — last thing read before generating has most influence. Ends with "Remember: respond EXACTLY as Peptide: True or False" as format reminder. No new section headers that confuse models into summary mode.
-- **Fix 3 — Reconciler verifier-majority awareness**: When 2+ verifiers agree on a different answer than the primary, the reconciler prompt now explicitly flags this ("NOTE: 2 of 3 independent verifiers agree on 'True'"). System prompt updated: "give strong weight to the verifier majority" when verifiers cite evidence-based reasoning. This addresses CV-MG01 where 2/3 verifiers correctly said True but reconciler sided with the wrong primary.
+- **Fix 3 — Reconciler verifier-majority awareness**: When 2+ verifiers agree on a different answer than the primary, the reconciler prompt now explicitly flags this ("NOTE: 2 of 3 independent verifiers agree on 'True'"). System prompt updated: "give strong weight to the verifier majority" when verifiers cite evidence-based reasoning. This addresses the peptide-conjugate case where 2/3 verifiers correctly said True but reconciler sided with the wrong primary.
 - **Insulin context**: In v26, insulin was correctly False (2-50 AA boundary, insulin at 51 AA was "protein"). The boundary change to 2-100 AA (v27) made insulin a True case. The models struggle because UniProt reports 110 AA (precursor). Fix #2 puts "Mature form: 51 aa (ADMINISTERED drug, not 110 aa precursor)" as the last thing the model reads. Fix #1 ensures verifiers actually follow the format. Fix #3 means even if one verifier misses it, the reconciler weighs 2/3 agreement.
 - **Test job 05f80bba8946 results (v27e) — BOTH FIXED**:
-  - **Insulin (NCT00004984)**: Primary=True ✓. Verifier_1=True (cited "mature form 51 aa"). Verifier_2=None (qwen2.5:7b still produces summaries). Verifier_3=False (but reasoning actually supports True). Agreement=0.333 → **high-confidence primary override** (0.93 > 0.85, dissenters at 0.70). **Final=True ✓**
-  - **CV-MG01 (NCT03165435)**: Primary=False ✗ (14B model still wrong). Verifier_1=True, Verifier_2=True (both cited structured facts). Verifier_3=None (phi4-mini timeout). Agreement=0.0 → **reconciler flipped to True** citing "structured facts explicitly state CV-MG01 consists of two short synthetic peptides." **Final=True ✓** — Fix #3 (verifier-majority awareness) worked.
-  - **Remaining issues**: (1) qwen2.5:7b (verifier_2) still produces summaries instead of following format on insulin — None parse. (2) phi4-mini:3.8b consistently times out on CV-MG01/peptide. (3) Primary LLM (qwen2.5:14b) still says False for CV-MG01 — reconciler corrects it.
+  - **Insulin case**: Primary=True ✓. Verifier_1=True (cited "mature form 51 aa"). Verifier_2=None (qwen2.5:7b still produces summaries). Verifier_3=False (but reasoning actually supports True). Agreement=0.333 → **high-confidence primary override** (0.93 > 0.85, dissenters at 0.70). **Final=True ✓**
+  - **Peptide-conjugate case**: Primary=False ✗ (14B model still wrong). Verifier_1=True, Verifier_2=True (both cited structured facts). Verifier_3=None (phi4-mini timeout). Agreement=0.0 → **reconciler flipped to True** citing "structured facts explicitly state the drug consists of two short synthetic peptides." **Final=True ✓** — Fix #3 (verifier-majority awareness) worked.
+  - **Remaining issues**: (1) qwen2.5:7b (verifier_2) still produces summaries instead of following format on the insulin case — None parse. (2) phi4-mini:3.8b consistently times out on the peptide-conjugate case. (3) Primary LLM (qwen2.5:14b) still says False for the peptide-conjugate case — reconciler corrects it.
 
 ### v27e Full Concordance (50 NCTs, job c00a1eef08f4, prod) — 2026-04-03
 
@@ -906,13 +904,13 @@ Per-job variance is high: delivery ranged 77.3–93.3%, RfF 76.6–97.2%, sequen
 
 **Peptide: 10 false negatives (agent=FALSE, human=TRUE), zero false positives.**
 Root causes:
-- 4 have known sequences in _KNOWN_SEQUENCES but cascade blocks lookup (BMN 111, dnaJP1, BNZ-1, sPIF)
-- 2 are peptide vaccines/imaging (NEO-PV-01, 68Ga-RM2) — "peptide therapeutic" definition too narrow
-- 2 are peptide conjugates (MB1707, PGN-EDO51) — agent prioritizes non-peptide component
-- 2 are boundary/synthesis cases (CPT31 D-peptide, thymic peptides)
+- 4 have known sequences in _KNOWN_SEQUENCES but cascade blocks lookup
+- 2 are peptide vaccines/imaging — "peptide therapeutic" definition too narrow
+- 2 are peptide conjugates — agent prioritizes non-peptide component
+- 2 are boundary/synthesis cases (D-peptides, thymic peptides)
 
-**Classification: 5 false negatives, all agent=Other/human=AMP on new old-trial NCTs.**
-All from _KNOWN_NON_AMP_DRUGS blocklist (Peptide T, Enfuvirtide, PCLUS vaccine). Definitional gap, not a bug.
+**Classification: 5 false negatives, all agent=Other/human=AMP on old-trial NCTs.**
+All from the _KNOWN_NON_AMP_DRUGS blocklist (HIV entry/fusion inhibitors, peptide vaccines). Definitional gap, not a bug.
 
 **RfF: 6 of 10 disagreements cascade from peptide=False (trials never evaluated).**
 
@@ -926,16 +924,16 @@ All from _KNOWN_NON_AMP_DRUGS blocklist (Peptide T, Enfuvirtide, PCLUS vaccine).
 | Outcome | 78% (7/9) | 56% (5/9) | 75.9% | 70.4% | Mixed |
 | RfF | **29% (2/7)** | **29% (2/7)** | 74.4% | 63.9% | **-45pp** |
 
-**NCT00000435 crashed**: `'dict' object has no attribute 'lower'` — EDAM-resolved interventions stored as dicts, pre-cascade loop called `.lower()` on them. **Fixed in f0a4dba.**
+**One trial crashed**: `'dict' object has no attribute 'lower'` — EDAM-resolved interventions stored as dicts, pre-cascade loop called `.lower()` on them. **Fixed in f0a4dba.**
 
 **RfF regression root cause**: `_pass1_says_no_failure()` checked the LLM's "Is This A Failure: No" answer (line 277) BEFORE the terminated/withdrawn status override (line 307). LLM said "No" for terminated/withdrawn trials lacking published evidence → early return → Pass 2 never ran → v26 "Business Reason" default never fired. **Fixed in f0a4dba**: moved terminated/withdrawn check to top of function.
 
 **RfF mismatches (pre-fix)**:
-- NCT03597282: empty (should be Recruitment issues/Due to covid) — "slow enrollment compounded by COVID-19"
-- NCT04672083: empty (should be Business Reason) — outcome also wrong (Unknown vs Failed)
-- NCT05813314: empty (should be Business Reason) — "further optimization required"
-- NCT06833931: empty (should be Business Reason) — "development voluntarily discontinued by Sponsor"
-- NCT05465590: Toxic/Unsafe (should be Business Reason) — "terminated due to Sponsor decision"
+- empty (should be Recruitment issues/Due to covid) — "slow enrollment compounded by COVID-19"
+- empty (should be Business Reason) — outcome also wrong (Unknown vs Failed)
+- empty (should be Business Reason) — "further optimization required"
+- empty (should be Business Reason) — "development voluntarily discontinued by Sponsor"
+- Toxic/Unsafe (should be Business Reason) — "terminated due to Sponsor decision"
 
 ### v28 50-NCT Concordance (job 3e8c4848fe74, prod commit 26b6c0d) — 2026-04-04
 
@@ -947,11 +945,11 @@ All from _KNOWN_NON_AMP_DRUGS blocklist (Peptide T, Enfuvirtide, PCLUS vaccine).
 | Outcome | 73.9% (34/46) | 60.0% (27/45) | 75.9% | 70.4% | -2pp | 64.3% |
 | **RfF** | **50.0% (15/30)** | **48.3% (14/29)** | 74.4% | 63.9% | **-24pp** | 88.6% |
 
-**Peptide: 90% target MET.** 4 false negatives (NCT00000435/775/798/846 — old trials, naming issues), 1 false positive (NCT03675126).
+**Peptide: 90% target MET.** 4 false negatives (old trials, naming issues), 1 false positive.
 
 **RfF: 50% — negation bug.** All 8 Toxic/Unsafe mismatches from `_infer_from_pass1()` negation-blind keyword matching on prod code. Fixed in v29 (dev dce4466d): sentence-level negation filter + section boundary regex fix. Projected RfF after v29: ~70% vs R1.
 
-**Delivery: -4pp** — NCT00000391/392/393 (old thymic peptide trials → "Other"), NCT04771013 (agent correct, humans wrong — oral formulation), NCT06126354 (multi-route dedup).
+**Delivery: -4pp** — old thymic peptide trials → "Other"; one trial agent correct, humans wrong (oral formulation); one multi-route dedup case.
 
 **Outcome: -2pp** — mix of literature gaps (HTTP 429 rate limiting), old trials with no publications, genuine LLM misses.
 
@@ -1001,13 +999,13 @@ All from _KNOWN_NON_AMP_DRUGS blocklist (Peptide T, Enfuvirtide, PCLUS vaccine).
 Only 7 trial-field values changed (LLM nondeterminism). No code regressions.
 
 **Peptide regressions (2, both stochastic — no code change in peptide logic):**
-- NCT03675126 (SRP-5051/vesleteplirsen): Reconciler made different judgment call on "peptide-conjugated" — actually a PPMO antisense oligonucleotide. Verifiers 2/3 correctly said False, reconciler overrode.
-- NCT05813314 (BMN 111/vosoritide): Verifier 3 flipped True→False (cited ChEMBL "Protein" classification), triggering reconciler which also got it wrong. **Critical bug: system has vosoritide's 39 AA sequence stored but `_enforce_post_verification_consistency` lacks Rule 3 (sequence→peptide). Fixed in v30.**
+- An antisense-oligonucleotide (PPMO) case: Reconciler made different judgment call on "peptide-conjugated" — actually an antisense oligonucleotide. Verifiers 2/3 correctly said False, reconciler overrode.
+- A 39 AA peptide case: Verifier 3 flipped True→False (cited ChEMBL "Protein" classification), triggering reconciler which also got it wrong. **Critical bug: system has the 39 AA sequence stored but `_enforce_post_verification_consistency` lacks Rule 3 (sequence→peptide). Fixed in v30.**
 
 **RfF: Negation fix confirmed working at annotation layer:**
 - 6 of 8 Toxic/Unsafe mismatches fixed by `_strip_negated_sentences()`
-- 2 remaining: NCT05813314 (whyStopped fallback lacks negation filter — **fixed in v30**), NCT03597282 (affirmative "is safe" matches)
-- 1 new regression: NCT03593421 (improved section boundary now catches affirmative safety language in findings — **fixed by v30 whyStopped filter**)
+- 2 remaining: one whyStopped fallback lacks negation filter (**fixed in v30**), one with affirmative "is safe" matches
+- 1 new regression: improved section boundary now catches affirmative safety language in findings (**fixed by v30 whyStopped filter**)
 
 #### Jobs 47-48: Generalization (99 unseen NCTs with ground truth)
 
@@ -1024,25 +1022,25 @@ Only 7 trial-field values changed (LLM nondeterminism). No code regressions.
 - 8 false negatives: mix of borderline cases and annotation noise.
 
 **Classification: 3 false AMP hits from DBAASP.**
-- Apelin (NCT03449251), GLP-2 (NCT03867656), Thymalfasin (NCT06821100) have in-vitro DBAASP entries but are not clinical AMPs. **Fixed in v30: DBAASP-only hits now go through verification instead of skip_verification=True.**
+- Three drugs (a peptide hormone, a GLP-2, and a thymic peptide) have in-vitro DBAASP entries but are not clinical AMPs. **Fixed in v30: DBAASP-only hits now go through verification instead of skip_verification=True.**
 
-**NCT06675917: Total research pipeline failure.**
+**One trial: Total research pipeline failure.**
 - `logger` NameError in literature.py → all sources failed → zero-confidence annotations. Not in ground truth. **Fixed in v30.**
 
 **Outcome conservatism (P2-6): LEAVE AS-IS.**
-- 6 of 10 disagreements are Agent=Unknown, Human=Positive for COMPLETED trials without publications. Agent correctly follows decision tree. Verified that 2 of the 6 "Positive" human annotations are actually wrong (NCT02636582 failed to meet primary endpoint, NCT05328115 R2 says "Failed"). Agent already exceeds human inter-rater (71.4% vs 59.0%). A COMPLETED→Positive heuristic would introduce systematic bias. The real improvement path is better literature search coverage (separate effort).
+- 6 of 10 disagreements are Agent=Unknown, Human=Positive for COMPLETED trials without publications. Agent correctly follows decision tree. Verified that 2 of the 6 "Positive" human annotations are actually wrong (one failed to meet primary endpoint, one where R2 says "Failed"). Agent already exceeds human inter-rater (71.4% vs 59.0%). A COMPLETED→Positive heuristic would introduce systematic bias. The real improvement path is better literature search coverage (separate effort).
 
 ### v30 Fixes (dev, 2026-04-06)
 
-1. **P0: whyStopped negation filter** (`failure_reason.py`): Apply `_strip_negated_sentences()` to whyStopped text before keyword matching. Fixes NCT05813314 ("not due to any patient safety concerns" → no longer matches "safety") and NCT03593421.
+1. **P0: whyStopped negation filter** (`failure_reason.py`): Apply `_strip_negated_sentences()` to whyStopped text before keyword matching. Fixes a case where "not due to any patient safety concerns" no longer matches "safety", plus one more.
 
-2. **P0: Post-verification sequence consistency** (`orchestrator.py`): Added Rule 3 to `_enforce_post_verification_consistency()` — if verified sequence is 2-100 AA, force peptide=True. Mirrors pre-verification Rule 3. Catches vosoritide regression and any future case where verifiers incorrectly flip a peptide with a known short sequence.
+2. **P0: Post-verification sequence consistency** (`orchestrator.py`): Added Rule 3 to `_enforce_post_verification_consistency()` — if verified sequence is 2-100 AA, force peptide=True. Mirrors pre-verification Rule 3. Catches the 39 AA peptide regression and any future case where verifiers incorrectly flip a peptide with a known short sequence.
 
-3. **P0: Literature logger fix** (`literature.py`): Added `import logging` and logger definition. Fixes `NameError: name 'logger' is not defined` that caused 7 trials to lose literature data (NCT06675917 lost ALL data).
+3. **P0: Literature logger fix** (`literature.py`): Added `import logging` and logger definition. Fixes `NameError: name 'logger' is not defined` that caused 7 trials to lose literature data (one trial lost ALL data).
 
 4. **P1: Cell therapy peptide guidance** (`verifier.py`, `reconciler.py`): Added to verifier Excludes + CRITICAL RULES and reconciler SYSTEM_PROMPT: DCs pulsed with peptides, CAR-T cells, peptide-loaded DC vaccines → peptide=False (the therapy is the cell product). Also dietary supplements (collagen, whey protein). Addresses 6 of 11 peptide FPs in generalization test.
 
-5. **P1: DBAASP verification gate** (`classification.py`): DBAASP-only hits now go through verification (`skip_verification=False`, confidence 0.80) instead of being auto-classified as AMP. DRAMP/APD hits or multi-database hits remain deterministic. Addresses 3 false AMP classifications (apelin, GLP-2, thymalfasin).
+5. **P1: DBAASP verification gate** (`classification.py`): DBAASP-only hits now go through verification (`skip_verification=False`, confidence 0.80) instead of being auto-classified as AMP. DRAMP/APD hits or multi-database hits remain deterministic. Addresses 3 false AMP classifications (a peptide hormone, a GLP-2, and a thymic peptide).
 
 ### v31 Changes (2026-04-07)
 
@@ -1101,11 +1099,11 @@ Only 7 trial-field values changed (LLM nondeterminism). No code regressions.
 ### Classification: Known Disagreements (Not Bugs)
 
 7 AMP→Other misclassifications in v31 50-NCT validation are **definitional disagreements**, not code errors:
-- **NCT00000391, 00000392, 00000393** (Peptide T/DAPTA): HIV entry inhibitor, explicitly in `_KNOWN_NON_AMP_DRUGS`. Both R1 and R2 say AMP. Agent's narrow definition excludes entry inhibitors.
-- **NCT00001118** (Enfuvirtide/T-20): HIV fusion inhibitor, explicitly in `_KNOWN_NON_AMP_DRUGS`. Both R1 and R2 say AMP.
-- **NCT00000435** (dnaJ peptide): Immunosuppressive for RA. R1=AMP, R2=Other. Agent aligns with R2.
-- **NCT04672083** (CPT31): HIV entry inhibitor. R1=AMP, R2=Other. Agent aligns with R2.
-- **NCT04771013** (Thymic peptides): Immunomodulatory for COVID. R1=AMP, R2=Other. Agent aligns with R2.
+- **3× HIV entry inhibitor (CCR5 blocker)**: explicitly in `_KNOWN_NON_AMP_DRUGS`. Both R1 and R2 say AMP. Agent's narrow definition excludes entry inhibitors.
+- **HIV fusion inhibitor**: explicitly in `_KNOWN_NON_AMP_DRUGS`. Both R1 and R2 say AMP.
+- **Immunosuppressive peptide (for RA)**: R1=AMP, R2=Other. Agent aligns with R2.
+- **HIV entry inhibitor (D-peptide)**: R1=AMP, R2=Other. Agent aligns with R2.
+- **Thymic peptides (immunomodulatory for COVID)**: R1=AMP, R2=Other. Agent aligns with R2.
 
 No code change. Agent's Mode A/B/C definition is intentional and documented.
 
@@ -1118,18 +1116,18 @@ No code change. Agent's Mode A/B/C definition is intentional and documented.
 | Field | Agent (10 NCTs) | Human R1↔R2 | vs Human |
 |---|---|---|---|
 | Peptide | 100.0% (10/10) | 100.0% | **=** |
-| Classification | 90.0% (9/10) | 100.0% | -10pp (known R1 error: NCT00000393 Peptide T) |
+| Classification | 90.0% (9/10) | 100.0% | -10pp (known R1 error on an HIV entry inhibitor) |
 | Delivery | 100.0% (10/10) | 80.0% | **+20pp** |
 | Outcome | 50.0% (5/10) | 60.0% | -10pp |
 | RfF | 80.0% (8/10) | 70.0% | **+10pp** |
 | Sequence | 42.9% (3/7) | 28.6% | **+14pp** |
 
 **Outcome fixes had limited impact.** 5/10 NCTs still returned Unknown:
-- NCT00000393: Unknown vs Positive (Peptide T, completed Phase I, no findable publications)
-- NCT00000846: Unknown vs Failed (HIV peptide vaccine, 1990s, no publications)
-- NCT04701021: Unknown vs Positive/Failed (annotator disagreement — R1 says Positive, R2 says Failed)
-- NCT03482648: Unknown vs Positive (completed, publications exist but generic pub filter likely blocked them)
-- NCT03734718: Unknown vs Failed (completed trial, agent missed failure evidence)
+- Unknown vs Positive (an HIV entry inhibitor, completed Phase I, no findable publications)
+- Unknown vs Failed (an HIV peptide vaccine, 1990s, no publications)
+- Unknown vs Positive/Failed (annotator disagreement — R1 says Positive, R2 says Failed)
+- Unknown vs Positive (completed, publications exist but generic pub filter likely blocked them)
+- Unknown vs Failed (completed trial, agent missed failure evidence)
 
 **Root cause:** Structured status injection (fix #3) correctly injects COMPLETED status, but the LLM still returns Unknown for old trials without trial-specific publications. The generic pub filter (fix #4) may be too aggressive — blocking legitimate outcome evidence.
 
@@ -1151,16 +1149,16 @@ No code change. Agent's Mode A/B/C definition is intentional and documented.
 **Cascade breakdown:** 22/50 NCTs classified as non-peptide → all downstream fields N/A. Of these, 6 have GT downstream annotations (cascade victims).
 
 **Peptide false positives (4):**
-- NCT00028431: Melanoma peptide vaccine → agent sees "Peptide" in intervention name
-- NCT00031044: Enfuvirtide → in `_KNOWN_PEPTIDE_DRUGS` (36 aa fusion inhibitor — molecularly IS a peptide, GT says False)
-- NCT02625636: Macimorelin → UniProt confirms peptide hormone, GT says False
-- NCT02662400: Tirzepatide → UniProt confirms peptide hormone, GT says False
+- A melanoma peptide vaccine → agent sees "Peptide" in intervention name
+- An HIV fusion inhibitor → in `_KNOWN_PEPTIDE_DRUGS` (36 aa — molecularly IS a peptide, GT says False)
+- A growth-hormone secretagogue → UniProt confirms peptide hormone, GT says False
+- A GLP-1/GIP dual agonist → UniProt confirms peptide hormone, GT says False
 
 3 of 4 false positives are likely **GT annotation errors** — these drugs are peptides by molecular definition.
 
 **Classification cascade damage (13 errors):**
 - 5 × agent=N/A where GT=Other (NCTs where peptide=False correctly, but GT still annotated classification)
-- 3 × agent=Other where GT=AMP (NCT00002228, NCT00002363, NCT00004494 — AMP definitional disagreement)
+- 3 × agent=Other where GT=AMP (AMP definitional disagreement)
 - 5 × agent=N/A from genuine peptide false-negatives cascading downstream
 
 **Outcome exceeds human IAA (+9.3pp):** Despite low absolute (58.1%), agent outperforms human inter-rater agreement (48.8%) on this set. Consistent with v29 generalization finding (71.4% vs 59.0%).
@@ -1183,13 +1181,13 @@ No code change. Agent's Mode A/B/C definition is intentional and documented.
 #### 1. Generic pub filter relaxation (`outcome.py`)
 - **`_infer_from_pass1()`**: When publications exist but lack trial-specific markers, now checks the LLM's `result_valence` field as a softer signal. Valence is the LLM's holistic judgment (not keyword matching), so it's less prone to false positives from drug-class publications. Clear positive/negative valence → returns result; unclear valence → falls through to registry heuristics as before.
 - **`_publication_priority_override()`**: Same fix — generic publications with clear LLM valence now trigger overrides instead of returning None.
-- **Root cause**: v33 filter was too aggressive — blocked ALL keyword matching AND valence for generic pubs, causing COMPLETED trials with publications to return Unknown (NCT03482648 and similar).
+- **Root cause**: v33 filter was too aggressive — blocked ALL keyword matching AND valence for generic pubs, causing COMPLETED trials with publications to return Unknown.
 
 #### 2. Training CSV peptide corrections (`docs/human_ground_truth_train_df.csv`)
-- **NCT00031044 (enfuvirtide)**: False→True (both annotators). 36aa HIV fusion inhibitor, in `_KNOWN_PEPTIDE_DRUGS`. Molecularly a peptide.
-- **NCT02625636 (macimorelin)**: False→True (both annotators). Growth hormone secretagogue, UniProt confirms peptide hormone.
-- **NCT02662400 (tirzepatide)**: False→True (both annotators). GLP-1/GIP dual agonist, in `_KNOWN_PEPTIDE_DRUGS`, 39aa peptide.
-- **NCT00028431 (melanoma peptide vaccine)**: Left as False — vaccine delivery vehicle, agent FP was from "Peptide" in intervention name.
+- **HIV fusion inhibitor**: False→True (both annotators). 36aa, in `_KNOWN_PEPTIDE_DRUGS`. Molecularly a peptide.
+- **Growth-hormone secretagogue**: False→True (both annotators). UniProt confirms peptide hormone.
+- **GLP-1/GIP dual agonist**: False→True (both annotators). In `_KNOWN_PEPTIDE_DRUGS`, 39aa peptide.
+- **Melanoma peptide vaccine**: Left as False — vaccine delivery vehicle, agent FP was from "Peptide" in intervention name.
 - **Impact**: Removes 3 false-positive penalties from peptide accuracy. These were GT annotation errors, not agent errors.
 
 #### 3. Cascade-aware concordance metrics (`concordance_service.py`, `concordance.py`)
@@ -1341,7 +1339,7 @@ The FALSE→TRUE pattern (74% of errors) means the agent is too conservative —
 
 ### Design Decisions
 
-- **NCT00004984 (Insulin):** 51aa multi-chain protein. Agent correctly classified, humans disagree on peptide definition. **Decision: KEEP the sequence.** Multi-chain proteins at peptide scale should retain their sequence annotation. The agent is correct here — do not penalize or special-case this. If the agent finds a valid sequence, include it regardless of single-chain vs multi-chain debate.
+- **Insulin (multi-chain peptide hormone):** 51aa multi-chain protein. Agent correctly classified, humans disagree on peptide definition. **Decision: KEEP the sequence.** Multi-chain proteins at peptide scale should retain their sequence annotation. The agent is correct here — do not penalize or special-case this. If the agent finds a valid sequence, include it regardless of single-chain vs multi-chain debate.
 
 ### Updated Testing Plan
 
@@ -1351,7 +1349,7 @@ The FALSE→TRUE pattern (74% of errors) means the agent is too conservative —
 
 **Phase 2b: DONE** — v27e concordance (c00a1eef08f4, 50 NCTs). Results in v27e concordance table above.
 
-**Phase 3: DONE (partial)** — v27b-v27e fixed insulin (True) and CV-MG01 (True). 10 other peptide false negatives remain. v28 plan addresses these.
+**Phase 3: DONE (partial)** — v27b-v27e fixed the insulin case (True) and the peptide-conjugate case (True). 10 other peptide false negatives remain. v28 plan addresses these.
 
 **Phase 4: v28 implementation (NEXT)**
 - Wave 1: Pre-cascade _KNOWN_SEQUENCES check, expand sequences, replace phi4-mini→llama3.1:8b, reduce verifier evidence

@@ -31,7 +31,7 @@ PKG_ROOT = THIS_DIR.parent
 if str(PKG_ROOT) not in sys.path:
     sys.path.insert(0, str(PKG_ROOT))
 
-from app.services.concordance_service import _normalise, sequences_match  # noqa: E402
+from app.services.value_normalization import _normalise, sequences_match  # noqa: E402
 
 CSV_FIELDS = {
     "peptide": "Peptide",

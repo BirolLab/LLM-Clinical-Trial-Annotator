@@ -9,9 +9,6 @@ import type {
   ReviewStats,
   ResultListItem,
   ResultSummary,
-  JobConcordance,
-  ComparisonResult,
-  ConcordanceHistoryEntry,
   PartialResults,
 } from "../types";
 
@@ -116,49 +113,6 @@ export const submitReview = (
   request<Record<string, unknown>>(`/review/${jobId}/${nctId}/${field}`, {
     method: "POST",
     body: JSON.stringify(decision),
-  });
-
-// Concordance
-export const getConcordanceJobs = () =>
-  request<{ jobs: Array<{ job_id: string; timestamp: string; total_trials: number }> }>("/agreement/jobs");
-
-export const getJobConcordance = (jobId: string, grouped = false) =>
-  request<{ agent_vs_r1: JobConcordance; agent_vs_r2: JobConcordance; r1_vs_r2: JobConcordance }>(`/agreement/job/${jobId}${grouped ? "?grouped=true" : ""}`);
-
-export const getMultiJobConcordance = (jobIds: string[], grouped = false) =>
-  request<{ agent_vs_r1: JobConcordance; agent_vs_r2: JobConcordance; r1_vs_r2: JobConcordance }>(`/agreement/jobs/multi${grouped ? "?grouped=true" : ""}`, {
-    method: "POST",
-    body: JSON.stringify({ job_ids: jobIds }),
-  });
-
-export const compareJobs = (jobIdA: string, jobIdB: string) =>
-  request<ComparisonResult>(`/agreement/compare/${jobIdA}/${jobIdB}`);
-
-export const getConcordanceHistory = () =>
-  request<{ history: ConcordanceHistoryEntry[] }>("/agreement/history");
-
-export const getHumanConcordance = () =>
-  request<JobConcordance>("/agreement/human");
-
-export const getAnnotators = () =>
-  request<{ annotators: Array<{ name: string; replicate: string; nct_count: number }> }>("/agreement/annotators");
-
-export const getJobAnnotatorConcordance = (jobId: string, annotator: string) =>
-  request<JobConcordance>(`/agreement/job/${jobId}/annotator/${encodeURIComponent(annotator)}`);
-
-export const getHumanAnnotatorConcordance = (annotator: string) =>
-  request<JobConcordance>(`/agreement/human/annotator/${encodeURIComponent(annotator)}`);
-
-export const getJobAnnotatorsConcordance = (jobId: string, annotators: string[], replicate: string) =>
-  request<JobConcordance>(`/agreement/job/${jobId}/annotators`, {
-    method: "POST",
-    body: JSON.stringify({ annotators, replicate }),
-  });
-
-export const getHumanAnnotatorsConcordance = (r1Annotators?: string[], r2Annotators?: string[]) =>
-  request<JobConcordance>("/agreement/human/annotators", {
-    method: "POST",
-    body: JSON.stringify({ r1_annotators: r1Annotators || null, r2_annotators: r2Annotators || null }),
   });
 
 // Settings

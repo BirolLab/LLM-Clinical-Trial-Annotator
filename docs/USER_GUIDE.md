@@ -20,7 +20,7 @@ Annotation outputs may include `<field>_atomic` keys alongside the standard fiel
 - **Outcome agent overrides:** vaccine-immunogenicity Positive override (v42.7.7) with pub-title-pattern alternative (v42.7.17); FDA-approved drug override gated on strong-efficacy keywords (v42.7.12); Failed override gated on terminal registry status (v42.7.14).
 - **Publication classifier (v42.7.20):** `_classify_publication` defaults to `general` unless an explicit trial signal (NCT match, "phase X", "first-in-human", "clinical trial", "primary endpoint", "we report", etc.) is present in the title. Cleaner [TRIAL-SPECIFIC] tags so the LLM can trust them when applying Rule 7 condition (ii). Cross-job analysis showed v41b's "default to trial_specific" was systematically over-tagging field-review pubs (Job #98: typical trial saw 6-48 false trial_specific tags).
 - **Delivery_mode relevance gate (v42.7.19):** ambiguous keywords (tablet/capsule) only fire on citations that mention an experimental intervention name. Addresses 6 distinct NCTs across Jobs #92/#95/#96/#97 with spurious-oral pattern from FDA Drugs / OpenAlex citations on similarly-named approved drugs.
-- **Sequence dictionary expansions (v42.7.18 / .21 / .22):** `_KNOWN_SEQUENCES` extended for solnatide+aliases / io103 / apraglutide / cbx129801 / sartate / cgrp+aliases. Sequences-only — `_KNOWN_PEPTIDE_DRUGS` deliberately untouched.
+- **Sequence dictionary expansions (v42.7.18 / .21 / .22):** `_KNOWN_SEQUENCES` extended for several additional peptide candidates and their aliases. Sequences-only — `_KNOWN_PEPTIDE_DRUGS` deliberately untouched.
 - **Evidence grading:** every annotation carries an `evidence_grade` ∈ {db_confirmed, deterministic, pub_trial_specific, llm, inconclusive} (v42.7.1). Used by `scripts/commit_accuracy_report.py` for coverage × commit-accuracy stratification, and by `scripts/evidence_grade_miss_analysis.py` to surface which agent layer is failing.
 - **Code-sync diagnostic:** `/api/diagnostics/code_sync` returns boot vs disk commit + active-job count (v42.7.5). `scripts/check_code_sync.sh` is the smoke-harness gate.
 - **Held-out evaluation:** per-cycle held-out rotation. See `CONTINUATION_PLAN.md` for active slice + retired slices. `scripts/submit_holdout_validation.sh --check-sync` defaults to the active slice. `--milestone` flag triggers the 147-NCT validation tier (~24h, ±8pp CI half-width). Pool universe: 680 NCTs from `docs/human_ground_truth_train_df.csv` only.
@@ -331,7 +331,7 @@ All configuration lives in `config/default_config.yaml` and is editable through 
 Every annotation field includes a companion evidence column (e.g., `Classification Evidence`) containing deduplicated source identifiers:
 - PubMed articles: `PMID:36191080`
 - PMC full-text: `PMC:11773215`
-- ClinicalTrials.gov: `https://clinicaltrials.gov/study/NCT06729606`
+- ClinicalTrials.gov: `https://clinicaltrials.gov/study/NCT12345678`
 - UniProt entries: `uniprot:P01282`
 - Web sources: full URL
 
@@ -365,13 +365,13 @@ AMP stands for **Antimicrobial Peptide**. The classification categories are:
 - **AMP**: The intervention is an antimicrobial peptide (targets infection, wound healing, cancer, immunomodulation via antimicrobial mechanism)
 - **Other**: Everything else — including peptides that are NOT antimicrobial (GLP-1 analogues, VIP, somatostatin analogues, GnRH analogues)
 
-**Common agent error**: Classifying all peptides as AMP. VIP/Aviptadil for headaches is a peptide but NOT an AMP → should be "Other". Semaglutide for diabetes is a peptide but NOT an AMP → should be "Other". Only peptides with antimicrobial activity or that target pathogens qualify as AMP.
+**Common agent error**: Classifying all peptides as AMP. A vasoactive peptide for headaches is a peptide but NOT an AMP → should be "Other". A GLP-1 analogue for diabetes is a peptide but NOT an AMP → should be "Other". Only peptides with antimicrobial activity or that target pathogens qualify as AMP.
 
 ### Peptide: Nutritional Formulas vs Peptide Drugs
 
 The agent sometimes misclassifies nutritional products containing hydrolyzed peptides as peptide therapeutics. The distinction:
-- **True**: The active drug IS a peptide (colistin, semaglutide, VIP, StreptInCor vaccine)
-- **False**: The product CONTAINS peptides as food ingredients (Kate Farm Peptide 1.5, hydrolyzed protein formulas)
+- **True**: The active drug IS a peptide (e.g. a peptide antibiotic, a GLP-1 analogue, a vasoactive peptide, a peptide-based vaccine)
+- **False**: The product CONTAINS peptides as food ingredients (branded enteral nutrition formulas, hydrolyzed protein formulas)
 
 Also note that large multi-subunit proteins and engineered protein scaffolds are NOT peptides, even if they contain peptide chains.
 
@@ -519,7 +519,7 @@ After every job, EDAM:
 4. **Optimizes prompts** — every 3rd job, analyzes error patterns and proposes prompt improvements
 
 Before each annotation, EDAM retrieves relevant guidance:
-- Past corrections for similar trials ("NCT00004984 was corrected from Positive to Failed")
+- Past corrections for similar trials ("an earlier trial was corrected from Positive to Failed")
 - Stable exemplars as few-shot examples ("Trials like this consistently get 'Other'")
 - Anomaly warnings ("85% of recent trials got the same value — check for bias")
 

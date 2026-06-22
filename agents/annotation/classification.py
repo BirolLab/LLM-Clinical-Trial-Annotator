@@ -92,8 +92,8 @@ def _deterministic_classify(
     has_dbaasp = False
     has_apd = False
     # v42.6.17 (2026-04-25): collect AMP-DB citations so the deterministic
-    # FieldAnnotation can attach them as evidence. Job #83 NCT03196219
-    # (C16G2) hit DBAASP but the FieldAnnotation had evidence=[], so the
+    # FieldAnnotation can attach them as evidence. A Job #83 example trial
+    # (a named AMP) hit DBAASP but the FieldAnnotation had evidence=[], so the
     # downstream evidence-threshold check saw 0 sources and forced Other.
     amp_db_citations: list = []
 

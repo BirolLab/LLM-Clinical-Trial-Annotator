@@ -188,11 +188,11 @@ Pure data extraction, no LLM. Refactor from existing `_build_evidence_dossier` t
 Every verdict traces to a named rule + atomic inputs:
 
 ```
-NCT03314987 → Positive (rule R1: 2 POSITIVE pubs, 0 FAILED)
-   pubs: PMID:32145678 → POSITIVE (q2=YES: "primary endpoint was met")
-         PMID:34567890 → POSITIVE (q3=YES: "significant clinical benefit")
+NCT12345678 → Positive (rule R1: 2 POSITIVE pubs, 0 FAILED)
+   pubs: PMID:00000001 → POSITIVE (q2=YES: "primary endpoint was met")
+         PMID:00000002 → POSITIVE (q3=YES: "significant clinical benefit")
 
-NCT01653249 → Positive (rule R4: COMPLETED, no trial-specific pubs,
+NCT87654321 → Positive (rule R4: COMPLETED, no trial-specific pubs,
                         ChEMBL shows drug advanced to Phase III)
 ```
 

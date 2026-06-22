@@ -57,7 +57,7 @@ _Authored 2026-05-06. Levers 1+2 already landed (commits `9b8ed95c`, `91e4cbe0`)
 
 #### 2.2.3 Intervention-drug signal
 - Compare the trial's `protocolSection.armsInterventionsModule.interventions[]` (drug names + intervention names) to the publication title + abstract
-- Use existing `_KNOWN_PEPTIDE_DRUGS` mapping from `peptide.py` to canonicalize aliases (e.g. CBX129801 ↔ semaglutide)
+- Use existing `_KNOWN_PEPTIDE_DRUGS` mapping from `peptide.py` to canonicalize aliases (e.g. a development code ↔ its generic name)
 - Match if any intervention name appears in pub text with word-boundary
 - Implementation: `intervention_match(interventions, pub_text) -> bool`
 
@@ -179,7 +179,7 @@ Build slice-H, 20 NCTs, biased toward GT=Positive trials with `registered_trial_
 
 ## 3. Lever 4 — Drug-Code → Biological-Name Resolver
 
-**Goal:** resolve pharma drug codes (PLG0206, CBX129801, "64Cu-SARTATE", GT-001, etc.) to biological names that UniProt / DrugBank actually index. Currently the `peptide_identity` agent returns "no_structured_match" for these, blocking downstream sequence extraction and weakening the outcome signal (drug_max_phase from ChEMBL would also benefit).
+**Goal:** resolve pharma drug codes (sponsor-assigned alphanumeric development codes, radiolabeled-conjugate codes, etc.) to biological names that UniProt / DrugBank actually index. Currently the `peptide_identity` agent returns "no_structured_match" for these, blocking downstream sequence extraction and weakening the outcome signal (drug_max_phase from ChEMBL would also benefit).
 
 **Expected lift:** unblocks UniProt on ~40% of currently-N/A sequence cases. Estimated +15-20pp on sequence accuracy. Secondary benefit on outcome via richer ChEMBL signals.
 
@@ -201,7 +201,7 @@ async def rxnorm_resolve(drug_code: str) -> list[dict]:
     """Resolve a drug code to canonical names via RxNorm.
 
     RxNorm exposes /approximateTerm.json which fuzzy-matches across
-    brand/generic/code names. For pharma codes (PLG0206), it usually
+    brand/generic/code names. For pharma development codes, it usually
     returns the generic name + RXCUI. From RXCUI, /related.json with
     tty=IN gives the ingredient name.
     """
@@ -246,7 +246,7 @@ Add field:
 
 The LLM prompt then sees:
 ```
-Interventions: PLG0206 → resolved to: plectasin (UniProt P0DPI2)
+Interventions: <development code> → resolved to: <generic name> (UniProt <accession>)
 ```
 
 ### 3.4 Risk: API failure modes
@@ -261,10 +261,10 @@ Interventions: PLG0206 → resolved to: plectasin (UniProt P0DPI2)
 #### 3.5.1 Live API integration test (`scripts/test_v42_8_4_drug_code_resolver_live.py`)
 
 ```python
-# Known codes from the v42.7 audit
-assert "plectasin" in [r[0].lower() for r in await resolve("PLG0206")]
-assert "semaglutide" in [r[0].lower() for r in await resolve("CBX129801")]
-assert "octreotate" in [r[0].lower() for r in await resolve("64Cu-SARTATE")]
+# Known codes from the v42.7 audit (use real code→name pairs from the audit set)
+assert "<expected generic>" in [r[0].lower() for r in await resolve("<dev code 1>")]
+assert "<expected generic>" in [r[0].lower() for r in await resolve("<dev code 2>")]
+assert "<expected generic>" in [r[0].lower() for r in await resolve("<dev code 3>")]
 # Negative case
 assert await resolve("FAKE-NONSENSE-12345") == []
 ```

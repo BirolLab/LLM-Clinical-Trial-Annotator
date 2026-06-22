@@ -10,7 +10,7 @@ Strategy to surpass human annotation accuracy by fixing agent errors, exploiting
 
 ## 1. Human Annotation Quality Audit
 
-Before trying to beat the humans, we need to know how reliable they are. Both replicates in `docs/clinical_trials-with-sequences.xlsx` (~1847 rows each, 4 annotators: Mercan, Maya, Anat, Ali) were audited.
+Before trying to beat the humans, we need to know how reliable they are. Both replicates in `docs/clinical_trials-with-sequences.xlsx` (~1847 rows each, 4 annotators: Annotator 1, Annotator 2, Annotator 3, Annotator 4) were audited.
 
 ### 1.1 Coverage Gaps
 
@@ -44,7 +44,7 @@ Before trying to beat the humans, we need to know how reliable they are. Both re
 - **Casing inconsistencies**: R2 uses "Oral - unspecified" / "Topical - unspecified" (lowercase)
 - **R1 Peptide? is over-broad**: 451 True vs R2's 56 True — one annotator classified far too many interventions as peptides
 - **21 missing failure reasons** where Outcome = Terminated/Withdrawn/Failed
-- **1 logical inconsistency**: NCT05265806 has Outcome=Recruiting + Reason=Toxic/Unsafe
+- **1 logical inconsistency**: a trial has Outcome=Recruiting + Reason=Toxic/Unsafe
 - **R1 used multi-value delivery modes** (24 rows with comma-separated values like "SC, IV, Oral") — not a valid format
 
 ### 1.4 Key Disagreement Patterns
@@ -64,18 +64,18 @@ These disagreements stem from annotators checking ClinicalTrials.gov at differen
 
 ## 2. Agent Error Summary (10 agent-annotated trials)
 
-| NCT ID | Field | Agent | Human | Root Cause |
+| Trial | Field | Agent | Human | Root Cause |
 |--------|-------|-------|-------|------------|
-| NCT06729606 | Peptide | False | True | Aviptadil IS VIP (28 AA) — listed in prompt but model ignored it |
-| NCT03987672 | Peptide | True | False (both) | Nutritional formula — prompt warns against this but model ignored |
-| NCT03984812 | Peptide | True | False (R1) | Multi-subunit protein, antibody-like |
-| NCT03998592 | Classification | AMP | AMP (both) | S. pyogenes vaccine = infection target |
-| NCT03989817 | Classification | AMP | Other (both) | VIP is NOT an AMP |
-| NCT03998592 | Delivery Mode | IM | Other/Unspecified (both) | Guessed IM — violates rules |
-| NCT05415410 | Delivery Mode | Other/Unspec | SC/ID | Missed FDA label signal |
-| NCT03984812 | Delivery Mode | Other/Unspec | SC/ID (both) | Missed SC from literature |
-| NCT03989817 | Failure Reason | Ineffective | empty (both) | Contradicts Positive outcome |
-| NCT04098562 | All fields | Invalid values | N/A | "AMP", "Topical", "Active", "N/A" |
+| Trial A | Peptide | False | True | A VIP-class peptide (28 AA) — listed in prompt but model ignored it |
+| Trial B | Peptide | True | False (both) | Nutritional formula — prompt warns against this but model ignored |
+| Trial C | Peptide | True | False (R1) | Multi-subunit protein, antibody-like |
+| Trial D | Classification | AMP | AMP (both) | Bacterial vaccine = infection target |
+| Trial E | Classification | AMP | Other (both) | VIP is NOT an AMP |
+| Trial D | Delivery Mode | IM | Other/Unspecified (both) | Guessed IM — violates rules |
+| Trial F | Delivery Mode | Other/Unspec | SC/ID | Missed FDA label signal |
+| Trial C | Delivery Mode | Other/Unspec | SC/ID (both) | Missed SC from literature |
+| Trial E | Failure Reason | Ineffective | empty (both) | Contradicts Positive outcome |
+| Trial G | All fields | Invalid values | N/A | "AMP", "Topical", "Active", "N/A" |
 
 ---
 
@@ -120,10 +120,10 @@ The research agents already query live APIs, so recency is built in. To make it 
 
 **Standard CSV** now includes per-field evidence columns:
 - `Classification Evidence`, `Delivery Mode Evidence`, `Outcome Evidence`, `Reason for Failure Evidence`, `Peptide Evidence`
-- Format: deduplicated identifiers — `PMID:36191080; https://clinicaltrials.gov/study/NCT06729606`
+- Format: deduplicated identifiers — `PMID:36191080; https://clinicaltrials.gov/study/NCT12345678`
 
 **Full CSV** now includes per-field:
-- `{field}_evidence_sources` — database:identifier pairs (`clinicaltrials_gov:NCT06729606; pubmed:PMID:36191080`)
+- `{field}_evidence_sources` — database:identifier pairs (`clinicaltrials_gov:NCT12345678; pubmed:PMID:36191080`)
 - `{field}_evidence_urls` — deduplicated URLs
 - `{field}_reasoning` — the model's chain-of-thought (up to 1000 chars)
 
@@ -297,7 +297,7 @@ Two annotation jobs were run on the **same 70 NCT IDs** using different agent ve
 
 **Outcome +31.8pp is the largest single-version improvement in the project.** The combination of fixed research agents (providing actual literature citations) and improved completion heuristics resolved 36 of 41 "Unknown" outcomes to "Positive". Of the 19 newly correct outcomes vs R1, most were old completed Phase I/II trials where the agent now finds published results or correctly applies completion heuristics.
 
-**Peptide -6.2pp is a regression** caused by multi-drug trial confusion. In 3 trials (NCT01673217, NCT01687595, NCT01697527), the agent evaluated a co-administered small molecule or adjuvant instead of the peptide intervention, leading to False when the correct answer was True.
+**Peptide -6.2pp is a regression** caused by multi-drug trial confusion. In 3 trials, the agent evaluated a co-administered small molecule or adjuvant instead of the peptide intervention, leading to False when the correct answer was True.
 
 ### 8.3 Review Rate Improvement
 
@@ -326,17 +326,17 @@ Outcome and failure reason are highly coupled — when outcome shifts from Unkno
 
 The new agents fixed 19 outcomes vs R1 but introduced 5 regressions:
 
-| NCT | NEW value | Human R1 | Root Cause |
+| Trial | NEW value | Human R1 | Root Cause |
 |---|---|---|---|
-| NCT01651715 | Positive | Failed | Phase I/II completed, no published results — H1 heuristic overrode "failed" evidence |
-| NCT01654120 | Positive | Unknown | Liraglutide Phase IV — agent inferred positive from completion |
-| NCT01660529 | Positive | Unknown | Early Phase I peptide vaccine — H1 heuristic applied |
-| NCT01673217 | Positive | Unknown | NY-ESO-1 Phase I — H1 heuristic applied despite below-threshold evidence |
-| NCT01689051 | Positive | Unknown | GLP-1 study, no published results — H1 heuristic too aggressive |
+| Trial 1 | Positive | Failed | Phase I/II completed, no published results — H1 heuristic overrode "failed" evidence |
+| Trial 2 | Positive | Unknown | GLP-1 agonist Phase IV — agent inferred positive from completion |
+| Trial 3 | Positive | Unknown | Early Phase I peptide vaccine — H1 heuristic applied |
+| Trial 4 | Positive | Unknown | Cancer peptide vaccine Phase I — H1 heuristic applied despite below-threshold evidence |
+| Trial 5 | Positive | Unknown | GLP-1 study, no published results — H1 heuristic too aggressive |
 
 **Pattern:** All 5 regressions vs R1 are H1 heuristic over-applications (Phase I completion = Positive), applied even when:
-- No publications found (NCT01689051, NCT01660529, NCT01673217)
-- Evidence quality is below threshold (NCT01673217 had only 1 source when 2 were required)
+- No publications found (Trials 3, 4, 5)
+- Evidence quality is below threshold (Trial 4 had only 1 source when 2 were required)
 - The human annotator said Unknown (meaning no result evidence was available)
 
 Against R2, there are 12 regressions — most follow the same pattern: agent says Positive for completed trials where R2 said Unknown because no publications were found.
@@ -345,11 +345,11 @@ Against R2, there are 12 regressions — most follow the same pattern: agent say
 
 3 trials regressed from True → False:
 
-| NCT | Intervention | Root Cause |
+| Trial | Intervention | Root Cause |
 |---|---|---|
-| NCT01673217 | NY-ESO-1 peptide vaccine + decitabine | Agent focused on decitabine (small molecule), ignored peptide vaccine |
-| NCT01687595 | HerpV peptide vaccine + QS-21 adjuvant | Agent focused on QS-21 adjuvant, ignored HerpV peptides |
-| NCT01697527 | TCR cells + aldesleukin (IL-2) | Agent correctly ID'd aldesleukin as protein but verifiers overrode to False |
+| Trial 4 | Cancer peptide vaccine + small-molecule co-drug | Agent focused on the small molecule, ignored the peptide vaccine |
+| Trial 6 | Peptide vaccine + adjuvant | Agent focused on the adjuvant, ignored the peptide component |
+| Trial 7 | Cell therapy + a protein cytokine | Agent correctly ID'd the cytokine as a protein but verifiers overrode to False |
 
 **Pattern:** In multi-drug trials, the agent evaluates whichever intervention ChEMBL returns data for first (typically small molecules), rather than examining all interventions. The peptide prompt says "If a trial tests MULTIPLE drugs and only ONE is a peptide, answer True" but the two-pass extraction focuses on a single intervention.
 
@@ -445,13 +445,13 @@ All annotation agents and blind verifiers now receive evidence organized into la
 4. Snippet capping: 250 chars (mac_mini) or 500 chars (server)
 5. Source-level filters: ChEMBL and IUPHAR name-match prevents fuzzy search false positives
 
-**Impact:** NCT01697527 (92 raw citations) → 20 used on mac_mini (78% noise removal, ~873 tokens) vs 30 on server (~1500 tokens).
+**Impact:** an example trial (92 raw citations) → 20 used on mac_mini (78% noise removal, ~873 tokens) vs 30 on server (~1500 tokens).
 
 ### 9.8 Remaining Issues (Priority: LOW)
 
 - **APD negative confirmations**: APD returns "no exact match" for most searches — a negative result that wastes a citation slot. Consider filtering at source.
 - **DuckDuckGo 202 responses**: Rate limiting causes 0 citations on some trials. Add a 1-second inter-trial delay for the web_context agent.
-- **Literature 0 results for old trials**: NCT00000391, NCT00598312 return 0 PubMed/PMC results despite being completed trials. May need broader search terms (intervention name + condition) in addition to NCT ID.
+- **Literature 0 results for old trials**: some older completed trials return 0 PubMed/PMC results despite being completed. May need broader search terms (intervention name + condition) in addition to NCT ID.
 - **ChEMBL wasted API calls**: Fuzzy text search returns irrelevant molecules that get filtered downstream. Moving the name-match filter before the API call would save HTTP requests.
 
 ---
@@ -576,7 +576,7 @@ Instability = the prompt allows the LLM to interpret the evidence differently on
 ### Peptide Definition Ambiguity
 
 R1 annotators marked 451 trials (24%) as Peptide=True. R2 annotators marked 56 (3%). This 8:1 ratio is the largest systematic divergence in the dataset. Analysis of the R1 annotations shows they included:
-- Radiolabeled peptide conjugates (e.g., 177Lu-DOTATATE) — these use a peptide as a targeting vector but the therapeutic mechanism is radiation, not the peptide itself
+- Radiolabeled peptide conjugates (e.g., a lutetium-177 somatostatin-analog conjugate) — these use a peptide as a targeting vector but the therapeutic mechanism is radiation, not the peptide itself
 - Peptide receptor agonists/antagonists where the "peptide" label is ambiguous
 - Nutritional peptide formulas
 
@@ -671,7 +671,7 @@ Analysis of job d2761eeb8102 (10 trials) and comparison across 6 prior jobs reve
 2. **Identical prompts.** All 3 verifiers saw the same prompt — zero cognitive diversity. If the prompt biases toward one answer, all three are biased identically.
 3. **Evidence starvation.** Verifiers had a hardcoded 25-citation cap while primary annotators got 30-50. False disagreements from missing evidence.
 4. **Hardcoded 0.7 confidence.** No signal about actual verifier certainty. The high-confidence primary override compared real primary confidence against an arbitrary constant.
-5. **Outcome instability.** NCT00004984 outcome flip-flopped across 6 jobs because low-confidence verifiers overrode high-confidence primaries.
+5. **Outcome instability.** One trial's outcome flip-flopped across 6 jobs because low-confidence verifiers overrode high-confidence primaries.
 
 ### 15.2 Fixes Implemented
 
@@ -739,7 +739,7 @@ Issues from concordance analysis (CONTINUATION_PLAN.md) resolved in v25:
 | Issue | Status | Fix |
 |---|---|---|
 | Delivery mode duplicate output ("Injection/Infusion, Injection/Infusion") | **Fixed in v25** | `_parse_value()` now deduplicates after mapping multi-route values to 4 categories. Was 26% of delivery mode disagreements. |
-| Sequence DRVYIHP over-matching (angiotensin matching ACE inhibitor trials) | **Fixed in v25** | Short drug names (<=4 chars) require exact match in `_KNOWN_SEQUENCES`; longer names use word-boundary regex. |
+| Short peptide sequence over-matching (a short angiotensin-family sequence matching unrelated trials) | **Fixed in v25** | Short drug names (<=4 chars) require exact match in `_KNOWN_SEQUENCES`; longer names use word-boundary regex. |
 | Outcome Unknown defaults for trials with published results | **Addressed in v25** | Post-LLM `_publication_priority_override()` checks for published results when LLM returns Unknown/Active/Terminated. Evidence priority ladder: publications > CT.gov results > status > phase. |
 | Peptide false negatives (agent=False, human=True) | **Partially addressed in v25** | 15 new peptide drugs added to `_KNOWN_PEPTIDE_DRUGS` (peptide vaccines, novel therapeutics from error analysis). 9 new verified sequences added to `_KNOWN_SEQUENCES`. Remaining false negatives require LLM reasoning improvements. |
 
@@ -767,17 +767,17 @@ After v25, the project went through a substantial overhaul. This file is no long
 
 **Discipline established:** per-cycle held-out separation. Held-out-A (30 NCTs, seed 4242) used as Jobs #92+#95 then retired. Held-out-B (25 NCTs, seed 5252) used as Job #96 (which surfaced v42.7.13's over-correction) then retired. Held-out-C (25 NCTs, seed 6262) used as Job #97 then retired. Held-out-D (20 NCTs, seed 7373) is now active for Job #98.
 
-**v42.7.18 (sequence-dict expansion):** 5 entries to `_KNOWN_SEQUENCES` (solnatide/ap301/tip-peptide; io103; apraglutide backbone). Sourced from Job #97's 8/10 sequence-N/A misses on peptide=True trials.
+**v42.7.18 (sequence-dict expansion):** 5 entries added to `_KNOWN_SEQUENCES` (covering several named peptide therapeutics and their backbones). Sourced from Job #97's 8/10 sequence-N/A misses on peptide=True trials.
 
 **v42.7.19 (delivery_mode ambiguous-keyword relevance gate):** Cross-job analysis (Jobs #92/#95/#96/#97) surfaced 6 distinct NCTs where ambiguous keywords (tablet/capsule) matched on FDA Drugs / OpenAlex / placebo-comparator citations not describing the experimental arm — added `citation_mentions_experimental` flag.
 
 **v42.7.20 (`_classify_publication` default → `general`):** Cross-job analysis showed `positive → unknown` was the dominant outcome miss class (9-12 misses per slice). Empirical: re-classifying Job #98 pubs under the new rule shows trial_specific count drops 6-48 → 0-5 per trial. Over-tagging was systematically confusing the LLM. v42.7.20 requires an explicit trial signal for `trial_specific` tagging.
 
-**v42.7.21 (sequences: CBX129801 + SARTATE):** From Job #98 misses. CBX129801 = Long-Acting C-Peptide → 31aa proinsulin C-peptide; SARTATE = octreotate analog → fCYwKTCT (D-Phe1, D-Trp4 lowercase preserved).
+**v42.7.21 (two more sequence-dict entries):** From Job #98 misses. One drug-code resolved to a 31aa proinsulin C-peptide; another (a somatostatin-analog conjugate) resolved to a short cyclic sequence with D-amino-acid lowercase casing preserved.
 
-**v42.7.22 (CGRP / calcitonin disambiguation):** NCT03481400 emitted wrong sequence (32aa calcitonin instead of 37aa alpha-CGRP) because the longer "calcitonin gene-related peptide" key was missing. Same v42.6.18 root cause (longest-first iteration was already in place; missing key).
+**v42.7.22 (CGRP / calcitonin disambiguation):** a trial emitted the wrong sequence (32aa calcitonin instead of 37aa alpha-CGRP) because the longer "calcitonin gene-related peptide" key was missing. Same v42.6.18 root cause (longest-first iteration was already in place; missing key).
 
-**v42.7.23 (radiotracer rule split by isotope class):** v31's `_RADIOTRACER_PATTERNS` rule emitted "Other" for all radiotracers as a diagnostic-not-therapeutic distinction, but the 147-NCT milestone surfaced 5 NCTs (NCT03069989, NCT03164486, NCT05940298, NCT05968846, NCT06443762) where humans annotated injected radiotracers as Injection/Infusion. v42.7.23 splits patterns into PET (positron-emitting), SPECT (gamma-emitting), and Therapeutic (90Y, 177Lu, 131I, 225Ac, 211At). PET/SPECT → always Injection/Infusion (no oral PET tracer exists by physics). Therapeutic → defer to explicit injection signal in name/desc, fall back to v31 'Other' (preserves [131I] oral capsule case). First v42.7.23.a attempt (OpenFDA multi-formulation gate) was rejected after 0/5 smoke targeted wrong code path; redesign passed prod smoke 5/5.
+**v42.7.23 (radiotracer rule split by isotope class):** v31's `_RADIOTRACER_PATTERNS` rule emitted "Other" for all radiotracers as a diagnostic-not-therapeutic distinction, but the 147-NCT milestone surfaced 5 trials where humans annotated injected radiotracers as Injection/Infusion. v42.7.23 splits patterns into PET (positron-emitting), SPECT (gamma-emitting), and Therapeutic (90Y, 177Lu, 131I, 225Ac, 211At). PET/SPECT → always Injection/Infusion (no oral PET tracer exists by physics). Therapeutic → defer to explicit injection signal in name/desc, fall back to v31 'Other' (preserves [131I] oral capsule case). First v42.7.23.a attempt (OpenFDA multi-formulation gate) was rejected after 0/5 smoke targeted wrong code path; redesign passed prod smoke 5/5.
 
 **Production gate (Job #101, CERTIFIED 2026-05-02):** 239-NCT final accuracy certification on commit `2172018e` complete. **Decision: SHIP-WITH-FLAG.** Per-field with 95% CI half-width: classification **95.1%** ±2.8pp ✅ (target ≥95%); peptide **89.4%** ±4.2pp ✅ (target ≥85%, +41pp vs human IRA); delivery_mode **88.6%** ±4.3pp ✅ (target ≥80%, **closes -6.7pp milestone regression**); outcome **60.7%** ±6.2pp ⚠️ (in 55-65% gray zone — ACCEPT per GT-quality ceiling thesis; pos→unk constant ~9-12/slice independent of v42.7.X version after v42.7.13, needs v42.8 architectural for new evidence sources); RfF 86.4%/61.3% (gate/heldout methodology) ❌ flagged with CI; sequence 31-37% ❌ flagged with CI. **Per-outcome-class breakdown (FIRST AT SCALE):** positive 46.2%, unknown 79.5%, terminated 90.0%, **failed 0/11 = 0.0%** (systematic failed→terminated miss — v42.8 candidate), **withdrawn 6/6 = 100% ⭐**. Agent BEATS human inter-rater agreement on 4 of 5 fields with comparable IRA data. Full-corpus annotation (630 NCTs in 2× 315 batches) cleared to proceed. Report: `docs/PRODUCTION_GATE_REPORT.md`.
 

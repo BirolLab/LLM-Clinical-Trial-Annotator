@@ -198,7 +198,7 @@ _PROTOCOL_ROUTE_KEYWORDS = {
     # v38b: skin prick/skin test REMOVED from injection keywords.
     # Allergy skin prick tests are classified as "Other" by R1 annotators
     # (diagnostic procedure, not therapeutic drug delivery).
-    # Previously caused false positives on allergen peptide trials (NCT01719133).
+    # Previously caused false positives on allergen peptide trials.
 }
 
 _DRUG_CLASS_ROUTES = {
@@ -372,8 +372,8 @@ def _extract_deterministic_route(research_results: list) -> FieldAnnotation | No
     # PRIMARILY a diagnostic study. Multi-modality trials with therapeutic
     # DRUG/BIOLOGICAL interventions plus supportive CT/MRI/biopsy procedures
     # should NOT be tagged Other — the therapeutic delivery is primary.
-    # Job #83 surfaced NCT05269381 (Cyclophosphamide + Vaccine + Pembrolizumab
-    # + MRI) being mis-tagged Other when GT was Injection/Infusion.
+    # Job #83 surfaced an example trial (chemotherapy + vaccine + checkpoint
+    # inhibitor + MRI) being mis-tagged Other when GT was Injection/Infusion.
     has_therapeutic_intervention = any(
         t in ("DRUG", "BIOLOGICAL") for t in intervention_types
     )

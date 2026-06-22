@@ -159,7 +159,7 @@ def main() -> int:
     print("|---|---|---|---|---|")
     full_results: dict[str, dict] = {}
     sys.path.insert(0, str(PKG_ROOT))
-    from app.services.concordance_service import sequences_match
+    from app.services.value_normalization import sequences_match
 
     for field, target in PER_FIELD_TARGETS.items():
         hits = 0

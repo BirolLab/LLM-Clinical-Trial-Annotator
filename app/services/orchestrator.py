@@ -1170,8 +1170,8 @@ class PipelineOrchestrator:
                 # trial since v42.7.0 reported "No interventions to search"
                 # for those three agents — they fired but never had a term
                 # to query. Discovered while investigating dev smoke
-                # e46797571504 (NCT00002228 enfuvirtide DRUG, NCT03199872
-                # RV001V BIOLOGICAL — both should have hit FDA Drugs / NIH
+                # e46797571504 (two example trials — one a peptide DRUG, one a
+                # BIOLOGICAL — both should have hit FDA Drugs / NIH
                 # RePORTER but didn't).
                 interventions = []
                 if proto_result.raw_data:

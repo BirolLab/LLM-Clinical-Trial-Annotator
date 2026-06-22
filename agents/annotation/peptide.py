@@ -9,10 +9,11 @@ v11 changes (from 400-trial concordance — peptide at 65% vs 83% human baseline
   - Root cause: 130 True→False EDAM corrections + 8B model defaulting to False
 
 v17 changes:
-  - Added OSE2101/TEDOPI (multi-epitope peptide vaccine) and DOTATOC/DOTATATE
-    (peptide receptor radionuclide therapy) to _KNOWN_PEPTIDE_DRUGS.
-  - NCT02654587 was misclassified because the LLM called OSE2101 a "large
-    multi-subunit protein" — it's actually a cocktail of 10 synthetic peptides.
+  - Added multi-epitope peptide vaccine and peptide-receptor radionuclide
+    therapy entries to _KNOWN_PEPTIDE_DRUGS.
+  - An example trial was misclassified because the LLM called a multi-epitope
+    peptide vaccine a "large multi-subunit protein" — it's actually a cocktail
+    of synthetic peptides.
 """
 
 import re

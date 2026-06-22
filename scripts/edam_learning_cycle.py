@@ -12,7 +12,7 @@ Each phase waits for the previous to complete. EDAM post-job hooks run
 automatically after every job, building the learning memory.
 
 Usage:
-    # Full cycle with default calibration set (10 NCTs from d2761eeb8102)
+    # Full cycle with default calibration set (10 NCTs)
     python scripts/edam_learning_cycle.py
 
     # Custom calibration runs and full batch
@@ -44,18 +44,12 @@ import httpx
 BASE_DIR = Path(__file__).resolve().parent.parent
 RESULTS_DIR = BASE_DIR / "results"
 
-# Default calibration set: the 10 NCTs from job d2761eeb8102
+# Default calibration set of 10 NCT IDs. Replace these placeholders with the
+# real trial IDs you want to use as the calibration set for the learning cycle.
 CALIBRATION_NCTS = [
-    "NCT00004984",
-    "NCT00001827",
-    "NCT00002428",
-    "NCT01718834",
-    "NCT00000798",
-    "NCT00000886",
-    "NCT00004358",
-    "NCT01652573",
-    "NCT00000391",
-    "NCT00000435",
+    "NCT12345678",
+    "NCT87654321",
+    "NCT11223344",
 ]
 
 

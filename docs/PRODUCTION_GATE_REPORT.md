@@ -60,8 +60,8 @@ The Job #101 production gate at 239 NCTs measured outcome at 60.7%, marginally a
 
 | Slice | NCT vintage | n (GT-scoreable) | Outcome accuracy |
 |---|---|---|---|
-| Job #102 (batch 1) | NCT00001703–NCT05021016 (mostly pre-2021) | 209 | 49.3% |
-| Job #103 (batch 2) | NCT05025267–NCT07012330 (all 2021+) | 129 | ~31% |
+| Job #102 (batch 1) | mostly pre-2021 trials | 209 | 49.3% |
+| Job #103 (batch 2) | all 2021+ trials | 129 | ~31% |
 
 Recent trials have less published evidence by definition. The agent's Rule 7 ("default to Unknown if Registered Trial Publications: 0") fires correctly more often on 2021+ trials, where published readouts haven't surfaced yet. Human annotators in the GT, by contrast, use out-of-band knowledge (sponsor pipeline pages, conference abstracts, press releases, equity disclosures) to label these trials Positive. **The agent is being *accurate* — emitting Unknown when public evidence is genuinely insufficient — and is being scored as wrong.**
 

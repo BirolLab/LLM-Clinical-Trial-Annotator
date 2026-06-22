@@ -328,13 +328,13 @@ Avg time: <span class="bold">~380s/trial</span> on Mac Mini (16GB, qwen2.5:14b a
 <span class="hl2">RUN 2</span> (EDAM populated from run 1)
   Agent starts each annotation with <span class="accent">[EDAM GUIDANCE]</span> block:
   <span class="hl3">[PAST CORRECTIONS]</span>
-    - NCT02665377/peptide: corrected False&rarr;True (UniProt showed 28 AA)
-    - NCT00000886/outcome: corrected Unknown&rarr;Failed (literature found toxicity)
+    - [trial]/peptide: corrected False&rarr;True (UniProt showed 28 AA)
+    - [trial]/outcome: corrected Unknown&rarr;Failed (literature found toxicity)
   <span class="hl3">[REASONING PATTERNS]</span>
     - peptide: UniProt entries with 2-50 AA indicate peptide=True
     - delivery_mode: continuous infusion rates indicate IV
   <span class="hl3">[STABLE EXEMPLARS]</span>
-    - NCT02642523: consistently 'Withdrawn' (2 runs, evidence=high)
+    - [trial]: consistently 'Withdrawn' (2 runs, evidence=high)
 
   Agent makes fewer mistakes <span class="arrow">&rarr;</span> fewer overrides needed
 

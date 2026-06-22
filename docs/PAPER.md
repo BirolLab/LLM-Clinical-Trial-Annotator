@@ -307,7 +307,7 @@ All five annotation agents employ a two-pass architecture. This universal design
 - *Pass 1* extracts molecular facts: intervention name, molecular class (peptide chain vs antibody vs small molecule vs nutritional product), database confirmation (UniProt, DRAMP, ChEMBL entries), product description, and investigational drug role (investigational drug vs food ingredient vs targeting vector vs brand name).
 - *Pass 2* applies a three-step decision tree: (1) Is the molecular class a peptide? (2) Is it the investigational drug (not a food ingredient or brand name artifact)? (3) Database/literature confirmation.
 - *v15:* If peptide=False, all other fields are set to N/A and annotation is skipped (non-peptide trials are out of scope).
-- *v16:* The N/A cascade requires peptide confidence ≥ 0.90 to trigger. Low-confidence False results proceed to full annotation but are flagged for review, preventing false-negative wipeouts observed in NCT02624518 and NCT02654587.
+- *v16:* The N/A cascade requires peptide confidence ≥ 0.90 to trigger. Low-confidence False results proceed to full annotation but are flagged for review, preventing false-negative wipeouts observed in two trials during development.
 
 **Outcome Agent.**
 
@@ -437,7 +437,7 @@ Memory is version-gated: each configuration change creates a new epoch, and lear
 
 ### 4.1 Baseline Dataset
 
-The baseline evaluation dataset comprises 25 clinical trials selected as the first 25 entries (sorted alphabetically by NCT identifier) from the set of 614 trials annotated by both human annotators. Both annotator groups --- designated R1 (Emily) and R2 (independent annotators) --- independently annotated all five fields for all 25 trials. This selection method avoids cherry-picking and provides a representative sample of the difficulty distribution across the full dataset.
+The baseline evaluation dataset comprises 25 clinical trials selected as the first 25 entries (sorted alphabetically by NCT identifier) from the set of 614 trials annotated by both human annotators. Both annotator groups --- designated R1 (Annotator 8) and R2 (independent annotators) --- independently annotated all five fields for all 25 trials. This selection method avoids cherry-picking and provides a representative sample of the difficulty distribution across the full dataset.
 
 ### 4.2 Pre-Improvement Results (v2 Agents)
 
@@ -476,7 +476,7 @@ This error is consistent with a surface-level pattern-matching failure: the mode
 
 #### 4.3.2 Classification Over-Triggering
 
-The agent classified five or more non-AMP peptide trials (including trials of Peptide T and insulin-related compounds) as AMP. Root cause analysis indicates that the 8B model pattern-matches the co-occurrence of "peptide" and a disease context to produce an AMP classification, ignoring the explicit worked examples in the system prompt that enumerate these compounds as non-AMP.
+The agent classified five or more non-AMP peptide trials (including trials of neuropeptides and metabolic-hormone compounds) as AMP. Root cause analysis indicates that the 8B model pattern-matches the co-occurrence of "peptide" and a disease context to produce an AMP classification, ignoring the explicit worked examples in the system prompt that enumerate these compounds as non-AMP.
 
 This failure mode is consistent with the known tendency of smaller language models to attend preferentially to salient keywords over nuanced instructions. The worked examples, while present in the prompt, are insufficient to override the model's prior association between "peptide" and "antimicrobial."
 

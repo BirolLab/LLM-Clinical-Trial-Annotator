@@ -3,11 +3,7 @@
 fastapi
 uvicorn[standard]
 pydantic>=2.0
-pydantic-settings
 httpx
-aiohttp
 pyyaml
 python-dotenv
-python-multipart
-openpyxl
 psutil

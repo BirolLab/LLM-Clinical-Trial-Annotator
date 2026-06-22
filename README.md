@@ -68,7 +68,7 @@ cd agent-annotate
 git checkout birollabs-migration
 
 ./install.sh        # installs Ollama + models + Python deps  (use --server for big models)
-./run.sh            # starts the API on http://127.0.0.1:9005
+./run.sh            # starts the API; auto-selects a free port and prints the URL
 ```
 
 ### Windows (PowerShell)
@@ -79,33 +79,42 @@ cd agent-annotate
 git checkout birollabs-migration
 
 .\install.ps1       # installs Ollama + models + Python deps  (-Server for big models)
-.\run.ps1           # starts the API on http://127.0.0.1:9005
+.\run.ps1           # starts the API; auto-selects a free port and prints the URL
 ```
 
-Verify it's up:
+`run.sh` / `run.ps1` pick the first free port starting at **9005** and print the
+exact URL (e.g. `http://127.0.0.1:9005`). Pin one with `PORT=8080 ./run.sh`. The
+examples below use 9005 — substitute whatever port it printed.
+
+Verify it's up (use the printed port):
 
 ```bash
 curl http://127.0.0.1:9005/api/health
-# {"status":"ok"}
+# {"status":"ok","version":"0.1.0"}
 ```
 
-Open `http://127.0.0.1:9005/` in a browser for the bundled web UI.
+Open the same URL in a browser for the bundled web UI.
 
 ---
 
 ## What the installer does
 
-`install.sh` / `install.ps1` is idempotent — safe to re-run. It:
+`install.sh` / `install.ps1` is idempotent — safe to re-run. It runs a full
+preflight and **warns** (without aborting) on anything that could bite you:
 
-1. Finds a suitable Python (3.10+).
-2. Installs **Ollama** if it isn't already present.
-3. Starts the Ollama server and waits for it to be reachable.
-4. Pulls the LLM models for the chosen profile (see below).
-5. Creates a `.venv` virtualenv and installs `requirements.txt`.
-6. Creates the runtime directories (`results/…`, `logs/`).
-7. Copies `.env.example` → `.env` (if you don't already have one).
+1. **Preflight checks** — verifies Python 3.10+, `venv`/pip, `git`, `curl`, and
+   network reachability; measures **RAM** and **free disk** and warns if either
+   is below what the chosen model profile needs, so you find out *before* a
+   multi-GB pull fails.
+2. Installs **Ollama** if absent, starts its server, and waits for it.
+3. Pulls the LLM models for the chosen profile (cached models verify instantly).
+4. Creates a `.venv` virtualenv and installs `requirements.txt`.
+5. Creates the runtime directories (`results/…`, `logs/`) and copies
+   `.env.example` → `.env`.
 
-You can re-pull a single model anytime with `ollama pull <model>`.
+It prints a summary with a warning count at the end. Flags: `--server` (large
+profile) and `--skip-models` (set everything up but skip the pulls). Re-pull a
+single model anytime with `ollama pull <model>`.
 
 ---
 
@@ -147,7 +156,7 @@ NCT ID (`NCT` followed by 8 digits). Jobs are queued and processed one at a time
 ```bash
 curl -s -X POST http://127.0.0.1:9005/api/jobs \
   -H 'Content-Type: application/json' \
-  -d '{"nct_ids": ["NCT04545749", "NCT03680742"]}'
+  -d '{"nct_ids": ["NCT12345678", "NCT87654321"]}'   # replace with real NCT IDs
 ```
 
 ```json
@@ -185,7 +194,6 @@ curl -sOJ http://127.0.0.1:9005/api/results/a1b2c3d4e5f6/csv       # download CS
 | `GET  /api/status/models` | Models available in Ollama. |
 | `GET/PUT /api/settings` · `POST /api/settings/reload` | Runtime config. |
 | `GET  /api/review` · `POST /api/review/{job}/{nct}/{field}` | Human review queue / corrections. |
-| `GET  /api/agreement/*` | Inter-rater concordance analytics (needs the GT dataset). |
 
 Interactive API docs are always available at
 `http://127.0.0.1:9005/docs` (Swagger UI).
@@ -221,19 +229,19 @@ HOST=0.0.0.0 PORT=8080 ./run.sh        # listen on all interfaces, port 8080
 
 ---
 
-## Optional: enable scoring & concordance
+## Optional: bring your own annotations
 
-The human ground-truth dataset (`docs/human_ground_truth_train_df.csv`) is a
-**dataset, not code**, so it is not shipped. Without it:
+Agent Annotate is **annotation-only**: it accepts **any** valid NCT ID and runs
+entirely on its own. There is **no** concordance / inter-rater-agreement (AC1,
+Cohen's κ) analysis in the product — it just annotates.
 
-- ✅ You can annotate **any** NCT ID.
-- ⚠️ The `/api/agreement/*` concordance endpoints and EDAM accuracy-scoring are
-  inert (they degrade gracefully and log a warning).
-
-To enable scoring/concordance, drop your ground-truth CSV at
-`docs/human_ground_truth_train_df.csv`. When present, job submission is
-restricted to the trials in that CSV (the scoreable set) and the concordance
-analytics light up.
+If you have your own human annotations and want to score the agent against them,
+drop a ground-truth CSV at `docs/human_ground_truth_train_df.csv` (the column
+layout expected by `scripts/score_full_corpus.py`). That enables the optional
+**dev scoring scripts** under `scripts/` (e.g. `compare_jobs.py`,
+`score_full_corpus.py`) and lets the EDAM memory learn from your labels. It is
+never required — the annotator works fully without it, and job submission is
+**not** restricted by it.
 
 ---
 
@@ -258,6 +266,48 @@ analytics light up.
 ```
 
 Generated at runtime (git-ignored): `results/`, `logs/`, `.venv/`.
+
+---
+
+## Where everything is saved
+
+Everything the app writes lives **under the repo root** and is git-ignored.
+Nothing is uploaded anywhere — only read-only queries go out to the public
+research APIs (see [Network egress](#network-egress)); annotation results never
+leave your machine.
+
+| Path | What's stored |
+|------|---------------|
+| `results/json/<job_id>.json` | Final annotation result for a job — every field + its supporting evidence. |
+| `results/csv/<job_id>_*.csv` | Exported CSV of a job's annotations (one row per trial). |
+| `results/jobs/<job_id>.json` | Job/queue state record — used to restore queued jobs after a restart. |
+| `results/research/<job_id>/` | Per-trial raw research evidence + `_meta.json`. Written incrementally so a crashed job can resume. |
+| `results/annotations/<job_id>/` | Per-trial annotation output as it's produced (mid-run progress). |
+| `results/atomic_pub_cache/` | Cached per-publication assessments (re-used across trials). |
+| `results/edam.db` | SQLite "EDAM" memory store (self-learning corrections). `-wal`/`-shm` are transient. |
+| `results/review_queue.json` | Human review-queue corrections submitted via the review API. |
+| `logs/agent_annotate.log` | Rotating application log (10 MB × 10 backups). |
+| `.env` | Your local config (copied from `.env.example`). |
+
+**Outside the repo:**
+
+| Path | What's stored |
+|------|---------------|
+| `~/.ollama/models/` | Downloaded LLM weights — the bulk of the disk footprint (~30 GB for the default profile). Relocate by setting `OLLAMA_MODELS`. |
+| `.venv/` | The Python virtualenv (lives in-repo but is git-ignored). |
+
+**How a job flows through storage:** submit → the job record lands in
+`results/jobs/` and the queue → research agents write evidence into
+`results/research/<job_id>/` → annotation + verification write into
+`results/annotations/<job_id>/` → on completion the merged result is written to
+`results/json/<job_id>.json` (and CSV on export). Because each stage persists to
+disk, an interrupted job resumes from where it stopped via
+`POST /api/jobs/{id}/resume`.
+
+**Cleaning up:** delete `results/<*>/<job_id>*` to remove a single job, or wipe
+the whole `results/` tree to reset all output — the app recreates the directory
+structure on the next start. Model weights are managed separately with
+`ollama rm <model>`.
 
 ---
 

@@ -28,18 +28,12 @@ import httpx
 BASE_DIR = Path(__file__).resolve().parent.parent
 RESULTS_DIR = BASE_DIR / "results"
 
-# The 10 NCTs from job d2761eeb8102
+# Default calibration set of 10 NCT IDs. Replace these placeholders with the
+# real trial IDs you want to test for run-to-run reproducibility.
 STABILITY_NCTS = [
-    "NCT00004984",
-    "NCT00001827",
-    "NCT00002428",
-    "NCT01718834",
-    "NCT00000798",
-    "NCT00000886",
-    "NCT00004358",
-    "NCT01652573",
-    "NCT00000391",
-    "NCT00000435",
+    "NCT12345678",
+    "NCT87654321",
+    "NCT11223344",
 ]
 
 FIELDS = ["peptide", "classification", "delivery_mode", "outcome", "reason_for_failure"]
