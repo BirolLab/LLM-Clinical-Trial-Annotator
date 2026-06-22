@@ -1,0 +1,52 @@
+# ─────────────────────────────────────────────────────────────────────────
+# Agent Annotate (standalone) — keep the repo lean: code + docs only.
+# Everything below is generated at runtime or is bulk data, never committed.
+# ─────────────────────────────────────────────────────────────────────────
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Environment ──
+.env
+.env.*
+!.env.example
+
+# ── Node / frontend build artifacts (frontend/ source IS tracked) ──
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# ── Runtime output & state (regenerated on every run) ──
+logs/
+*.log
+results/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# ── Datasets / corpora (NOT shipped — supply locally to enable scoring) ──
+# Ground-truth dataset used by concordance/EDAM scoring. Drop it into docs/
+# to enable those features; the API runs fine without it.
+docs/human_ground_truth_train_df.csv
+# Generated NCT slices, merged corpora, exported result CSVs.
+scripts/*.json
+scripts/*.csv
+scripts/*.gz
+
+# ── OS / editor cruft ──
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

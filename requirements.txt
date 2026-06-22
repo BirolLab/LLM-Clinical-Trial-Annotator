@@ -1,0 +1,13 @@
+# Agent Annotate — standalone API runtime dependencies.
+# Pure PyPI; the app talks to Ollama over HTTP (no local ML stack required).
+fastapi
+uvicorn[standard]
+pydantic>=2.0
+pydantic-settings
+httpx
+aiohttp
+pyyaml
+python-dotenv
+python-multipart
+openpyxl
+psutil

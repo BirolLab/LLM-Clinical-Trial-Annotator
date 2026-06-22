@@ -1,0 +1,176 @@
+"""
+IntAct Molecular Interactions Research Agent.
+
+Queries the EMBL-EBI IntAct database REST API
+(https://www.ebi.ac.uk/intact/ws/) for protein-protein and
+protein-molecule interaction data.
+
+Free, open API, no authentication required. Returns interactor
+information including interaction partners, interaction type,
+species, and detection methods.
+"""
+
+import logging
+from typing import Optional
+from datetime import datetime
+
+import httpx
+
+from agents.base import BaseResearchAgent
+from agents.research.http_utils import resilient_get
+from app.models.research import ResearchResult, SourceCitation
+
+logger = logging.getLogger("agent_annotate.research.intact")
+
+INTACT_INTERACTOR_URL = "https://www.ebi.ac.uk/intact/ws/interactor/findInteractor"
+
+
+def _extract_intervention_names(metadata: dict | None) -> list[str]:
+    """Extract plain-string intervention names from metadata.
+
+    Handles both list-of-dicts (``[{"name": "Nisin"}]``) and
+    list-of-strings (``["Nisin"]``) formats.
+    """
+    if not metadata:
+        return []
+    raw = metadata.get("interventions", [])
+    if not isinstance(raw, list):
+        return []
+    names: list[str] = []
+    for item in raw:
+        if isinstance(item, dict):
+            name = item.get("name") or item.get("intervention_name") or ""
+            if name:
+                names.append(str(name))
+        elif isinstance(item, str) and item:
+            names.append(item)
+    return names
+
+
+class IntActClient(BaseResearchAgent):
+    """Queries IntAct for molecular interaction data."""
+
+    agent_name = "intact"
+    sources = ["intact"]
+
+    async def research(self, nct_id: str, metadata: Optional[dict] = None) -> ResearchResult:
+        citations = []
+        raw_data = {}
+
+        # Extract intervention names to search for interactors
+        interventions = _extract_intervention_names(metadata)
+
+        if not interventions:
+            return ResearchResult(
+                agent_name=self.agent_name,
+                nct_id=nct_id,
+                citations=[],
+                raw_data={"note": "No interventions to search"},
+            )
+
+        async with httpx.AsyncClient(timeout=15) as client:
+            for intervention in interventions[:3]:
+                try:
+                    # IntAct interactor search: /findInteractor/{query}
+                    search_url = f"{INTACT_INTERACTOR_URL}/{intervention}"
+                    resp = await resilient_get(
+                        search_url,
+                        client=client,
+                        params={"page": 0, "pageSize": 10},
+                        headers={"Accept": "application/json"},
+                    )
+                    if resp.status_code == 200:
+                        data = resp.json()
+                        interactors = data.get("content", [])
+                        total = data.get("totalElements", 0)
+
+                        # FILTER: Only keep interactors whose name or description
+                        # actually matches the searched intervention. The IntAct API
+                        # returns partial/fuzzy matches sorted by interaction count,
+                        # which means generic high-connectivity proteins (CFTR, MAPT,
+                        # HTT) appear for almost every search term. We require the
+                        # intervention name to appear in the interactor's name,
+                        # description, or aliases.
+                        intervention_lower = intervention.lower()
+                        filtered = []
+                        for entry in interactors:
+                            if not isinstance(entry, dict):
+                                continue
+                            name = (entry.get("interactorName") or "").lower()
+                            desc = (entry.get("interactorDescription") or "").lower()
+                            aliases = " ".join(
+                                str(a) for a in entry.get("interactorAliases", [])
+                            ).lower() if entry.get("interactorAliases") else ""
+                            # Check if the intervention name appears in any field
+                            if (intervention_lower in name
+                                    or intervention_lower in desc
+                                    or intervention_lower in aliases
+                                    or name in intervention_lower):
+                                filtered.append(entry)
+
+                        raw_data[f"intact_{intervention}"] = {
+                            "total_elements": total,
+                            "filtered_to": len(filtered),
+                            "interactors": filtered[:3],
+                        }
+
+                        if not filtered:
+                            logger.info(
+                                "IntAct: %d results for '%s' but none matched intervention name — skipping noise",
+                                total, intervention,
+                            )
+                            continue
+
+                        for entry in filtered[:3]:
+                            ac = entry.get("interactorAc", "")
+                            name = entry.get("interactorName", "")
+                            description = entry.get("interactorDescription", "")
+                            preferred_id = entry.get("interactorPreferredIdentifier", "")
+                            species = entry.get("interactorSpecies", "")
+                            int_type = entry.get("interactorType", "")
+                            interaction_count = entry.get("interactionCount", 0)
+
+                            snippet_parts = []
+                            if name:
+                                snippet_parts.append(f"Interactor: {name}")
+                            if description:
+                                snippet_parts.append(f"Description: {description}")
+                            if preferred_id:
+                                snippet_parts.append(f"UniProt: {preferred_id}")
+                            if species:
+                                snippet_parts.append(f"Species: {species}")
+                            if int_type:
+                                snippet_parts.append(f"Type: {int_type}")
+                            if interaction_count:
+                                snippet_parts.append(f"Interactions: {interaction_count}")
+
+                            source_url = (
+                                f"https://www.ebi.ac.uk/intact/details/interactor/{ac}"
+                                if ac
+                                else "https://www.ebi.ac.uk/intact/"
+                            )
+
+                            citations.append(SourceCitation(
+                                source_name="intact",
+                                source_url=source_url,
+                                identifier=f"IntAct:{ac}" if ac else preferred_id or name,
+                                title=f"{name or description or intervention} - IntAct",
+                                snippet="\n".join(snippet_parts) if snippet_parts else f"IntAct interactor for: {intervention}",
+                                quality_score=self.compute_quality_score("intact"),
+                                retrieved_at=datetime.utcnow().isoformat(),
+                            ))
+
+                    elif resp.status_code == 404:
+                        raw_data[f"intact_{intervention}"] = {"found": False}
+                    else:
+                        raw_data[f"intact_{intervention}_status"] = resp.status_code
+                except Exception as e:
+                    logger.warning("IntAct search failed for %s: %s", intervention, e)
+                    raw_data[f"intact_{intervention}_error"] = str(e)
+
+        return ResearchResult(
+            agent_name=self.agent_name,
+            nct_id=nct_id,
+            citations=citations,
+            raw_data=raw_data,
+        )

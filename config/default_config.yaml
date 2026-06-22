@@ -1,0 +1,248 @@
+# Agent Annotate - Default Configuration
+# ========================================
+# This file defines the multi-model verification pipeline,
+# research agents, annotation fields, and orchestrator settings.
+
+verification:
+  num_verifiers: 3
+  require_consensus: true
+  consensus_threshold: 0.67
+
+  models:
+    primary:
+      name: "llama3.1:8b"
+      role: annotator
+    # Mac Mini verifiers — cognitive diversity via 3 different model families.
+    # Each gets a different verification persona (conservative, evidence-strict, adversarial).
+    verifier_1:
+      name: "gemma3:12b"         # Google — conservative persona (v42: gemma2:9b → gemma3:12b, same-family upgrade)
+      role: verifier
+    verifier_2:
+      name: "qwen3:8b"           # Alibaba Qwen 3 — evidence-strict persona (v42: qwen2.5:7b → qwen3:8b, within-family upgrade)
+      role: verifier
+    verifier_3:
+      name: "llama3.1:8b"        # Meta Llama 3.1 — adversarial persona (replaces phi4-mini:3.8b, v28)
+      role: verifier
+    reconciliation:
+      name: "qwen3:14b"
+      role: reconciler
+
+# v12: Lowered min_sources from 2→1. ClinicalTrials.gov alone is often
+# sufficient — the 2-source requirement was causing false "Unknown" outcomes
+# for older/completed trials with no PubMed publications.
+evidence_thresholds:
+  classification:
+    min_sources: 1
+    min_quality: 0.5
+  delivery_mode:
+    min_sources: 1
+    min_quality: 0.5
+  outcome:
+    min_sources: 1
+    min_quality: 0.3
+  reason_for_failure:
+    min_sources: 1
+    min_quality: 0.3
+  peptide:
+    min_sources: 1
+    min_quality: 0.5
+
+research_agents:
+  clinical_protocol:
+    sources:
+      - clinicaltrials_gov
+      - openfda
+  literature:
+    sources:
+      - pubmed
+      - pmc
+      - pmc_bioc
+  peptide_identity:
+    sources:
+      - uniprot
+      - dramp
+  web_context:
+    sources:
+      - duckduckgo
+  dbaasp:
+    sources:
+      - dbaasp
+  chembl:
+    sources:
+      - chembl
+  rcsb_pdb:
+    sources:
+      - rcsb_pdb
+  ebi_proteins:
+    sources:
+      - ebi_proteins
+  apd:
+    sources:
+      - apd
+  # dbamp: REMOVED v8 — server (yylab.jnu.edu.cn) permanently unreachable
+  who_ictrp:
+    sources:
+      - who_ictrp
+  iuphar:
+    sources:
+      - iuphar
+  # intact: REMOVED v8 — 1/10 hit rate, mostly generic protein noise
+  # card: REMOVED v8 — 0/10 hit rate, only relevant for AMR-specific trials
+  pdbe:
+    sources:
+      - pdbe
+  # v31: New literature sources for broader publication coverage
+  openalex:
+    sources:
+      - openalex
+  semantic_scholar:
+    sources:
+      - semantic_scholar
+  crossref:
+    sources:
+      - crossref
+  # v42 Phase 6: preprint-server coverage (bioRxiv + medRxiv via Europe PMC)
+  # for the Cat 1 evidence gaps identified in the 94-NCT shadow run.
+  biorxiv:
+    sources:
+      - biorxiv_medrxiv
+  # v42.7.0 (2026-04-25): two free research APIs targeting the outcome/RfF
+  # gap identified in Job #83 audit. SEC EDGAR surfaces pharma sponsor
+  # disclosures of trial failures/discontinuations from 10-K/10-Q/8-K
+  # filings. FDA Drugs@FDA gives structured regulatory-approval records
+  # (BLA/NDA application number, approval dates, brand/generic names).
+  sec_edgar:
+    sources:
+      - sec_edgar
+  fda_drugs:
+    sources:
+      - fda_drugs
+  # v42.7.6 (2026-04-26): NIH RePORTER federal-grants index. Returns
+  # NIH-funded projects whose abstracts mention the drug intervention.
+  # Useful for funding context (active grants → drug program is alive).
+  nih_reporter:
+    sources:
+      - nih_reporter
+
+annotation_agents:
+  classification:
+    primary_research: clinical_protocol
+    secondary_research: literature
+  delivery_mode:
+    primary_research: clinical_protocol
+    secondary_research: literature
+  outcome:
+    primary_research: clinical_protocol
+    secondary_research: web_context
+  reason_for_failure:
+    primary_research: web_context
+    secondary_research: literature
+  peptide:
+    primary_research: peptide_identity
+    secondary_research: literature
+
+orchestrator:
+  max_retry_rounds: null
+  parallel_research: true
+  parallel_annotation: true
+  # Hardware profile: "mac_mini" (16-24GB, sequential Ollama, smaller models)
+  #                   "server"   (240+ GB RAM, premium models for high-accuracy tasks)
+  # Controls model selection for classification/outcome (high-accuracy fields),
+  # reconciliation, concurrency settings, and evidence limits.
+  hardware_profile: "mac_mini"
+  # v11: Unified annotation model — all annotation fields use this model on Mac Mini.
+  # Eliminates model switches during annotation phase (was switching between
+  # llama3.1:8b and qwen3:14b, costing 60-90s per trial in model reload overhead).
+  annotation_model: "qwen3:14b"
+
+  # v42 Phase 5 shadow-mode flags. Each runs a parallel "atomic" agent under a
+  # distinct _atomic field name; legacy authoritative fields are untouched.
+  # These MUST stay true on dev during Phase 5 validation. Flip them off on
+  # prod until the 94-NCT run is analyzed and B1/B2/B3 verdicts are in.
+  outcome_atomic_shadow: true
+  classification_atomic_shadow: true
+  failure_reason_atomic_shadow: true
+  # v42 B1: Tier 1b per-pub LLM cap. Prevents 45-pub NCTs from stalling the
+  # whole batch on a single trial. 0 = unlimited.
+  outcome_atomic_max_voting_pubs: 20
+  # v42 B4: Reconciler /think-mode. qwen3-only. Costs ~2x tokens; off until
+  # Phase 5 data proves it resolves disagreements better.
+  reconciler_thinking: false
+
+  # v42 Phase 6 cut-over flags — DISABLED 2026-04-23 after Job #76/#77 analysis.
+  # Atomic pipelines stay running in shadow mode (writes <field>_atomic for
+  # audit/comparison) but legacy stays authoritative. Reason: classification
+  # atomic and failure_reason atomic both regressed vs legacy on the v42.6.x
+  # 50/100-NCT validations — atomic classification missed AMPs where the
+  # peptide field was correctly True (Curodont, Self-assembling peptide P11-4,
+  # EOM613, NCT05584878, etc.); atomic failure_reason returned empty 0/7
+  # because the chain only fires on outcome=="Failed" and never on
+  # Terminated/Withdrawn. Re-evaluate after atomic pipelines beat legacy in
+  # head-to-head shadow comparison on a held-out batch.
+  prefer_atomic_classification: false
+  prefer_atomic_failure_reason: false
+
+  # v42.6 efficiency pack flags — DISABLED 2026-04-23.
+  # skip_legacy_when_atomic: false — legacy is the trusted ground truth, must
+  #   always run. Atomic stays shadow-only.
+  # deterministic_peptide_pregate: false — bidirectional INN-suffix pregate
+  #   had spurious matches ("NS"→peptide via 2-letter sequence, "Curodont"
+  #   brand-name match) and ChEMBL Small-molecule false-negatives on obvious
+  #   peptides ("Liver-enriched antimicrobial peptide 2", "Neoantigen
+  #   Peptides"). Net negative on peptide accuracy vs LLM judgment.
+  # skip_amp_research_for_non_peptides: false — gated AMP research on the
+  #   flawed pregate, propagating its FN rate into AMP recall.
+  skip_legacy_when_atomic: false
+  deterministic_peptide_pregate: false
+  skip_amp_research_for_non_peptides: false
+  # Kept ON (legitimate efficiency, no accuracy cost):
+  # - skip_verification_on_legacy (default true): audit-only legacy_<field>
+  #   columns under shadow mode don't need verifier burn.
+  # - biorxiv_drug_name_prefilter (default true): research-side dedupe + page
+  #   filter, no annotation-output effect.
+  # - per_drug_research_cache (default true): chembl/uniprot/iuphar/dbaasp/
+  #   apd/rcsb queries are pure functions of drug name; coalescing identical
+  #   queries within a job is an unconditional speedup.
+  # - outcome_atomic_max_voting_pubs: 20 — caps Tier 1b LLM passes on 45-pub
+  #   trials. Keeps tail-latency bounded without changing the typical case.
+
+  # Premium model for server profile — used for classification, outcome, and reconciliation.
+  # These are the hardest tasks requiring strong multi-step reasoning.
+  # Toggle between models by changing this single value:
+  #   "kimi-k2-thinking"  — 1T MoE, 32B active. Proven reasoning (AIME 95.6%). Default.
+  #   "minimax-m2.7"      — 2.3T MoE, 100B active. Strong task adherence (97%). ~3x slower.
+  # Models are auto-pulled from Ollama if not available locally.
+  server_premium_model: "kimi-k2-thinking"
+
+  # Server verifier overrides — stronger models replace Mac Mini defaults.
+  # Each gets a verification persona (conservative, evidence-strict, adversarial).
+  # Auto-pulled from Ollama if not available locally.
+  # Leave empty [] to use the default Mac Mini verifiers on server too.
+  server_verifiers:
+    - "gemma2:27b"            # verifier_1 (conservative) — 3x upgrade from 9b
+    - "qwen2.5:32b"           # verifier_2 (evidence-strict) — 4.5x upgrade from 7b
+    - "phi4:14b"              # verifier_3 (adversarial) — 3.7x upgrade from 3.8b
+
+  # Server model selection summary:
+  #   classification:  server_premium_model (decision tree requires strongest reasoning)
+  #   outcome:         server_premium_model (nuanced literature interpretation)
+  #   reconciler:      server_premium_model (resolves multi-model disagreements)
+  #   peptide:         qwen3:14b (deterministic catches most cases)
+  #   delivery_mode:   qwen3:14b (deterministic catches most cases)
+  #   failure_reason:  qwen3:14b (depends on outcome, not independent)
+  #   verifiers:       server_verifiers (above) — replaces Mac Mini defaults
+
+ollama:
+  host: localhost
+  port: 11434
+  timeout: 600
+  temperature: 0.10
+  # v17: Per-model timeout overrides (seconds).
+  # Smaller models respond in <30s when healthy — a 240s timeout catches hangs
+  # while allowing cold loads (~60s) + inference (~30s) + safety margin.
+  # Larger models (14B+) doing annotation/reconciliation need the full 600s.
+  model_timeouts:
+    "llama3.1:8b": 300       # v42: verifier_3 (adversarial)
+    "gemma3:12b": 400        # v42: verifier_1 (conservative) + atomic Tier 1b assessor
+    "qwen3:8b": 300          # v42: verifier_2 (evidence-strict)
+    "qwen3:14b": 600         # v40+: primary annotator + reconciler
