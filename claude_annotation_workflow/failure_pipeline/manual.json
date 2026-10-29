@@ -1,0 +1,57 @@
+{
+  "NCT01076764": {
+    "reason": "Ineffective for purpose",
+    "confidence": "Medium",
+    "sub": "primary endpoint not met",
+    "evidence": "TAO (EFC6204), n=13,229 NSTE-ACS: the primary composite of all-cause death or new myocardial infarction through day 7 was 5.5% with otamixaban vs 5.7% with unfractionated heparin + eptifibatide (adjusted RR 0.99, 95% CI 0.85-1.16; P=.93), and TIMI major/minor bleeding was increased (3.1% vs 1.5%; RR 2.13, P<.001); Sanofi then discontinued the otamixaban programme",
+    "note": [
+      "no reason is on record in the registry or the bundle for this trial; located by external search (11)",
+      "sources: ACC Latest in Cardiology summary of the TAO randomized clinical trial (acc.org/Latest-in-Cardiology/Articles/2014/07/18/18/05/Otamixaban-For-Patients-With-Non-ST-Segment-Elevation-Acute-Coronary-Syndrome); Medthority, 'Sanofi terminates development of otamixaban in ACS' (June 2013)",
+      "date check (11): the trial completed 2013-05 and the result was reported in 2013, so the dates line up"
+    ]
+  },
+  "NCT04255433": {
+    "reason": null,
+    "confidence": "Low",
+    "evidence": "LOW CONFIDENCE: no reason for failure is on record, and external search indicates this trial did not fail: SURPASS-CVOT met its prespecified primary non-inferiority objective for 3-point MACE against dulaglutide (HR 0.92, 95.3% CI 0.83-1.01), missing superiority only. Sources: TCTMD, 'Tirzepatide Matches Dulaglutide in Large CV Outcomes Trial: SURPASS-CVOT'; HCPLive, 31 July 2025. The upstream outcome table calls this trial Negative; on this evidence that label is doubtful and no failure reason is owed (1.1, 5.3). Treat this row as unresolved."
+  },
+  "NCT00327379": {
+    "reason": "Business reasons",
+    "confidence": "Low",
+    "sub": "programme discontinued",
+    "evidence": "Bayer announced on 25 January 2007 that it was discontinuing the Trasylol (aprotinin) clinical trial programme in non-CABG indications, comprising exactly three studies \u2014 elective spinal fusion surgery, pneumonectomy or esophagectomy for cancer, and radical or total cystectomy in bladder cancer. The announcement states: \"Bayer's decision to discontinue these trials was not made based on any safety findings in these non-CABG studies\", and cites the impracticality of cardiopulmonary bypass in non-cardiac surgical settings \u2014 i.e. a sponsor programme decision, not a safety or efficacy finding",
+    "note": [
+      "whyStopped is blank and no reason is on record in the registry narrative fields, the bundle literature or the posted results for this trial; located by external search (11)",
+      "attribution is inferred from a programme-level event, not a trial-specific statement (11): this trial is the non-CABG indication 'elective spinal fusion surgery', one of the three the announcement names",
+      "sources: Manufacturing Chemist, 'Bayer discontinues Trasylol clinical trial programme in non-CABG indications', published 25-Jan-2007 (manufacturingchemist.com/bayer-discontinues-trasylol-clinical-trial-programme-in-non-cabg-indications-38380)",
+      "date check (11): the discontinuation was announced 2007-01-25 and this Bayer trial terminated with a completion date of 2007-03, so the trial wound down immediately after the announcement and the dates line up",
+      "not Toxic/unsafe: the announcement explicitly denies a safety basis for these three trials, and the aprotinin mortality signal (BART, 2007-10-17) and worldwide sales suspension (2007-11-05) both post-date this termination"
+    ]
+  },
+  "NCT00306137": {
+    "reason": "Business reasons",
+    "confidence": "Low",
+    "sub": "programme discontinued",
+    "evidence": "Bayer announced on 25 January 2007 that it was discontinuing the Trasylol (aprotinin) clinical trial programme in non-CABG indications, comprising exactly three studies \u2014 elective spinal fusion surgery, pneumonectomy or esophagectomy for cancer, and radical or total cystectomy in bladder cancer. The announcement states: \"Bayer's decision to discontinue these trials was not made based on any safety findings in these non-CABG studies\", and cites the impracticality of cardiopulmonary bypass in non-cardiac surgical settings \u2014 i.e. a sponsor programme decision, not a safety or efficacy finding",
+    "note": [
+      "whyStopped is blank and no reason is on record in the registry narrative fields, the bundle literature or the posted results for this trial; located by external search (11)",
+      "attribution is inferred from a programme-level event, not a trial-specific statement (11): this trial is the non-CABG indication 'pneumonectomy or esophagectomy for lung or esophageal cancer', one of the three the announcement names",
+      "sources: Manufacturing Chemist, 'Bayer discontinues Trasylol clinical trial programme in non-CABG indications', published 25-Jan-2007 (manufacturingchemist.com/bayer-discontinues-trasylol-clinical-trial-programme-in-non-cabg-indications-38380)",
+      "date check (11): the discontinuation was announced 2007-01-25 and this Bayer trial terminated with a completion date of 2007-03, so the trial wound down immediately after the announcement and the dates line up",
+      "not Toxic/unsafe: the announcement explicitly denies a safety basis for these three trials, and the aprotinin mortality signal (BART, 2007-10-17) and worldwide sales suspension (2007-11-05) both post-date this termination"
+    ]
+  },
+  "NCT00306150": {
+    "reason": "Business reasons",
+    "confidence": "Low",
+    "sub": "programme discontinued",
+    "evidence": "Bayer announced on 25 January 2007 that it was discontinuing the Trasylol (aprotinin) clinical trial programme in non-CABG indications, comprising exactly three studies \u2014 elective spinal fusion surgery, pneumonectomy or esophagectomy for cancer, and radical or total cystectomy in bladder cancer. The announcement states: \"Bayer's decision to discontinue these trials was not made based on any safety findings in these non-CABG studies\", and cites the impracticality of cardiopulmonary bypass in non-cardiac surgical settings \u2014 i.e. a sponsor programme decision, not a safety or efficacy finding",
+    "note": [
+      "whyStopped is blank and no reason is on record in the registry narrative fields, the bundle literature or the posted results for this trial; located by external search (11)",
+      "attribution is inferred from a programme-level event, not a trial-specific statement (11): this trial is the non-CABG indication 'radical or total cystectomy', one of the three the announcement names",
+      "sources: Manufacturing Chemist, 'Bayer discontinues Trasylol clinical trial programme in non-CABG indications', published 25-Jan-2007 (manufacturingchemist.com/bayer-discontinues-trasylol-clinical-trial-programme-in-non-cabg-indications-38380)",
+      "date check (11): the discontinuation was announced 2007-01-25 and this Bayer trial terminated with a completion date of 2007-03, so the trial wound down immediately after the announcement and the dates line up",
+      "not Toxic/unsafe: the announcement explicitly denies a safety basis for these three trials, and the aprotinin mortality signal (BART, 2007-10-17) and worldwide sales suspension (2007-11-05) both post-date this termination"
+    ]
+  }
+}

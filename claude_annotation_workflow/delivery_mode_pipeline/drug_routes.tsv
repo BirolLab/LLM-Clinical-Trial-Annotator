@@ -1,0 +1,362 @@
+# drug	mode	evidence phrase	source	quality   (recovered from work/rb_pass12.csv)
+adrenomedullin	injection/infusion	Infused intra-arterially/IV in human vascular studies	Human brachial-artery ADM infusion study 1997	v
+albuvirtide	injection/infusion	320 mg intravenously once weekly in HIV trials	NCT02369965, NCT03719664	v
+allert	injection/infusion	Immunotherapy given as 5 SC injections over 2 months	NCT02943720 arm descriptions	i
+alpha-msh	Other	Afamelanotide 16 mg subcutaneous implant via implantation cannula	SCENESSE prescribing information	v
+angiotensin (1-7)	injection/infusion	TXA127 0.5 mg/kg intravenous infusion daily	NCT04401423 protocol; Crit Care 2022	v
+angiotensin ii	injection/infusion	Giapreza continuous intravenous infusion	FDA label via openFDA	i
+anidulafungin	injection/infusion	Label route intravenous infusion only	FDA labels via openFDA	v
+aprotinin	injection/infusion	Trasylol given intravenously: loading dose plus infusion	FDA label 020304s009; EMA aprotinin referral	v
+b2a peptide	Other	B2A-coated ceramic granules surgically implanted as graft	NCT00798239; J Neurosurg Spine 2015 pilot	v
+bacitracin	Topical	Topical ointment; IM injection approval withdrawn 2021 for safety	FDA labels via openFDA; Federal Register 2021-05105	v
+bivalirudin	injection/infusion	Label route intravenous bolus plus infusion	FDA labels via openFDA	v
+bleomycin	injection/infusion	Label routes: intravenous, intramuscular, subcutaneous, intrapleural	FDA labels via openFDA	v
+bortezomib	injection/infusion	Label permits intravenous or subcutaneous injection	FDA labels via openFDA	v
+bradykinin	injection/infusion	Human studies use intrabrachial/IV bradykinin infusion	Human forearm infusion study (Circulation	v
+buserelin	injection/infusion	SC injection for prostate cancer/IVF; nasal spray maintenance	Suprefact injection and nasal spray SmPCs	i
+c-type natriuretic peptide (cnp)	injection/infusion	Human CNP given by IV/intra-arterial infusion; vosoritide SC	1998 human CNP infusion study; Voxzogo DailyMed	v
+calcitonin (salmon)	injection/infusion	IM/SC for Paget's and hypercalcaemia; nasal spray osteoporosis	FDA labels via openFDA (IM, SC, NASAL	i
+cap1-6d	injection/infusion	CAP1-6D subcutaneously in Montanide or intradermally with GM-CSF	NCT00012246 record	v
+capreomycin	injection/infusion	Capastat label: deep intramuscular injection or IV infusion	FDA label 050095s072 (accessdata	v
+carbetocin	injection/infusion	Pabal: slow IV injection, or IM after vaginal delivery	Pabal SmPC (medicines.org.uk	v
+carfilzomib	injection/infusion	Label route intravenous infusion only	FDA label via openFDA	v
+carnosine	Oral	Randomized trials gave oral carnosine 2 g/day	PMC5727174; PMC11597812	v
+carperitide	injection/infusion	Intravenous human ANP formulation; LASCAR-AHF IV infusion	Cardiovasc Drugs Ther 2017 review	v
+caspofungin	injection/infusion	Label route intravenous infusion only	FDA label via openFDA	v
+cat-pad	injection/infusion	administered by intradermal injection into forearm flexor surface	NCT02311413 record	i
+cerebrolysin	injection/infusion	30 mL once-daily intravenous infusion in stroke trials	NCT00868283, NCT06339411	v
+cetrorelix	injection/infusion	Cetrotide labels subcutaneous only	FDA label routes via openFDA	v
+cgrp (calcitonin gene-related peptide)	injection/infusion	20-minute intravenous alpha-CGRP infusion in human studies	Front Neurol 2023 systematic review	v
+colistin / colistimethate	Multiple:injection/infusion|Other	IV/IM systemically; inhaled powder/nebulised in cystic fibrosis	FDA Colistimethate label; EMA Colobreathe PI	i
+collagen peptides	Oral	Oral collagen supplements improved skin hydration, elasticity	J Drugs Dermatol 2019 systematic review	v
+corticotropin (acth)	injection/infusion	Acthar Gel labels intramuscular or subcutaneous	FDA label routes via openFDA	v
+cosyntropin	injection/infusion	Cortrosyn given intravenously or intramuscularly	FDA label routes via openFDA	v
+cyclic peptide fertiline	Other	peptide supplements oocyte and embryo in vitro media	NCT04954274 record	v
+cyclosporine	Multiple:Oral|Topical	Oral capsules for transplant rejection; ophthalmic emulsion for dry eye	FDA labels via openFDA (Sandimmune, Vevye	i
+dactinomycin	injection/infusion	Label route intravenous only	FDA labels via openFDA	v
+daptomycin	injection/infusion	All FDA labels list intravenous route only	FDA labels via openFDA	v
+degarelix	injection/infusion	Firmagon route of administration: subcutaneous	FDA label via DailyMed	v
+desmopressin	Multiple:injection/infusion|Oral	Oral tablets for DI/nocturia; IV/SC for haemophilia	FDA labels via openFDA (oral, IV, SC, nasal	i
+dgx 001	Oral	PK endpoints report oral clearance CL/F, non-intravenous administration	NCT05121831 record	i
+diapep277	injection/infusion	1 mg subcutaneously every 3 months, type 1 diabetes	NCT00644501, NCT01898286	v
+dotanoc	injection/infusion	whole-body PET after IV injection of ~185 MBq	Pettinato, 68Ga-DOTANOC dosimetry, EJNMMI 2008	v
+dulaglutide	injection/infusion	Trulicity: pen, once-weekly subcutaneous injection	PMC8888891 Table 1	v
+ecnoglutide	injection/infusion	SLIMMER phase 3: weekly subcutaneous ecnoglutide 1.2-2.4mg	PMID 40555243	v
+endothelin	injection/infusion	Continuous brachial-artery infusion 2.5-10 pmol/min	J Physiol via PMC1874447	v
+enfuvirtide	injection/infusion	Fuzeon reconstituted for subcutaneous injection, 90 mg twice daily	FDA label 021481 (accessdata	v
+eo2401	injection/infusion	injection site granuloma/erythema among reported adverse events	NCT04116658 record	i
+eptifibatide	injection/infusion	Label route intravenous bolus plus infusion	FDA labels via openFDA	v
+evuzamitide	injection/infusion	Single IV injection of 124I-AT-01 radiotracer for PET/CT	NCT05968846 record	v
+exenatide	injection/infusion	Byetta twice-daily, Bydureon weekly subcutaneous pen	PMC8888891 Table 1	v
+exendin(9-39) / avexitide	injection/infusion	Twice-daily subcutaneous avexitide in post-bariatric hypoglycaemia	NCT02771574	v
+fsr peptide	Topical	FSR peptide applied to one punch biopsy wound	NCT04473859 record	v
+ganirelix	injection/infusion	All ganirelix labels subcutaneous	FDA label routes via openFDA	v
+ghrelin (acyl)	injection/infusion	Intravenous ghrelin 5 pmol/kg/min increased appetite	Wren 2001 JCEM 86:5992	v
+ghrh / somatorelin	injection/infusion	Sermorelin/GHRH test given intravenously or subcutaneously	NCATS drug record; Geref label	v
+gi heptapeptide	Topical	topically-administered peptide during upper endoscopy	NCT01391208 record	v
+gip	injection/infusion	Synthetic human GIP infused intravenously in healthy volunteers	PMC3219957; Nauck 1993	v
+glatiramer acetate	injection/infusion	All labels subcutaneous injection for multiple sclerosis	FDA labels via openFDA	i
+glp 1 agonists	injection/infusion	Class subcutaneous; oral semaglutide the sole exception	PMC8888891 Table 1	i
+glp-1 (7-36) amide	injection/infusion	Infused intravenously into volunteers; insulin rose, glucose fell	PMID 2890903	v
+glp-1 receptor agonist class (unspecified)	injection/infusion	Class subcutaneous; oral semaglutide the sole exception	PMC8888891 Table 1	v
+glucagon	injection/infusion	Injection IV/IM/SC for hypoglycaemia; Baqsimi intranasal powder	FDA labels via openFDA	i
+glutathione	Oral	Oral supplements commonest human use; IV for skin lightening	PMC11862975 review; FDA warning on injectables	i
+gnrh analogue (unspecified)	injection/infusion	Class default: depot SC/IM injection predominates	Inferred from GnRH-analogue class labels	i
+gonadorelin (gnrh/lhrh)	injection/infusion	Factrel 0.1 mg given subcutaneously or intravenously	Factrel label via drugs.com/Mayo Clinic	v
+goserelin	injection/infusion	Zoladex subcutaneous depot placed by syringe	FDA label routes via openFDA	v
+heme iron polypeptide	Oral	dietary supplement 1 g/day for anaemia	NCT01733979 record	v
+hsp70 peptide	injection/infusion	eight weekly intradermal injections of autologous Hsp70-peptide complexes	PMID 15958631	v
+insulin (unspecified)	injection/infusion	All insulin products labeled subcutaneous; regular also intravenous	FDA labels via openFDA	v
+insulin aspart	injection/infusion	NovoLog/Fiasp labels: subcutaneous injection or pump infusion	FDA labels via openFDA	v
+insulin degludec	injection/infusion	Tresiba labeled once-daily subcutaneous injection	FDA labels via openFDA	v
+insulin detemir	injection/infusion	Levemir subcutaneous only; not intravenous or intramuscular	FDA label via openFDA	v
+insulin glargine	injection/infusion	Lantus/Toujeo/Basaglar labels: subcutaneous injection only	FDA labels via openFDA	v
+insulin human (regular)	injection/infusion	Regular human insulin given subcutaneously or intravenously	FDA labels via openFDA	v
+insulin isophane (nph)	injection/infusion	Humulin N isophane suspension labeled subcutaneous use	FDA label via openFDA	v
+insulin lispro	injection/infusion	Humalog/Lyumjev labels: subcutaneous injection or pump	FDA labels via openFDA	v
+irgd	injection/infusion	intravenous infusion of CEND-1 (iRGD) in patients	PMID 36982773	v
+lanreotide	injection/infusion	Somatuline Depot labels subcutaneous	FDA label routes via openFDA	v
+leuprolide	injection/infusion	All US leuprolide labels subcutaneous depot injection	FDA label routes via openFDA	v
+liraglutide	injection/infusion	Victoza/Saxenda: pen, once-daily subcutaneous injection	PMC8888891 Table 1	v
+lixisenatide	injection/infusion	Adlyxin/Lyxumia: pen, once-daily subcutaneous injection	PMC8888891 Table 1	v
+melan-a/mart-1 peptide	injection/infusion	subcutaneous vaccination with Montanide/MART-1 peptide	NCI cancer drug dictionary	v
+micafungin	injection/infusion	Label route intravenous infusion only	FDA labels via openFDA	v
+multiplexed heptapeptides	Topical	topical application of peptide panel to esophageal mucosa	NCT03589443 record	i
+nangibotide	injection/infusion	Continuous IV infusion 0.3-1.0 mg/kg/hr in septic shock	NCT04055909; Intensive Care Med 2020;46:1425	v
+nesiritide	injection/infusion	Natrecor IV bolus then continuous intravenous infusion	Natrecor prescribing information	v
+octreotide	injection/infusion	SC/IV injection standard; oral Mycapssa capsules niche	FDA labels via openFDA	v
+ombipepimut-s	injection/infusion	DSP-7888 dosing emulsion administered intradermally	NCT03149003 record	i
+oxytocin	injection/infusion	FDA labels list intravenous and intramuscular only	FDA label routes via openFDA	v
+parathyroid hormone (1-84)	injection/infusion	Natpara 50 mcg once daily subcutaneously into thigh	Natpara SmPC	v
+pasireotide	injection/infusion	Signifor subcutaneous; LAR intramuscular	FDA label via openFDA	v
+pds0101	injection/infusion	2.7 mg HPVmix plus R-DOTAP by subcutaneous injection	ISRCTN15021247	v
+pegmolesatide	injection/infusion	Subcutaneous injection once every four weeks	PMC11993201; NMPA approval 2023	v
+peptide yy (3-36)	injection/infusion	Graded intravenous PYY3-36 infusions reduced food intake	PMID 16285944	v
+polymyxin b	injection/infusion	Injection IV/IM/intrathecal; OTC topical ointments very common	FDA labels via openFDA	i
+preimplantation factor (spif)	injection/infusion	Subcutaneously administered sPIF doses, autoimmune hepatitis	NCT03593460 outcome measures; Hepatol Commun 2018	v
+protamine	injection/infusion	Label route intravenous only (slow injection)	FDA labels via openFDA	i
+protamine sulfate	injection/infusion	Label route intravenous only (slow injection)	FDA labels via openFDA	v
+pulmobind	injection/infusion	15 mCi 99mTc-PulmoBind injected in forearm vein	Harel et al., Eur J Nucl Med Mol Imaging 2017, PMC5434971	i
+purastat	Topical	PuraStat applied endoscopically to EMR mucosal defect	NCT04629768 record	i
+pvx-410	injection/infusion	six biweekly subcutaneous doses in Montanide ISA720	NCT01718899; JAMA Oncol 2018	i
+radiolabelled peptide tracer	injection/infusion	bolus intravenous injection, 148 MBq (4 mCi) adults	Ga-68-DOTATOC prescribing information	v
+relaxin / serelaxin	injection/infusion	RELAX-AHF-2: 48-hour IV infusion 30 mcg/kg/day	RELAX-AHF-2 trial publication	v
+rgd peptide	Topical	RGD hydrogel syringe-applied into debrided intrabony defect	J Appl Oral Sci 2023 PMC10786453; NCT05653245	v
+romidepsin	injection/infusion	Label route intravenous infusion only	FDA label via openFDA	v
+secretin	injection/infusion	ChiRhoStim: injection for intravenous use, reconstituted powder	ChiRhoStim monograph	v
+self assembling peptide nanofiber hydrogel	Other	transplantation of SVF and nanohydrogel for spinal cord injury	NCT05967325 record	v
+self-assembling peptide p11-4	Topical	Curodont Repair applied topically to enamel lesions	NCT07664046 record; JADA 2023 review	v
+semaglutide	injection/infusion	Ozempic/Wegovy weekly subcutaneous; Rybelsus oral tablet	PMC8888891 Table 1	i
+sincalide	injection/infusion	Kinevac: intravenous injection or 30-minute infusion	Kinevac prescribing information	v
+somatostatin	injection/infusion	250 mcg IV bolus then continuous IV infusion	Stilamin PI; Somatostatina GP-Pharm SmPC	v
+substance p	injection/infusion	Continuous IV infusion 1.5 pmol/kg/min, 20 minutes	NCT06632080; J Headache Pain 2025	v
+teicoplanin	injection/infusion	SmPC: IV bolus or 30-min infusion, or intramuscular	Targocid SmPC (emc/EMA Article-30	v
+teriparatide	injection/infusion	Forteo labels subcutaneous daily injection	FDA label routes via openFDA	v
+terlipressin	injection/infusion	Terlivaz given intravenously every 6 hours	FDA label routes via openFDA	v
+tertomotide	injection/infusion	GV1001 given by intradermal injection with GM-CSF	PMC2360729 (Phase I/II pancreatic	i
+thymosin alpha 1	injection/infusion	Zadaxin 1.6 mg subcutaneous injection twice weekly	Zadaxin label text via RxList	v
+thymosin alpha 1 / thymalfasin	injection/infusion	Zadaxin 1.6 mg subcutaneous injection twice weekly	Zadaxin label text via RxList	v
+tirzepatide	injection/infusion	Mounjaro/Zepbound labeled weekly subcutaneous injection	FDA labels via openFDA	v
+triptorelin	injection/infusion	Trelstar and Triptodur route of administration: intramuscular	FDA label via DailyMed	v
+ts 104	injection/infusion	PIP-MMAE conjugate dosed intravenously in preclinical studies	JITC 2025;13(Suppl 2	i
+ucpvax	injection/infusion	peptides injected subcutaneously in separate sites	NCT02818426 record	v
+vancomycin	Multiple:injection/infusion|Oral	IV for systemic MRSA; oral capsules for C. difficile	FDA labels via openFDA/DailyMed (Vancocin oral	i
+vasoactive intestinal peptide (vip)	injection/infusion	Aviptadil given as 12-hour daily IV infusion	ACTIV-3b/TESICO; NCT04843761	v
+vasopressin	injection/infusion	All US vasopressin labels intravenous (Vasostrict and generics)	FDA label routes via openFDA	v
+wt1 126-134	injection/infusion	six subcutaneous doses PR1 and WT1 in Montanide	NCT00488592 record	v
+# --- run 7 additions: recombinant protein and peptide biologics (methodology 14.3)
+filgrastim	injection/infusion	injection, for subcutaneous or intravenous use	openFDA SPL label (Nypozi, Releuko)	v
+pegfilgrastim	injection/infusion	6 mg subcutaneously once per chemotherapy cycle	openFDA SPL label (Udenyca, Ziextenzo)	v
+lenograstim	injection/infusion	subcutaneous injection or 30-minute intravenous infusion	Granocyte SmPC, medicines.org.uk/emc/medicine/8347	v
+lipegfilgrastim	injection/infusion	preservative-free liquid for subcutaneous administration	TGA AusPAR PI, Lonquex	v
+eflapegrastim	injection/infusion	13.2 mg administered subcutaneously once per cycle	openFDA SPL label (Rolvedon)	v
+sargramostim	injection/infusion	intravenous infusion or subcutaneous injection	openFDA SPL label (Leukine)	v
+cilmostim	injection/infusion	route not retrieved, inferred from class (M-CSF)	AMA USAN -mostim stem list	i
+g csf	injection/infusion	subcutaneous preferable to intravenous; fewer side effects	Br J Cancer PMC2077104 CSF review	v
+gm csf	injection/infusion	subcutaneous preferred route versus continuous IV infusion	Br J Cancer PMC2077104 CSF review	v
+m csf	injection/infusion	intermittent intravenous bolus or continuous infusion, phase I	J Natl Cancer Inst 86:39; PubMed 1403042	v
+epoetin alfa	injection/infusion	administered intravenously or subcutaneously	openFDA SPL label (Epogen, Retacrit)	v
+epoetin beta	injection/infusion	administered either subcutaneously or intravenously	NeoRecormon SmPC, medicines.org.uk/emc/product/10496	v
+darbepoetin alfa	injection/infusion	0.45 mcg/kg intravenously or subcutaneously weekly	openFDA SPL label (Aranesp)	v
+darbepoetin	injection/infusion	0.45 mcg/kg intravenously or subcutaneously weekly	openFDA SPL label (Aranesp)	v
+methoxy polyethylene glycol epoetin beta	injection/infusion	administered by subcutaneous or intravenous injection	openFDA/Mircera label	v
+erythropoietin	injection/infusion	administered intravenously or subcutaneously	openFDA SPL label (Epogen, Retacrit)	v
+aldesleukin	injection/infusion	intravenous infusion per label; low-dose subcutaneous regimens	openFDA Proleukin label; Br J Cancer PMC2409650	v
+bempegaldesleukin	injection/infusion	0.006 mg/kg intravenously every 3 weeks with nivolumab	PIVOT IO-001 phase III, NCT03635983	v
+interleukin 2	injection/infusion	intravenous infusion per label; low-dose subcutaneous regimens	openFDA Proleukin label; Br J Cancer PMC2409650	v
+pegylated interleukin 2	injection/infusion	subcutaneous PEG IL-2 cycles (also intradermal/intravenous)	NCT00002017; Carr, J Infect Dis 1998;178:992	v
+interleukin 1 alpha	injection/infusion	intravenous rIL-1 alpha given in aplastic anaemia trial	Walsh 1992, Br J Haematol	v
+interleukin 3	injection/infusion	daily subcutaneous rhIL-3 injection in phase I/II trials	MSKCC phase I/II; Br J Cancer PMC1968723	v
+interleukin 4	injection/infusion	phase I dosing intravenously and subcutaneously	Phase I rhIL-4 trials, PMC1977892	v
+interleukin 6	injection/infusion	daily subcutaneous interleukin-6 in phase I trial	J Clin Oncol 1993, PubMed 7680375	v
+interleukin 7	injection/infusion	CYT107 intramuscularly; subcutaneous if anticoagulated	NCT04407689; NCT02640807 protocol	v
+interleukin 10	injection/infusion	daily subcutaneous injections of pegilodecakin	NCT02009449	v
+interleukin 12	injection/infusion	recombinant interleukin-12 given subcutaneously	NCT00003210	v
+interleukin 15	injection/infusion	phase I trials given intravenously and subcutaneously	NCT02689453 protocol	v
+interleukin 18	injection/infusion	SB-485232 daily intravenous infusions, 5 days per cycle	NCT00107718, NCT00500058	v
+interleukin 21	injection/infusion	intravenous bolus injection, 1-100 mcg/kg phase I	Cancer Immunol Immunother 2008;57	v
+oprelvekin	injection/infusion	daily subcutaneous dosing for 14 days	Neumega prescribing information	v
+denileukin diftitox	injection/infusion	9 mcg/kg/day as intravenous infusion	openFDA SPL label (Lymphir)	v
+interferon alfa	injection/infusion	intramuscular, subcutaneous, intralesional or intravenous	FDA Intron A label, accessdata ifnasch110697	v
+interferon alfa 2a	injection/infusion	Roferon-A given by subcutaneous injection	Genentech Roferon-A prescribing information	v
+interferon alfa 2b	injection/infusion	for intramuscular, subcutaneous, intralesional or IV injection	FDA Intron A label, accessdata ifnasch110697	v
+peginterferon alfa	injection/infusion	Pegasys labeled for subcutaneous use once weekly	DailyMed Pegasys SPL	v
+interferon beta	injection/infusion	Rebif subcutaneous only; Avonex intramuscular only	openFDA SPL labels (Rebif, Avonex, Betaseron)	v
+interferon gamma	injection/infusion	Actimmune for subcutaneous use only	openFDA SPL label (Actimmune)	v
+somatropin	injection/infusion	administer by subcutaneous injection, rotating sites	openFDA SPL labels (Norditropin, Omnitrope)	v
+growth hormone	injection/infusion	administer by subcutaneous injection, rotating sites	openFDA SPL labels (Norditropin, Omnitrope)	v
+somatrogon	injection/infusion	Ngenla once-weekly subcutaneous injection	openFDA SPL label (Ngenla)	v
+somapacitan	injection/infusion	Sogroya once-weekly subcutaneous injection	openFDA SPL label (Sogroya)	v
+lonapegsomatropin	injection/infusion	administered subcutaneously once weekly	openFDA SPL label (Skytrofa)	v
+mecasermin	injection/infusion	Increlex should be administered subcutaneously	openFDA SPL label (Increlex)	v
+insulin like growth factor i	injection/infusion	rhIGF-1 (mecasermin) administered subcutaneously twice daily	openFDA SPL label (Increlex)	v
+pegvisomant	injection/infusion	40 mg loading dose subcutaneously, then daily	openFDA SPL label (Somavert)	v
+leptin	injection/infusion	recombinant leptin injected subcutaneously twice daily	NEJM 2002 leptin replacement; NCT00896298	v
+metreleptin	injection/infusion	administer as subcutaneous injection once daily	openFDA SPL label (Myalept)	v
+human chorionic gonadotropin	injection/infusion	Intramuscular Use Only per label	openFDA SPL label (Chorionic Gonadotropin, Pregnyl)	v
+choriogonadotropin alfa	injection/infusion	Ovidrel For Subcutaneous Use Only	openFDA SPL label (Ovidrel)	v
+follitropin alfa	injection/infusion	75 IU per day administered subcutaneously	openFDA SPL label (Gonal-f)	v
+urofollitropin	injection/infusion	for subcutaneous or intramuscular injection	FDA Bravelle label 021289s019	v
+menotropins	injection/infusion	225 IU per day administered subcutaneously	openFDA SPL label (Menopur)	v
+lutropin alfa	injection/infusion	Luveris administered by subcutaneous route	EMA Luveris EPAR product information	v
+corifollitropin alfa	injection/infusion	single subcutaneous injection replaces seven daily FSH doses	EMA Elonva EPAR product information	v
+thyrotropin alfa	injection/infusion	administered intramuscularly only; not intravenously	openFDA SPL label (Thyrogen)	v
+romiplostim	injection/infusion	1 mcg/kg once weekly as subcutaneous injection	openFDA SPL label (Nplate)	v
+palifermin	injection/infusion	administer as intravenous bolus injection, 60 mcg/kg/day	openFDA SPL label (Kepivance)	v
+becaplermin	Topical	REGRANEX is for topical use on diabetic foot ulcers	openFDA SPL label (Regranex Gel 0.01%)	v
+cenegermin	Topical	rhNGF eye drops six times daily, neurotrophic keratitis	FDA Oxervate PI; DailyMed Oxervate	v
+glial cell line derived neurotrophic factor	injection/infusion	intraputamenal convection-enhanced infusion via skull port	Whone, Brain 2019, PMC6391602	v
+etanercept	injection/infusion	Enbrel SPL route: subcutaneous	openFDA SPL label (ENBREL)	v
+abatacept	injection/infusion	Orencia IV infusion and 125 mg weekly subcutaneous	openFDA SPL label (ORENCIA)	v
+belatacept	injection/infusion	Nulojix SPL route intravenous, kidney transplant	openFDA SPL label (NULOJIX)	v
+alefacept	injection/infusion	Amevive 15 mg intramuscular once weekly, 12 weeks	RxList Amevive label; Canadian product monograph	v
+aflibercept	injection/infusion	Eylea intravitreal; Zaltrap intravenous for oncology	openFDA SPL labels (EYLEA, ZALTRAP)	v
+rilonacept	injection/infusion	Arcalyst SPL route subcutaneous	openFDA SPL label (Arcalyst)	v
+batiraxcept	injection/infusion	trials dosed 15 mg/kg intravenously every two weeks	ASCO 2023 ccRCC phase 2, NCT04300140	v
+anakinra	injection/infusion	Kineret SPL route subcutaneous	openFDA SPL label (Kineret)	v
+canakinumab	injection/infusion	Ilaris SPL route subcutaneous injection	openFDA SPL label (Ilaris)	v
+basiliximab	injection/infusion	Simulect SPL route intravenous bolus or infusion	openFDA SPL label (Simulect)	v
+daclizumab	injection/infusion	Zinbryta for subcutaneous use, 150 mg monthly	Zinbryta prescribing information	v
+alemtuzumab	injection/infusion	Campath and Lemtrada SPL route intravenous	openFDA SPL labels (Campath, LEMTRADA)	v
+teplizumab	injection/infusion	Tzield SPL route intravenous, daily infusions 12 days	openFDA SPL label (TZIELD)	v
+antithymocyte globulin	injection/infusion	Thymoglobulin SPL route intravenous	openFDA SPL label (THYMOGLOBULIN)	v
+anti thymocyte globulin	injection/infusion	Thymoglobulin SPL route intravenous	openFDA SPL label (THYMOGLOBULIN)	v
+thymoglobulin	injection/infusion	Thymoglobulin SPL route intravenous	openFDA SPL label (THYMOGLOBULIN)	v
+atgam	injection/infusion	Atgam intravenous only, high-flow vein, in-line filter	Pfizer Atgam PI, labeling.pfizer.com id=525	v
+anti lymphocyte globulin	injection/infusion	ALG given as long intravenous infusions, 12-18 hours	Ter Arkh ALG complications study	i
+antilymphocyte immunoglobulin	injection/infusion	ALG given as long intravenous infusions, 12-18 hours	Ter Arkh ALG complications study	i
+adalimumab	injection/infusion	all adalimumab SPLs route subcutaneous	openFDA SPL labels (HUMIRA, AMJEVITA)	v
+infliximab	injection/infusion	Remicade intravenous infusion; Zymfentra subcutaneous	openFDA SPL labels (REMICADE, ZYMFENTRA)	v
+tocilizumab	injection/infusion	Actemra labelled for intravenous or subcutaneous use	openFDA SPL label (ACTEMRA)	v
+secukinumab	injection/infusion	Cosentyx label lists subcutaneous and intravenous routes	openFDA SPL label (COSENTYX)	v
+ixekizumab	injection/infusion	Taltz SPL route subcutaneous	openFDA SPL label (TALTZ)	v
+ustekinumab	injection/infusion	Stelara-class SPLs list subcutaneous and intravenous routes	openFDA SPL labels (STELARA biosimilars)	v
+rituximab	injection/infusion	Rituxan intravenous; Rituxan Hycela subcutaneous after IV	openFDA SPL labels (Rituxan, Rituxan Hycela)	v
+bevacizumab	injection/infusion	Avastin SPL route intravenous infusion	openFDA SPL labels (Avastin, MVASI)	v
+trastuzumab	injection/infusion	Herceptin intravenous; Herceptin Hylecta subcutaneous	openFDA SPL labels (Herceptin, Herceptin Hylecta)	v
+cetuximab	injection/infusion	Erbitux SPL route intravenous	openFDA SPL label (ERBITUX)	v
+nivolumab	injection/infusion	Opdivo intravenous; Opdivo Qvantig subcutaneous	openFDA SPL labels (OPDIVO, OPDIVO QVANTIG)	v
+pembrolizumab	injection/infusion	Keytruda intravenous; Keytruda Qlex subcutaneous	openFDA SPL labels (KEYTRUDA, KEYTRUDA QLEX)	v
+ipilimumab	injection/infusion	Yervoy SPL route intravenous	openFDA SPL label (YERVOY)	v
+ranibizumab	injection/infusion	Lucentis SPL route intravitreal	openFDA SPL labels (LUCENTIS, Byooviz)	v
+immune globulin	injection/infusion	Gammagard Liquid intravenous 300-600 mg/kg every 3-4 weeks	openFDA label text (GAMMAGARD LIQUID, GAMUNEX-C)	v
+gammagard	injection/infusion	Gammagard Liquid intravenous and subcutaneous administration	openFDA label text (GAMMAGARD LIQUID)	v
+rabies immune globulin	injection/infusion	HyperRAB infiltrated around wound, remainder intramuscular	openFDA label text (HyperRAB S/D)	v
+vaccinia immune globulin	injection/infusion	VIGIV (CNJ-016) for intravenous use only	openFDA SPL label (CNJ-016)	v
+dornase alfa	Other	Pulmozyme inhalation solution nebulised; SPL route inhalation	openFDA SPL label (Pulmozyme)	v
+taliglucerase alfa	injection/infusion	Elelyso SPL route intravenous infusion	openFDA SPL label (ELELYSO)	v
+imiglucerase	injection/infusion	Cerezyme SPL route intravenous	openFDA SPL label (Cerezyme)	v
+asparaginase	injection/infusion	Elspar given intramuscularly (preferred) or intravenously	HemOnc.org Asparaginase (Elspar); GlobalRPh	v
+pegaspargase	injection/infusion	Oncaspar SPL routes intramuscular and intravenous	openFDA SPL label (ONCASPAR)	v
+asparaginase erwinia	injection/infusion	Erwinaze/Rylaze intramuscular administration	openFDA SPL labels (ERWINAZE, RYLAZE)	v
+rasburicase	injection/infusion	Elitek 0.2 mg/kg intravenous infusion over 30 minutes	openFDA label text (Elitek)	v
+hyaluronidase	injection/infusion	Hylenex SPL route subcutaneous, facilitates fluid dispersion	openFDA SPL label (HYLENEX Recombinant)	v
+collagenase clostridium histolyticum	injection/infusion	Xiaflex for intralesional injection into cord or plaque	openFDA label text (XIAFLEX); FDA 125338	v
+stem bromelain	Topical	NexoBrid SPL route topical; gel applied over burn eschar	openFDA SPL label (NEXOBRID); FDA 761192	v
+nexobrid	Topical	NexoBrid SPL route topical; gel applied over burn eschar	openFDA SPL label (NEXOBRID); FDA 761192	v
+lucinactant	Other	Surfaxin intratracheal suspension via endotracheal tube	RxList Surfaxin monograph; Mayo Clinic lucinactant	v
+drotrecogin alfa	injection/infusion	Xigris single continuous intravenous infusion over 96 hours	EMA press release, Xigris withdrawal 2011	v
+alteplase	injection/infusion	Activase for intravenous use; 0.9 mg/kg stroke infusion	Genentech Activase prescribing information	v
+eptacog alfa	injection/infusion	NovoSeven RT for intravenous bolus injection only	openFDA label text (NovoSeven RT)	v
+turoctocog alfa	injection/infusion	NovoEight available for injection into a vein	EMA EPAR medicine overview, NovoEight	v
+moroctocog alfa	injection/infusion	Xyntha for intravenous use after reconstitution	openFDA label text (Xyntha)	v
+nonacog alfa	injection/infusion	BeneFIX for intravenous use only	openFDA label text (BeneFIX)	v
+coagulation factor ix	injection/infusion	Ixinity for intravenous use after reconstitution only	openFDA label text (Ixinity)	v
+antihemophilic factor	injection/infusion	Advate method of administration: intravenous use	EMA Advate EPAR product information	v
+emicizumab	injection/infusion	Hemlibra SPL route subcutaneous	openFDA SPL label (Hemlibra)	v
+protein c concentrate	injection/infusion	Ceprotin administered by intravenous injection	openFDA label text (CEPROTIN)	v
+galinpepimut s	injection/infusion	GPS plus Montanide administered subcutaneously every two weeks	NCT01266083 protocol	v
+6mhp	injection/infusion	200 mcg 6MHP subcutaneously/intradermally in Montanide	NCT03617328 protocol	v
+melanoma helper peptide	injection/infusion	200 mcg 6MHP subcutaneously/intradermally in Montanide	NCT03617328 protocol	v
+gp100 peptide vaccine	injection/infusion	gp100:209-217(210M) in Montanide ISA-51 subcutaneously	NCT00020358 protocol	v
+gp100	injection/infusion	gp100:209-217(210M) in Montanide ISA-51 subcutaneously	NCT00020358 protocol	v
+tyrosinase peptide vaccine	injection/infusion	tyrosinase:368-376(370D) in Montanide ISA-51 subcutaneously	NCT00020358 protocol	v
+io102	injection/infusion	IO102 85 ug, IO103 185 ug subcutaneously every three weeks	NCT05077709 protocol	v
+io103	injection/infusion	IO102 85 ug, IO103 185 ug subcutaneously every three weeks	NCT05077709 protocol	v
+p946	injection/infusion	peptide 946 emulsified with QS21 given subcutaneously	NCT00003224 protocol	v
+ny eso 1b	injection/infusion	NY-ESO-1b with Montanide ISA-51 subcutaneously every 3 weeks	NCT00066729 protocol	v
+env 2 3	injection/infusion	50 or 250 ug env2-3(SF2) administered intramuscularly	PubMed 1988506	v
+pclus 3 18 mn	injection/infusion	volunteers receive six peptide vaccinations under the skin	NCT00001386 protocol	v
+vacc 4x	injection/infusion	Vacc-4x administered intradermally with GM-CSF adjuvant	PMC5652289	v
+whey protein hydrolysate	Oral	protein hydrolysate supplement taken orally in trials	PubMed 24401291 collagen/whey supplement review	v
+casein hydrolysate	Oral	protein hydrolysate supplement taken orally in trials	PubMed 24401291 collagen/whey supplement review	v
+beta casein	Oral	participants drank 300 mL milk, randomized crossover	PMC5657040	v
+thymosin beta 4	Topical	preservative-free eye drop instilled into each eye QID	NCT02974907 protocol	v
+rgn 259	Topical	preservative-free eye drop instilled into each eye QID	NCT02974907 protocol	v
+aviptadil	injection/infusion	IV infusion over 12 hours, 50-150 pmol/kg/hr	NCT04843761 protocol	v
+sermorelin	injection/infusion	single intravenous dose of 1.0 microgram/kg	HPRA SmPC PA0285-006-001 (Geref)	v
+tesamorelin	injection/infusion	1.4 mg injected subcutaneously once daily into abdomen	FDA label 022505s020 (Egrifta)	v
+# --- run 7: trade names, spellings and class keys the records use
+aranesp	injection/infusion	0.45 mcg/kg intravenously or subcutaneously weekly	openFDA SPL label (Aranesp)	v
+darbepoietin	injection/infusion	0.45 mcg/kg intravenously or subcutaneously weekly	openFDA SPL label (Aranesp)	v
+erythropoetin	injection/infusion	administered intravenously or subcutaneously	openFDA SPL label (Epogen, Retacrit)	v
+enbrel	injection/infusion	Enbrel SPL route: subcutaneous	openFDA SPL label (ENBREL)	v
+neulasta	injection/infusion	6 mg subcutaneously once per chemotherapy cycle	openFDA SPL label (Neulasta)	v
+neupogen	injection/infusion	injection, for subcutaneous or intravenous use	openFDA SPL label (Neupogen)	v
+leukine	injection/infusion	intravenous infusion or subcutaneous injection	openFDA SPL label (Leukine)	v
+proleukin	injection/infusion	intravenous infusion per label; low-dose subcutaneous regimens	openFDA Proleukin label	v
+campath	injection/infusion	Campath SPL route intravenous	openFDA SPL label (Campath)	v
+genotropin	injection/infusion	administer by subcutaneous injection, rotating sites	openFDA SPL label (Genotropin)	v
+norditropin	injection/infusion	administer by subcutaneous injection, rotating sites	openFDA SPL label (Norditropin)	v
+humatrope	injection/infusion	administer by subcutaneous injection, rotating sites	openFDA SPL label (Humatrope)	v
+bravelle	injection/infusion	for subcutaneous or intramuscular injection	FDA Bravelle label 021289s019	v
+menopur	injection/infusion	225 IU per day administered subcutaneously	openFDA SPL label (Menopur)	v
+pregnyl	injection/infusion	Intramuscular Use Only per label	openFDA SPL label (Pregnyl)	v
+arvekap	injection/infusion	triptorelin depot given by intramuscular injection	EMA/Ipsen triptorelin product information	v
+fertipeptil	injection/infusion	triptorelin given by subcutaneous injection	Ferring Fertipeptil product information	v
+botulinum toxin	injection/infusion	injected intramuscularly or intradermally into target muscle	openFDA SPL label (BOTOX)	v
+onabotulinumtoxin	injection/infusion	injected intramuscularly or intradermally into target muscle	openFDA SPL label (BOTOX)	v
+damoctocog	injection/infusion	Jivi for intravenous injection after reconstitution	EMA Jivi EPAR product information	v
+granulocyte colony stimulating factor	injection/infusion	subcutaneous preferable to intravenous; fewer side effects	Br J Cancer PMC2077104 CSF review	v
+granulocyte macrophage colony stimulating factor	injection/infusion	subcutaneous preferred route versus continuous IV infusion	Br J Cancer PMC2077104 CSF review	v
+colony stimulating factor	injection/infusion	subcutaneous preferred route versus continuous IV infusion	Br J Cancer PMC2077104 CSF review	v
+luteinizing hormone releasing hormone	injection/infusion	LHRH/GnRH analogues given by SC or IM depot injection	EMA/FDA GnRH-analogue product information	i
+recombinant human brain natriuretic peptide	injection/infusion	nesiritide given as IV bolus then continuous infusion	openFDA SPL label (Natrecor)	v
+hyperinsulinaemic clamp	injection/infusion	clamp technique infuses insulin intravenously at fixed rate	DeFronzo, Am J Physiol 1979;237:E214	v
+hyperinsulinemic clamp	injection/infusion	clamp technique infuses insulin intravenously at fixed rate	DeFronzo, Am J Physiol 1979;237:E214	v
+insulin clamp	injection/infusion	clamp technique infuses insulin intravenously at fixed rate	DeFronzo, Am J Physiol 1979;237:E214	v
+euglycaemic clamp	injection/infusion	clamp technique infuses insulin intravenously at fixed rate	DeFronzo, Am J Physiol 1979;237:E214	v
+euglycemic clamp	injection/infusion	clamp technique infuses insulin intravenously at fixed rate	DeFronzo, Am J Physiol 1979;237:E214	v
+glucose clamp	injection/infusion	clamp technique infuses insulin intravenously at fixed rate	DeFronzo, Am J Physiol 1979;237:E214	v
+# --- run 7: abbreviations and spellings used by the records for the same drugs
+il 1	injection/infusion	intravenous rIL-1 alpha given in aplastic anaemia trial	Walsh 1992, Br J Haematol	v
+il 2	injection/infusion	intravenous infusion per label; low-dose subcutaneous regimens	openFDA Proleukin label	v
+il 3	injection/infusion	daily subcutaneous rhIL-3 injection in phase I/II trials	MSKCC phase I/II; Br J Cancer PMC1968723	v
+il 4	injection/infusion	phase I dosing intravenously and subcutaneously	Phase I rhIL-4 trials, PMC1977892	v
+il 6	injection/infusion	daily subcutaneous interleukin-6 in phase I trial	J Clin Oncol 1993, PubMed 7680375	v
+il 7	injection/infusion	CYT107 intramuscularly; subcutaneous if anticoagulated	NCT04407689; NCT02640807 protocol	v
+il 10	injection/infusion	daily subcutaneous injections of pegilodecakin	NCT02009449	v
+il 11	injection/infusion	daily subcutaneous dosing for 14 days	Neumega prescribing information	v
+il 12	injection/infusion	recombinant interleukin-12 given subcutaneously	NCT00003210	v
+il 15	injection/infusion	phase I trials given intravenously and subcutaneously	NCT02689453 protocol	v
+il 18	injection/infusion	SB-485232 daily intravenous infusions, 5 days per cycle	NCT00107718, NCT00500058	v
+il 21	injection/infusion	intravenous bolus injection, 1-100 mcg/kg phase I	Cancer Immunol Immunother 2008;57	v
+interleukin 1	injection/infusion	intravenous rIL-1 alpha given in aplastic anaemia trial	Walsh 1992, Br J Haematol	v
+interleukin 11	injection/infusion	daily subcutaneous dosing for 14 days	Neumega prescribing information	v
+interferon alpha	injection/infusion	intramuscular, subcutaneous, intralesional or intravenous	FDA Intron A label, accessdata ifnasch110697	v
+interferon alpha 2a	injection/infusion	Roferon-A given by subcutaneous injection	Genentech Roferon-A prescribing information	v
+interferon alpha 2b	injection/infusion	for intramuscular, subcutaneous, intralesional or IV injection	FDA Intron A label, accessdata ifnasch110697	v
+antithymocyte immunoglobulin	injection/infusion	Thymoglobulin SPL route intravenous	openFDA SPL label (THYMOGLOBULIN)	v
+anti thymocyte immunoglobulin	injection/infusion	Thymoglobulin SPL route intravenous	openFDA SPL label (THYMOGLOBULIN)	v
+rfsh	injection/infusion	75 IU per day administered subcutaneously	openFDA SPL label (Gonal-f)	v
+nph	injection/infusion	NPH insulin suspension for subcutaneous injection	openFDA SPL label (Humulin N, Novolin N)	v
+protein hydrolysate	Oral	protein hydrolysate supplement taken orally in trials	PubMed 24401291 collagen/whey supplement review	v
+clamp	injection/infusion	clamp technique infuses insulin intravenously at fixed rate	DeFronzo, Am J Physiol 1979;237:E214	v
+# --- run 8: products the identification gate needs peptide status for, each
+# --- web-verified this run (methodology 14.3's prompt skeleton, 5.4's format)
+tpx 100	injection/infusion	23-amino-acid chondrogenic peptide, intra-articular injection	Arthritis Res Ther 2021;23:234 (PMC8447757); NCT01925261	v
+msi 78	Topical	pexiganan 0.8% cream applied topically to diabetic foot ulcers	Dipexium OneStep-1/2 phase 3; Clin Infect Dis 2008 trial	v
+pexiganan	Topical	pexiganan 0.8% cream applied topically to diabetic foot ulcers	Dipexium OneStep-1/2 phase 3; Clin Infect Dis 2008 trial	v
+pemziviptadil	injection/infusion	VIP-elastin-like-polypeptide fusion, subcutaneous once weekly	PhaseBio pemziviptadil (PB1046) program disclosures	v
+pb1046	injection/infusion	VIP-elastin-like-polypeptide fusion, subcutaneous once weekly	PhaseBio pemziviptadil (PB1046) program disclosures	v
+hsppc 96	injection/infusion	gp96 heat-shock-protein-peptide complex, intradermal injection	NCT03018288 protocol; J Transl Med 2010;8:9 melanoma trial	v
+oncophage	injection/infusion	gp96 heat-shock-protein-peptide complex, intradermal injection	NCT03018288 protocol; NCI drug dictionary (vitespen)	v
+vitespen	injection/infusion	gp96 heat-shock-protein-peptide complex, intradermal injection	NCT03018288 protocol; NCI drug dictionary (vitespen)	v
+ub 311	injection/infusion	UBITh Abeta1-14 synthetic peptide vaccine, intramuscular	eBioMedicine 2023 phase 2a; precisionvaccinations UB-311	v
+cenderitide	injection/infusion	chimeric natriuretic peptide, continuous subcutaneous infusion	NCT01316432; NCT03091998; PLoS ONE 2012 (PMC3525541)	v
+cd np	injection/infusion	chimeric natriuretic peptide, continuous subcutaneous infusion	NCT01316432; NCT03091998; PLoS ONE 2012 (PMC3525541)	v
+gsk2586881	injection/infusion	recombinant human ACE2 given as consecutive intravenous doses	Crit Care 2017;21:234; Eur Respir J 2018;51:1702638	v
+sp16	injection/infusion	alpha-1-antitrypsin-derived LRP1 agonist peptide, subcutaneous	PLoS ONE 2021 phase 1 (PMC8101931); NCT04225533	v
+gm604	injection/infusion	6-amino-acid MNTF analogue (FSRYAR) given by IV injection	US patent 8673852; NCT01854294 (Genervon GM6)	v
+viaject	injection/infusion	rapid-acting human insulin formulation for subcutaneous injection	Diabetologia 2008 doi 10.1007/s00125-008-1095-8	v
+shr20004	injection/infusion	noiiglutide GLP-1 peptide, multiple subcutaneous injections	NCT06137469 official title; NCT04799327 phase 2	v
+noiiglutide	injection/infusion	noiiglutide GLP-1 peptide, multiple subcutaneous injections	NCT06137469 official title; NCT04799327 phase 2	v
+tendu	injection/infusion	tetanus-epitope-targeting PAP/PSMA/NY-ESO-1 peptide vaccine	NCI drug dictionary (TENDU); Mol Ther Oncol 2025 FIH report	v
+leap 2	injection/infusion	40-amino-acid peptide given by continuous intravenous infusion	Cell Rep Med 2022;3:100582; Diabetes 2026;75:925	v
+pacap38	injection/infusion	38-residue polypeptide, 20-min IV infusion at 10 pmol/kg/min	J Headache Pain 2017;18:110 human headache models review	v
+pacap 38	injection/infusion	38-residue polypeptide, 20-min IV infusion at 10 pmol/kg/min	J Headache Pain 2017;18:110 human headache models review	v
+pepgnp	injection/infusion	peptide-gold-nanoparticle vaccine, intradermal microneedle doses	NCT07394426; Emergex PepGNP-Dengue phase 1 (Lausanne)	v
+pb1023	injection/infusion	GLP-1/elastin-like-polypeptide fusion, weekly subcutaneous dosing	NCT01658501 official title; NCT01478399; NCT01236404	v
+glymera	injection/infusion	GLP-1/elastin-like-polypeptide fusion, weekly subcutaneous dosing	NCT01658501 official title; NCT01478399; NCT01236404	v
+dpx survivac	injection/infusion	five HLA-restricted survivin peptides in a DPX lipid depot	Clin Cancer Res 2015 phase 1/1b (PMC4570133); IMV DPX platform	v
+dalargin	injection/infusion	Tyr-D-Ala-Gly-Phe-Leu-Arg lyophilisate for IV and IM injection	Dalargin-Pharmsynthesis/Dalargin-Biolik labels (compendium.com.ua)	v
+# --- run 9: the named-peptide blanks in the Unknown bucket (methodology 5.4's prompt skeleton and format)
+panitumumab	injection/infusion	6 mg/kg every 14 days as an intravenous infusion	FDA label via openFDA (Vectibix; SPL route INTRAVENOUS)	v
+emfilermin	injection/infusion	150 ug subcutaneously twice daily for 7 days	Population-PK study of emfilermin, PAGE meeting abstract	v
+baminercept alfa	injection/infusion	subcutaneous BG9924 or placebo every other week for 12 weeks	Parent-trial records NCT00458861, NCT00664716 (same 104RA program)	v
+bg9924	injection/infusion	subcutaneous BG9924 or placebo every other week for 12 weeks	Parent-trial records NCT00458861, NCT00664716 (same 104RA program)	v
+interleukin 23 monoclonal antibody	injection/infusion	IL-23 antibodies are subcutaneous and/or intravenous, never oral	FDA labels via openFDA (Skyrizi SC/IV; Omvoh SC/IV; ustekinumab SC)	v
+human menopausal gonadotropin	injection/infusion	Menopur hMG 225 IU/day administered subcutaneously	FDA label via openFDA (Menopur dosage and administration)	v
+menopausal gonadotropin	injection/infusion	Menopur hMG 225 IU/day administered subcutaneously	FDA label via openFDA (Menopur dosage and administration)	v
+recombinant follicle stimulating hormone	injection/infusion	Gonal-f recombinant FSH, SPL route SUBCUTANEOUS	FDA label via openFDA (Gonal-f; follitropin alfa)	v
+recombinant fsh	injection/infusion	Gonal-f recombinant FSH, SPL route SUBCUTANEOUS	FDA label via openFDA (Gonal-f; follitropin alfa)	v

@@ -1,0 +1,62 @@
+import json, re, csv, collections
+csv.field_size_limit(10**9)
+D = json.load(open('work/drugs.json')); drugs = D['drugs']; alias = D['alias']
+def norm(s):
+    s = (s or '').lower(); s = re.sub(r'[‐-―−]', '-', s)
+    s = s.replace('.', ' ').replace(',', ' ').replace('(', ' ').replace(')', ' ')
+    s = re.sub(r'[^a-z0-9\- ]', ' ', s)
+    return re.sub(r'\s+', ' ', s).strip()
+MAXN = 7
+def find(text):
+    """-> {dkey: set(matched alias)}"""
+    out = {}
+    t = norm(text)
+    if not t: return out
+    w = t.split(' ')
+    used = [False]*len(w)
+    for n in range(min(MAXN, len(w)), 0, -1):
+        for i in range(0, len(w)-n+1):
+            if any(used[i:i+n]): continue
+            k = ' '.join(w[i:i+n])
+            if k in alias:
+                for dk in alias[k]: out.setdefault(dk, set()).add(k)
+                for z in range(i, i+n): used[z] = True
+    return out
+EXP = {'EXPERIMENTAL'}
+CMP = {'ACTIVE_COMPARATOR', 'PLACEBO_COMPARATOR', 'SHAM_COMPARATOR', 'NO_INTERVENTION'}
+tr = {}
+for r in csv.DictReader(open('/projects/btl/ezhang/ctg_lookup/ctg_api_out/trials.csv')):
+    tr.setdefault(r['nct_id'], r)
+res = {}
+for l in open('work/ctg.jsonl'):
+    d = json.loads(l)
+    armtype = {a.get('label', ''): (a.get('type') or '') for a in d.get('arms', [])}
+    per = {}   # dkey -> {'alias':set,'ivtypes':set,'arms':set,'where':set,'ivnames':set}
+    for iv in d.get('ivs', []):
+        nm = iv.get('name', ''); on = iv.get('otherNames') or []
+        at = set(armtype.get(x, '') for x in (iv.get('armGroupLabels') or []))
+        f = find(' | '.join([nm] + on))
+        for dk, al in f.items():
+            e = per.setdefault(dk, {'alias': set(), 'ivtypes': set(), 'arms': set(), 'where': set(), 'ivnames': set()})
+            e['alias'] |= al; e['ivtypes'].add(iv.get('type') or ''); e['arms'] |= at
+            e['where'].add('intervention'); e['ivnames'].add(nm[:60])
+        # research-code / descriptions: only to catch sequences later
+    for fld, tag in ((d.get('bt', ''), 'title'), (d.get('ot', ''), 'title')):
+        for dk, al in find(fld).items():
+            e = per.setdefault(dk, {'alias': set(), 'ivtypes': set(), 'arms': set(), 'where': set(), 'ivnames': set()})
+            e['alias'] |= al; e['where'].add(tag)
+    r = tr.get(d['nct'])
+    if r:
+        for dk, al in find(' | '.join([(r['interventions'] or ''), (r['search_terms'] or '')])).items():
+            e = per.setdefault(dk, {'alias': set(), 'ivtypes': set(), 'arms': set(), 'where': set(), 'ivnames': set()})
+            e['alias'] |= al; e['where'].add('search_terms')
+    if per:
+        res[d['nct']] = {k: {'alias': sorted(v['alias']), 'ivtypes': sorted(v['ivtypes']),
+                             'arms': sorted(v['arms']), 'where': sorted(v['where']),
+                             'ivnames': sorted(v['ivnames'])} for k, v in per.items()}
+json.dump(res, open('work/match2.json', 'w'))
+cnt = collections.Counter()
+for n, f in res.items():
+    for k in f: cnt[k] += 1
+print('trials', len(res), 'drugs matched', len(cnt))
+json.dump(cnt.most_common(), open('work/match2_cnt.json', 'w'))

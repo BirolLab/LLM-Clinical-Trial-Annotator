@@ -1,0 +1,58 @@
+# side-chain key (attachment preserved as '*') -> (token, ref_CIP_for_L_form, suffix)
+SC = {
+ '*CCC=O@ring': ('(pGlu)', '', ''),
+ '*Cc1ccc2ccccc2c1': ('(2Nal)', 'S', ''),
+ '*Cc1cccc2ccccc12': ('(1Nal)', 'S', ''),
+ '*Cc1ccc(Cl)cc1': ('(Cpa)', 'S', ''),
+ '*Cc1cccnc1': ('(3Pal)', 'S', ''),
+ '*CC': ('(Abu)', 'S', ''),
+ '*CCN': ('(Dab)', 'S', ''),
+ '*CCCN': ('(Orn)', 'S', ''),
+ '*CCCC': ('(Nle)', 'S', ''),
+ '*CCCNC(N)=O': ('(Cit)', 'S', ''),
+ '*c1ccc(O)cc1': ('(Hpg)', '', ''),
+ '*CCCCNC(C)C': ('K', 'S', '(iPr)'),
+ '*C(O)C(C)CC=CC': ('(Bmt)', '', ''),
+ '*COC(C)(C)C': ('S', 'S', '(tBu)'),
+ '*CCCCN=C(NCC)NCC': ('(Har)', 'S', '(Et2)'),
+ '*Cc1ccc(NC(N)=O)cc1': ('(Aph)', 'S', '(Cbm)'),
+ '*Cc1ccc(OS(=O)(=O)O)cc1': ('Y', 'S', '(SO3H)'),
+ '*CCCCN=C(N)N': ('(Har)', 'S', ''),
+ '*C(C)(C)C': ('(Tle)', 'S', ''),
+ '*COC': ('S', 'S', '(Me)'),
+ '*CCc1ccccc1': ('(Hph)', 'S', ''),
+ '*C1CCCCC1': ('(Chg)', '', ''),
+ '*C(C)(C)S': ('(Pen)', '', ''),
+ '*Cc1ccc(N=C(N)N)cc1': ('(Aph)', 'S', '(Gu)'),
+ '*Cc1ccc(OCc2ccccc2)cc1': ('Y', 'S', '(Bzl)'),
+ '*Cc1ccc(CC)cc1': ('F', 'S', '(Et)'),
+ '*c1ccccc1': ('(Phg)', '', ''),
+ '*Cc1ccc(C(=O)c2ccccc2)cc1': ('(Bpa)', 'S', ''),
+ '*CCC': ('(Nva)', 'S', ''),
+ '*Cc1c(C)cc(O)cc1C': ('(Dmt)', 'S', ''),
+ '*CC(C)C@ring': ('(Pip)', '', ''),
+ 'C*C': ('(Aib)', '', ''),
+ '*CC(C)CC': ('(Hle)', 'S', ''),
+ '*CC(C)O@ring': ('(Hyp)', '', ''),
+ '*Cc1ccccc1C@ring': ('(Tic)', '', ''),
+ '*CC1[CH]CCCC1@ring': ('(Oic)', '', ''),
+ '*Cc1cccs1': ('(Thi)', 'S', ''),
+ '*Cc1cn(Cc2ccccc2)cn1': ('H', 'S', '(Bzl)'),
+ '*Cc1ccc(OCC)cc1': ('Y', 'S', '(Et)'),
+ '*Cc1c(C)cc(O)cc1C': ('(Dmt)', 'S', ''),
+ '*CC(c1ccccc1)c1ccccc1': ('(Dip)', 'S', ''),
+}
+# C-terminal substituent -> token
+CTERM = {
+ '*O': '', '*[O-]': '', '*N': '(NH2)', '*NCC': '(NHEt)', '*NC': '(NHMe)',
+ '*NC(CO)C(C)O': 'T(ol)', '*NNC(N)=O': '(AzaGly)(NH2)',
+ '*OC': '(OMe)', '*OCC': '(OEt)', '*NCCO': '(NH-EtOH)',
+}
+# N-terminal / N-substituent -> token
+NTERM = {
+ '*C(C)=O': '(Ac)', '*C(=O)CCS': '(Mpa)', '*C(=O)c1ccc(F)cc1': '(Fbz)',
+ '*C(=O)CCC': '(Bua)', '*C(=O)C': '(Ac)',
+}
+THREE = {'A':'Ala','C':'Cys','D':'Asp','E':'Glu','F':'Phe','G':'Gly','H':'His','I':'Ile',
+ 'K':'Lys','L':'Leu','M':'Met','N':'Asn','P':'Pro','Q':'Gln','R':'Arg','S':'Ser',
+ 'T':'Thr','V':'Val','W':'Trp','Y':'Tyr'}

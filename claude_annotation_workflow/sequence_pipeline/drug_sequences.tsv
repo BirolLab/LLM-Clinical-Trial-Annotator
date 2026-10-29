@@ -1,0 +1,233 @@
+drug_key	n_trials	sequence	confidence	source	status
+cyclosporine	707	(MeBmt)(Abu)(Sar)(MeLeu)V(MeLeu)Aa(MeLeu)(MeLeu)(MeVal)	High	ChEMBL structure CHEMBL160 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+insulin human	573	GIVEQCCTSICSLYQLENYCN/FVNQHLCGSHLVEALYLVCGERGFFYTPKT	High	NCATS GSRS protein record INSULIN HUMAN (1Y17CTI5SR) subunit sequence	generic
+insulin glargine	572	GIVEQCCTSICSLYQLENYCG/FVNQHLCGSHLVEALYLVCGERGFFYTPKTRR	High	NCATS GSRS protein record INSULIN GLARGINE (2ZM8CX04RZ) subunit sequence	annotated
+oxytocin	490	CYIQNCPLG(NH2)	High	ChEMBL structure CHEMBL395429 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+liraglutide	388	HAEGTFTSDVSSYLEGQAAKEFIAWLVRGRG	High	NCATS GSRS protein record LIRAGLUTIDE (839I73S42A) subunit sequence	annotated
+insulin aspart	339	GIVEQCCTSICSLYQLENYCN/FVNQHLCGSHLVEALYLVCGERGFFYTDKT	High	NCATS GSRS protein record INSULIN ASPART (D933668QVX) subunit sequence	annotated
+vancomycin	329		n/a		glycopeptide antibiotic - not representable in single-letter code
+leuprolide	320	(pGlu)HWSYlLRP(NHEt)	High	ChEMBL structure CHEMBL1200775 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+goserelin	271	(pGlu)HWSYs(tBu)LRP(AzaGly)(NH2)	High	ChEMBL structure CHEMBL1200501 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+insulin lispro	261	GIVEQCCTSICSLYQLENYCN/FVNQHLCGSHLVEALYLVCGERGFFYTKPT	High	NCATS GSRS protein record INSULIN LISPRO (GFX7QIS1II) subunit sequence	annotated
+glucagon-like peptide 1	248	HAEGTFTSDVSSYLEGQAAKEFIAWLVKGR(NH2)	High	NCATS GSRS protein record GLUCAGON-LIKE PEPTIDE-I(7-36) AMIDE - the circulating/administered form of native GLP-1	generic
+exenatide	243	HGEGTFTSDLSKQMEEEAVRLFIEWLKNGGPSSGAPPPS(NH2)	High	ChEMBL structure CHEMBL414357 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+tirzepatide	209	YXEGTFTSDYSIXLDKIAQKAFVQWLIAGGPSSGAPPPS(NH2)	High	NCATS GSRS protein record Tirzepatide (OYN3CCI6QE) subunit sequence	annotated
+bortezomib	205		n/a		boronic dipeptide - not representable
+triptorelin	168	(pGlu)HWSYwLRPG(NH2)	High	ChEMBL structure CHEMBL1200554 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+octreotide	155	fCFwKTCT(ol)	High	ChEMBL structure CHEMBL1200480 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+insulin detemir	153	GIVEQCCTSICSLYQLENYCN/FVNQHLCGSHLVEALYLVCGERGFFYTPK	High	NCATS GSRS protein record INSULIN DETEMIR (4FT78T86XV) subunit sequence	annotated
+glucagon	150	HSQGTFTSDYSKYLDSRRAQDFVQWLMNT	High	NCATS GSRS protein record GLUCAGON HYDROCHLORIDE (1H87NVF4DB) subunit sequence	generic
+bleomycin	146		n/a		glycopeptide - not representable
+teriparatide	137	SVSEIQLMHNLGKHLNSMERVEWLRKKLQDVHNF	High	ChEMBL structure CHEMBL525610 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+semaglutide	122	HXEGTFTSDVSSYLEGQAAKEFIAWLVRGRG	High	NCATS GSRS protein record Semaglutide (53AXN4NNHX) subunit sequence	annotated
+gonadorelin	111	(pGlu)HWSYGLRPG(NH2)	High	ChEMBL structure CHEMBL1200511 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+insulin degludec	110	GIVEQCCTSICSLYQLENYCN/FVNQHLCGSHLVEALYLVCGERGFFYTPK	High	NCATS GSRS protein record INSULIN DEGLUDEC (54Q18076QB) subunit sequence	annotated
+somatostatin	91	AGCKNFFWKTFTSC	High	NCATS GSRS protein record ALTERNATIVE DEFINITION for [SOMATOSTATIN] (None) subunit sequence	generic
+vasopressin	88	CYFQNCPRG(NH2)	High	ChEMBL structure CHEMBL373742 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+daptomycin	78		n/a		lipopeptide - not representable
+terlipressin	77	GGGCYFQNCPKG(NH2)	High	ChEMBL structure CHEMBL2135460 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+insulin glulisine	76	GIVEQCCTSICSLYQLENYCN/FVKQHLCGSHLVEALYLVCGERGFFYTPET	High	NCATS GSRS protein record INSULIN GLULISINE (7XIY785AZD) subunit sequence	annotated
+desmopressin	71	(Mpa)YFQNCPrG(NH2)	High	ChEMBL structure CHEMBL1200556 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+corticotropin	62	SYSMEHFRWGKPVGKKRRPVKVYPDGAEDQLAEAFPLEF	High	NCATS GSRS protein record Corticotropin (K0U68Q2TXA) subunit sequence	annotated
+caspofungin	59		n/a		echinocandin - not representable
+nesiritide	56	SPKMVQGSGCFGRKMDRISSSSGLGCKVLRRH	High	NCATS GSRS protein record NESIRITIDE CITRATE (EL5U85UKD2) subunit sequence	annotated
+glatiramer acetate	56		n/a		random amino-acid copolymer - no defined sequence
+glatiramer	56		n/a		random amino-acid copolymer - no defined sequence
+degarelix	53	(Ac)(d2Nal)(dCpa)(d3Pal)S(Aph)(Hor)(dAph)(Cbm)LK(iPr)Pa(NH2)	Medium	ChEMBL/PubChem structure (CID 16136245) decomposed; residue 5 = 4-aminophenylalanine N-acylated with hydroorotic acid, the one residue the automatic b	annotated
+micafungin	52		n/a		echinocandin - not representable
+dactinomycin	51		n/a		chromopeptide - not representable
+colistin	50		n/a		polymyxin - not representable
+thymalfasin	49	(Ac)SDAAVDTSSEITTKDLKEKKEVVEEAEN	High	ChEMBL structure CHEMBL2103979 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+lixisenatide	43	HGEGTFTSDLSKQMEEEAVRLFIEWLKNGGPSSGAPPSKKKKKK	High	NCATS GSRS protein record LIXISENATIDE (74O62BB01U) subunit sequence	annotated
+carfilzomib	43		n/a		peptide epoxyketone - not representable
+carbetocin	42	(Bua)Y(Me)IQNCPLG(NH2)	Medium	PubChem structure (CID 16681432) decomposed; 1-butanoyl (deamino, carba) N-terminus and O-methyl-Tyr2 restored from the structure	annotated
+parathyroid hormone	42	SVSEIQLMHNLGKHLNSMERVEWLRKKLQDVHNFVALGAPLAPRDAGSQRPRKKEDNVLVESHEKSLGEADKADVNVLTKAKSQ	High	NCATS GSRS protein record PARATHYROID HORMONE (N19A0T0E5J) subunit sequence	generic
+oxodotreotide	41	fCYwKTCT	High	PubChem structure of oxodotreotide / DOTA-TATE (CID 11170867) decomposed; DOTA chelator and radionuclide omitted	annotated
+poly-iclc	41		n/a		adjuvant, not a peptide
+ghrelin	39	GSSFLSPEHQRVQQRKESKKPPAKLQPR	High	NCATS GSRS protein record LENOMORELIN (ghrelin) subunit sequence, corroborated by the bundle UniProt precursor Q9UBU3 (appetite-regulating hormone) wh	generic
+angiotensin ii	37	DRVYIHPF	High	ChEMBL structure CHEMBL3989932 (bundle by_source/chembl.jsonl) decomposed into residues	generic
+cetrorelix	35	(Ac)(d2Nal)(dCpa)(d3Pal)SY(dCit)LRPa(NH2)	High	ChEMBL structure CHEMBL2103735 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+romidepsin	35		n/a		depsipeptide - not representable
+enfuvirtide	33	(Ac)YTSLIHSLIEESQNQQEKNEQELLELDKWASLWNWF(NH2)	High	ChEMBL structure CHEMBL525076 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+anidulafungin	30		n/a		echinocandin - not representable
+secretin human	29	HSDGTFTSELSRLREGARLQRLLQGLV(NH2)	High	NCATS GSRS protein record SECRETIN HUMAN ACETATE (RK90J5778U) subunit sequence	annotated
+avexitide	26	DLSKQMEEEAVRLFIEWLKNGGPSSGAPPPS(NH2)	High	PubChem structure of exendin(9-39) (CID 16198321) decomposed	annotated
+ganirelix	25	(Ac)(d2Nal)(dCpa)(d3Pal)SY(dHar)(Et2)L(Har)(Et2)Pa(NH2)	High	ChEMBL structure CHEMBL1251 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+eptifibatide	25	(Mpa)(Har)GDWPC(NH2)	High	ChEMBL structure CHEMBL1174 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+pramlintide	22	KCNTATCATQRLANFLVHSSNNFGPILPPTNVGSNTY(NH2)	High	ChEMBL structure CHEMBL2103758 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+insulin peglispro	22	GIVEQCCTSICSLYQLENYCN/FVNQHLCGSHLVEALYLVCGERGFFYTK(PEG)PT	High	NCATS GSRS protein record INSULIN PEGLISPRO (6Y83I5F10I) subunit sequence	annotated
+gastric inhibitory polypeptide	20	YAEGTFISDYSIAMDKIHQQDFVNWLLAQKGKKNDWKHNITQ	High	NCATS GSRS protein record GASTRIC INHIBITORY POLYPEPTIDE (1O4H75S7H2) subunit sequence	generic
+cosyntropin	20	SYSMEHFRWGKPVGKKRRPVKVYP	High	ChEMBL structure CHEMBL2103784 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+gp-100 antigen	20		n/a		full-length antigen record, not the vaccine peptide
+oligopeptide-104	19	(Ac)QQRFEWEFEQQ(NH2)	High	NCATS GSRS record OLIGOPEPTIDE-104 subunit sequence; N-acetyl / C-amide from the same record	annotated
+glucagon-like peptide ii	19	HADGSFSDEMNTILDNLAARDFINWLIQTKITD	High	NCATS GSRS protein record GLUCAGON-LIKE PEPTIDE II (0825W549JC) subunit sequence	generic
+polymyxin b	19		n/a		polymyxin - not representable
+edotreotide	17	fCYwKTCT(ol)	High	PubChem structure of edotreotide / DOTA-TOC (CID 158782) decomposed; DOTA chelator and radionuclide omitted	annotated
+buserelin	17	(pGlu)HWSYs(tBu)LRP(NHEt)	High	ChEMBL structure CHEMBL2106198 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+bacitracin	17		n/a		cyclic peptide antibiotic - not representable
+colistimethate	17		n/a		polymyxin - not representable
+teicoplanin	16		n/a		glycopeptide antibiotic - not representable
+calcitonin salmon	15	CSNLSTCVLGKLSQELHKLQTYPRTNTGSGTP(NH2)	High	NCATS GSRS protein record CALCITONIN SALMON ACETATE (PHO3A1OI4I) subunit sequence	annotated
+aprotinin	15		n/a		full-length bovine protease-inhibitor protein - not annotated
+carnosine	15		n/a		beta-alanyl dipeptide - beta-linkage not representable
+protamine	15	PRRRRSSSRPVRRRRRPRVSRRRRRRGGRRRR	High	NCATS GSRS protein record ALTERNATIVE DEFINITION for [PROTAMINE SULFATE] (None) subunit sequence	annotated
+tertomotide	14	EARPALLTSRLRFIPK	High	NCATS GSRS protein record TERTOMOTIDE HYDROCHLORIDE (EBE6EA8IZM) subunit sequence	annotated
+insulin icodec	14	GIVEQCCTSICSLEQLENYCN/FVNQHLCGSHLVEALHLVCGERGFHYTPK	High	NCATS GSRS protein record Insulin Icodec (P7YU3ED05N) subunit sequence	annotated
+thymosin	14		n/a		ambiguous; thymalfasin (thymosin alpha-1) handled separately
+talfirastide	13	DRVYIHP	High	ChEMBL structure CHEMBL3545347 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+ixazomib	13		n/a		boronic dipeptide - not representable
+disomotide	12	IMDQVPFSV	High	ChEMBL structure CHEMBL263429 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+apelin	12	GSLMPLPDGNGLEDGNVRHLVQPRGSRNGPGPWQGGRRKFRRQRPRLSHKGPMPF	High	NCATS GSRS protein record APELIN (7P5ZL6T59Y) subunit sequence	generic
+bradykinin	12	RPPGFSPFR	High	NCATS GSRS protein record BRADYKININ (S8TIM42R2W) subunit sequence	generic
+kisspeptin	11	GTSLSPPPESSGSPQQPGLSAPHSRQIPAPQGAVLVQREKDLPNYNWNSFGLRF(NH2)	Medium	kisspeptin-54 (metastin) cut from the bundle UniProt precursor Q15726 (metastasis-suppressor KiSS-1): the 54 residues ending at the C-terminal YNWNSFG	generic
+pasireotide	10		n/a		cyclohexapeptide with non-proteinogenic residues - not representable
+serelaxin	10	DSWMEEVIKLCGRELVRAQIAICGMSTWS/(pGlu)LYSALANKCCHVGCTKRSLARFC	High	NCATS GSRS protein record SERELAXIN (W0122B976Y) subunit sequence	annotated
+lanreotide	10	(d2Nal)CYwKVCT(NH2)	High	ChEMBL structure CHEMBL1201184 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+abaloparatide	10	AVSEHQLLHDKGKSIQDLRRRELLEKLLXKLHTA(NH2)	High	NCATS GSRS protein record ABALOPARATIDE ACETATE (C4LQA2B9H4) subunit sequence	annotated
+survivin	10		n/a		full-length antigen record, not the vaccine peptide
+calcitonin gene-related peptide	9	ACDTATCVTHRLAGLLSRSGGVVKNNFVPTNVGSKAF(NH2)	High	NCATS GSRS protein record CALCITONIN GENE-RELATED PEPTIDE (JHB2QIZ69Z) subunit sequence	generic
+aviptadil	9	HSDAVFTDNYTRLRKQMAVKKYLNSILN	High	ChEMBL structure CHEMBL1981592 (bundle by_source/chembl.jsonl) decomposed into residues	generic
+substance p	9	RPKPQQFFGLM(NH2)	High	NCATS GSRS protein record SUBSTANCE P (675VGV5J1D) subunit sequence	generic
+amylin	8	KCNTATCATQRLANFLVHSSNNFGAILSSTNVGSNTY(NH2)	Medium	human amylin (IAPP 34-70) cut from the bundle UniProt precursor P10997 (islet amyloid polypeptide); C-terminally amidated	generic
+angiotensin	8		n/a		ambiguous ChEMBL record; angiotensin I and II handled separately
+telavancin	8		n/a		lipoglycopeptide antibiotic - not representable
+apraglutide	7	HGDGSFSDE(Nle)fTILDLLAARDFINWLIQTKITD	High	NCATS GSRS protein record Apraglutide Sodium (WBW452GZ6Z) subunit sequence	annotated
+dasiglucagon	7	HSQGTFTSDYSKYLDXARAEEFVKWLEST	High	NCATS GSRS protein record DASIGLUCAGON HYDROCHLORIDE (YQX12245A9) subunit sequence	annotated
+motixafortide	7	(Fbz)RR(2Nal)CY(dCit)KkPYR(Cit)CR(NH2)	High	ChEMBL structure CHEMBL5095030 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+liver-expressed antimicrobial peptide 2	7	MTPFWRGVSLRPIGASCRDDSECITRLCRKRRCSLSVAQE	High	NCATS GSRS protein record Liver-expressed antimicrobial peptide 2 (A4E5SCW9Z5) subunit sequence	annotated
+peginesatide	7	(Ac)GGLYACHMGPIT(1Nal)VCQPLA(Sar)K(PEG)/(Ac)GGLYACHMGPIT(1Nal)VCQPLA(Sar)K(PEG)	High	NCATS GSRS protein record PEGINESATIDE (JX56W9N61Q) subunit sequence	annotated
+histrelin	7	(pGlu)HWSYh(Bzl)LRP(NHEt)	High	PubChem structure (CID 25077993) decomposed	annotated
+vosoritide	7	PGQEHPNARKYKGANKKGLSKGCFGLKLDRIGSMSGLGC	High	NCATS GSRS protein record VOSORITIDE (7SE5582Q2P) subunit sequence	annotated
+angiotensin i	7	DRVYIHPFHL	High	NCATS GSRS protein record ANGIOTENSIN I (9C880YQG7C) subunit sequence	generic
+dalbavancin	7		n/a		lipoglycopeptide antibiotic - not representable
+cagrilintide	6	KCNTATCATQRLAEFLRHSSNNFGPILPPTNVGSNTP(NH2)	High	NCATS GSRS protein record Cagrilintide hydrochloride (3SBY6D7WH7) subunit sequence	annotated
+bivalirudin	6	fPRPGGGGNGDFEEIPEEYL	High	PubChem structure (CID 16129704) decomposed; the GSRS subunit sequence writes the N-terminal D-Phe as X	annotated
+nelipepimut-s	6	KIFGSLAFL	High	NCATS GSRS protein record NELIPEPIMUT-S ACETATE (HAB4B44DVX) subunit sequence	annotated
+taspoglutide	6	HXEGTFTSDVSSYLEGQAAKEFIAWLVKXR(NH2)	High	NCATS GSRS protein record TASPOGLUTIDE (2PHK27IP3B) subunit sequence	annotated
+mazdutide	6	HXQGTFTSDYSKYLDEKKAKEFVEWLLEGGPSSG(NH2)	High	NCATS GSRS protein record MAZDUTIDE (MB76Z4IBZ5) subunit sequence	annotated
+tetanus toxoid helper peptide	6	QYIKANSKFIGITEL	High	NCATS GSRS protein record TETANUS TOXOID HELPER PEPTIDE (GN2UOJ9QUZ) subunit sequence	generic
+tesamorelin	6	YADAIFTNSYRKVLGQLSARKLLQDIMSRQQGESNQERGARARL(NH2)	High	NCATS GSRS protein record TESAMORELIN ACETATE (LGW5H38VE3) subunit sequence	annotated
+svn53-67 m57-klh peptide vaccine	6	DLAQMFFCFKELEGW	High	NCATS GSRS protein record SVN53-67/M57-KLH PEPTIDE VACCINE (HK7BJ56KSP) subunit sequence	annotated
+diapep-277	5	VLGGGVALLRVIPALDSLTPANED	High	NCATS GSRS protein record DIAPEP-277 (F8778UWB0A) subunit sequence	annotated
+peptide yy human 3-36	5	IKPEAPGEDASPEELNRYYASLRHYLNLVTRQRY(NH2)	High	NCATS GSRS protein record PEPTIDE YY HUMAN (3-36) (7PQZ90ULIR) subunit sequence	generic
+nafarelin	5	(pGlu)HWSY(d1Nal)LRPG(NH2)	High	ChEMBL structure CHEMBL1200671 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+ovemotide	5	YLEPGPVTV	High	ChEMBL structure CHEMBL263441 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+ribupatide	5	YXEGTFTSDYSIYKEKIAAQEFVNWLLAGGPSSGAPPPS(NH2)	High	NCATS GSRS protein record Ribupatide (58K8SFK97C) subunit sequence	annotated
+adrenomedullin	5	YRQSMNNFQGLRSFGCRFGTCTVQKLAHQIYQFTDKDKDNVAPRSKISPQGY(NH2)	High	NCATS GSRS protein record ADRENOMEDULLIN (QA0A21Y20D) subunit sequence	generic
+sincalide	5	DY(SO3H)MGWMDF(NH2)	High	PubChem structure (CID 9833444) decomposed	annotated
+beinaglutide	5	HAEGTFTSDVSSYLEGQAAKEFIAWLVKGR	High	NCATS GSRS protein record BEINAGLUTIDE (38I1O6L31D) subunit sequence	annotated
+teduglutide	5	HGDGSFSDEMNTILDNLAARDFINWLIQTKITD	High	ChEMBL structure CHEMBL2104987 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+eloralintide	5	CNTATCATGX(Orn)AEFLVRSSNNFGPKLPPTEVGSNTY(NH2)	High	NCATS GSRS protein record Eloralintide (73G3354J8W) subunit sequence	annotated
+ruxotemitide	5	KKWWKKWFK(NH2)	High	NCATS GSRS protein record ALTERNATIVE DEFINITION for [RUXOTEMITIDE] (None) subunit sequence	annotated
+endothelin-1	5	csCsSlMdKEcVyFCHLDIIW	High	ChEMBL structure CHEMBL437472 (bundle by_source/chembl.jsonl) decomposed into residues	generic
+peptide yy human	4	YPIKPEAPGEDASPEELNRYYASLRHYLNLVTRQRY(NH2)	High	NCATS GSRS protein record PEPTIDE YY HUMAN (T2670C12I5) subunit sequence	generic
+tecemotide	4	STAPPAHGVTSAPDTRPAPGSTAPPKG	High	NCATS GSRS protein record Tecemotide (Q7Y026G2CX) subunit sequence	annotated
+pr1 leukemia peptide vaccine	4	VLQELNVTV	High	NCATS GSRS protein record PR1 LEUKEMIA PEPTIDE VACCINE (54XUF2TZ7G) subunit sequence	annotated
+veldoreotide	4	(2Nal)cY(dAph)KTF	Low	PubChem structure (CID 9919857) partial decomposition	annotated
+labuvirtide	4	(Ac)WEEWDREINNYTKLIHELIEESQNQQEKNEQELL(NH2)	High	NCATS GSRS protein record Labuvirtide (MG9PC54E43) subunit sequence	annotated
+nerofe	4	wwtfflpstlwerk	Low	ChEMBL structure decomposed; the structure assigns a D-configuration at every residue, which could not be confirmed against a second source	annotated
+lsalt peptide	4	LSALTPSPSWLKYKAL	High	NCATS GSRS protein record LSALT PEPTIDE (7A1PJO5PCK) subunit sequence	annotated
+pwt-126 peptide	4	RMFPNAPYL	High	NCATS GSRS protein record pWT-126 peptide (BRC9B0Q0F3) subunit sequence	annotated
+icatibant	4	rRP(Hyp)G(Thi)S(Tic)(Oic)R	High	PubChem structure (CID 6918173) decomposed	annotated
+satoreotide trizoxetan	4	(Cpa)cY(dAph)(Cbm)KTCy(NH2)	Medium	PubChem structure (CID 121488181) decomposed; chelator omitted	annotated
+etimupepimut	4	FMTYWHLLNAFTVTVPKDL	High	NCATS GSRS protein record Etimupepimut (49CUA4ZSL9) subunit sequence	annotated
+cenderitide	4	GLSKGCFGLKLDRIGSMSGLGCPSLRDPRPNAPSTSA	High	NCATS GSRS protein record CENDERITIDE (9NKZ9LYZ06) subunit sequence	annotated
+pituitary adenylate cyclase-activating polypeptide 38	4	HSDGIFTDSYSRYRKQMAVKKYLAAVLGKRYKQRVKNK(NH2)	High	NCATS GSRS protein record PITUITARY ADENYLATE CYCLASE-ACTIVATING POLYPEPTIDE 38 (LK78T72MLT) subunit sequence	generic
+parathyroid hormone-related protein 1-36	4	AVSEHQLLHDKGKSIQDLRRRFFLHHLIAEIHTAEI	High	NCATS GSRS protein record PARATHYROID HORMONE-RELATED PROTEIN 1-36 (42VQY191QQ) subunit sequence	generic
+corticorelin	4	SEEPPISLDLTFHLLREVLEMARAEQLAQQAHSNRKLMEII(NH2)	High	NCATS GSRS protein record CORTICORELIN (305OE8862Y) subunit sequence	annotated
+gip 3-30 nh2	4	EGTFISDYSIAMDKIHQQDFVNWLLAQK(NH2)	High	NCATS GSRS protein record GIP(3-30)NH2 (0406YMG3U7) subunit sequence	annotated
+bremelanotide	4	(Ac)(Nle)DHfRWK	Medium	PubChem structure (CID 9941379) decomposed; Asp-Lys lactam bridge re-joined	annotated
+cilengitide	4	(MeVal)RGDf	High	ChEMBL structure CHEMBL429876 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+albuvirtide	4	(Ac)WEEWDREINNYTK(PEG)LIHELIEESQNQQEKNEQELL(NH2)	High	ChEMBL structure CHEMBL4297257 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+peptide t	4	ASTTTNYT	High	ChEMBL structure CHEMBL180971 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+apelin-13	3	QRPRLSHKGPMPF	High	NCATS GSRS protein record APELIN-13 (GF5K6G6AH3) subunit sequence	annotated
+urocortin-3	3	FTLSLDVPTNIMNLLFNIAKAKNLRAQAAANAHLMAQI(NH2)	High	NCATS GSRS protein record UROCORTIN-3 (58TAO752XF) subunit sequence	generic
+urocortin-2	3	IVLSLDVPIGLLQILLEQARARAAREQATTNARILARVGHC	High	NCATS GSRS protein record UROCORTIN-2 (2IH21SQ983) subunit sequence	generic
+evuzamitide	3	GGGYSKAQKAQAKQAKQAQKAQKAQAKQAKQAQKAQKAQAKQAKQ	High	NCATS GSRS protein record EVUZAMITIDE (TQ491F7XEU) subunit sequence	annotated
+neurotensin	3	(pGlu)LYENKPRRPYIL	High	ChEMBL structure CHEMBL407196 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+neuropeptide y	3	YPSKPDNPGEDAPAEDMARYYSALRHYINLITRQRT(NH2)	High	NCATS GSRS protein record NEUROPEPTIDE Y (BY7U39XXK0) subunit sequence	generic
+surotomycin	3		n/a		lipopeptide - not representable
+melanoma antigen recognized by t-cells 1	3		n/a		full-length antigen record, not the vaccine peptide
+corticorelin ovine	3	SQEPPISLDLTFHLLREVLEMTKADQLAQQAHSNRKLLDIA(NH2)	High	NCATS GSRS protein record CORTICORELIN OVINE (Y124TZ0513) subunit sequence	annotated
+larazotide	3	GGVLVQPG	High	ChEMBL structure CHEMBL2103815 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+cibinetide	3	(pGlu)EQLERALNSS	High	ChEMBL structure CHEMBL3545305 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+pegloxenatide	3	HaEGTFTSDLSKQ(Nle)EEEAVRLFIEWLKQGGPSSGAPPPC	High	NCATS GSRS protein record PEGLOXENATIDE (BS678C7JWM) subunit sequence	annotated
+ularitide	3	TAPRSLRRSSCFGGRMDRIGAQSGLGCNSFRY	High	ChEMBL structure CHEMBL2103920 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+ecnoglutide	3	HVEGTFTSDVSSYLEEQAAREFIKWLVRGRG	High	NCATS GSRS protein record ECNOGLUTIDE (KM6YM7L8LH) subunit sequence	annotated
+pancreatic polypeptide	3	APLEPVYPGDNATPEQMAQYAADLRRYINMLTRPRY(NH2)	High	NCATS GSRS protein record PANCREATIC POLYPEPTIDE (UDH73690IV) subunit sequence	generic
+elamipretide	3	r(Dmt)KF(NH2)	High	ChEMBL structure CHEMBL3833370 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+oritavancin	3		n/a		lipoglycopeptide antibiotic - not representable
+thymosin beta -4	2	(Ac)SDKPDMAEIEKFDKSKLKKTETQEKNPLPSKETIEQEKQAGES	Medium	NCATS GSRS record THYMOSIN .BETA.-4 subunit sequence (N-acetyl only; the record's further post-translational variants are not part of the drug substan	annotated
+gp-2 her2-derived hla-a2 restricted peptide	2	IISAVVGIL	High	NCATS GSRS protein record GP-2 HER2-DERIVED, HLA-A2+ RESTRICTED PEPTIDE (FQA52PV28G) subunit sequence	annotated
+nepidermin	2		n/a		recombinant EGF growth factor - not annotated
+linaclotide	2	CCEYCCNPACTGCY	High	NCATS GSRS protein record LINACLOTIDE (N0TXR0XR5X) subunit sequence	annotated
+hlf 1-11	2	GRRRRSVQWCA	High	NCATS GSRS protein record HLF(1-11) (72YOI2Q5AK) subunit sequence	annotated
+insulin tregopil	2	GIVEQCCTSICSLYQLENYCN/FVNQHLCGSHLVEALYLVCGERGFFYTPKT	High	NCATS GSRS protein record INSULIN TREGOPIL (3UYC0OZ5ON) subunit sequence	annotated
+nisotirostide	2	PKPEKPGEDASPEEWQRYYAELRHYLNWLTRQRY	High	NCATS GSRS protein record Nisotirostide (3R5UFO57X5) subunit sequence	annotated
+certepetide	2	(Ac)CRGDKGPDC(NH2)	High	NCATS GSRS protein record Certepetide (7PF4546T2P) subunit sequence	annotated
+enicepatide	2	XEGTFTSDYSIXLDKIAQKAFVQWLIAGGPSSGAPPPS(NH2)	High	NCATS GSRS protein record Enicepatide (MTP9QR7GYF) subunit sequence	annotated
+adegrapepimut-s	2	WAPVLDFAPPGASAYGSL	High	NCATS GSRS protein record ADEGRAPEPIMUT-S (4XQ7W02EQ0) subunit sequence	annotated
+imsapepimut	2	DTLLKALLEIASCLEKALQVF	High	NCATS GSRS protein record Imsapepimut (V74I849BP9) subunit sequence	annotated
+elatipepimut-s	2	CRMFPNAPYL|CYTWNQMNL	High	NCATS GSRS protein record ELATIPEPIMUT-S: the record lists the two vaccine peptides as separate subunits, reported here as two peptides	annotated
+gi heptapeptide	2	ASYNYDAGGGSK	High	NCATS GSRS protein record GI HEPTAPEPTIDE (D33CAJ796A) subunit sequence	annotated
+retatrutide	2	YAQGTFTSDYSILLDKKAQAAFIEYLLEGGPSSGAPPPS	High	NCATS GSRS protein record Retatrutide (NOP2Y096GV) subunit sequence	annotated
+qrh-882260	2	QRHKPREGGGSK	High	NCATS GSRS protein record QRH-882260 (HL2W44VNI8) subunit sequence	annotated
+pegmolesatide	2	(Ac)GGTYSCHFGALTWVCRPQRGXK(PEG)/(Ac)GGTYSCHFGALTWVCRPQRGXK(PEG)	High	NCATS GSRS protein record PEGMOLESATIDE (M2JRK2KK4S) subunit sequence	annotated
+survodutide	2	HXQGTFTSDYSKYLDERAAKDFIKWLESA	High	NCATS GSRS protein record Survodutide (2ALA66NS64) subunit sequence	annotated
+cotadutide	2	HSQGTFTSDKSEYLDSERARDFVAWLEAGG	High	NCATS GSRS protein record ALTERNATIVE DEFINITION for [COTADUTIDE] (None) subunit sequence	annotated
+cbx-129801	2	(PEG)EAEDLQVGQVELGGGPGAGSLQPLALEGSLQ	High	NCATS GSRS protein record CBX-129801 (IF95YG4W0P) subunit sequence	annotated
+voclosporin	2	(MeBmt)(Abu)(Sar)(MeLeu)V(MeLeu)Aa(MeLeu)(MeLeu)(MeVal)	High	ChEMBL structure CHEMBL5314379 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+proinsulin human	2	FVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAEDLQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN	High	NCATS GSRS protein record PROINSULIN HUMAN (D91579HJ6E) subunit sequence	generic
+xenin	2	MLTKFETKSARVKGLSFHPKRPWIL	High	NCATS GSRS protein record XENIN (4ANL10E72A) subunit sequence	generic
+bevonescein	2	QVPWEEPYYVVKKSSGG	High	NCATS GSRS protein record Bevonescein (5RG113V7K3) subunit sequence	annotated
+dalazatide	2	(PO3H2)YXRSCIDTIPKSRCTAFQCKHSMKYRLSFCRKTCGTC(NH2)	High	NCATS GSRS protein record DALAZATIDE (6U0259J807) subunit sequence	annotated
+ltx-109	2		n/a		peptidomimetic with non-amino-acid residues - not representable
+macimorelin	2		n/a		peptidomimetic (D-Trp aldehyde) - not representable
+solnatide	1	CGQRETPEGAEAKPWYC	High	NCATS GSRS protein record SOLNATIDE (17ZS80333G) subunit sequence	annotated
+bpc-157	1	GEPPPGKPADDAGLV	High	ChEMBL structure CHEMBL4297358 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+tridecactide	1	SYSMEHFRWGKPV	High	NCATS GSRS protein record TRIDECACTIDE (T7PQK27HTI) subunit sequence	annotated
+gepon	1	TEKKRRETVEREKE	High	NCATS GSRS protein record Gepon (EHL7X7N9M9) subunit sequence	annotated
+berobenatide	1	FXEGTFTSDVSKQLEEKRVREFIEWLKQGGPSSGKPPPGKK	High	NCATS GSRS protein record Berobenatide (UN3RWY4TEG) subunit sequence	annotated
+hepcidin	1	DTHFPICIFCCGCCHRSKCGMCCKT	High	NCATS GSRS protein record HEPCIDIN ACETATE (CR8LH47UDV) subunit sequence	generic
+acetyl hexapeptide-8 amide	1		n/a		no sequence found
+c-x-c motif chemokine 9	1		n/a		chemokine, not a drug
+cap 1-6d	1	YLSGADLNL	High	NCATS GSRS protein record CAP 1-6D (OG9WI57DJZ) subunit sequence	annotated
+secretin porcine	1	HSDGTFTSELSRLRDSARLQRLLQGLV(NH2)	High	NCATS GSRS protein record SECRETIN PORCINE (D0L9J6I13I) subunit sequence	annotated
+satoreotide tetraxetan	1	(Cpa)cY(dAph)(Cbm)KTCy(NH2)	Medium	PubChem structure (CID 121488181) decomposed; chelator omitted	annotated
+cystatin-c	1		n/a		plasma protein, not a drug
+tiprelestat	1		n/a		engineered 56-aa protein (depelestat) - not annotated
+reltecimod	1	aSPMLVAYDa	High	ChEMBL structure CHEMBL3989950 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+ozarelix	1	(Ac)(d2Nal)(dCpa)(d3Pal)SYk(Nle)RPa(NH2)	High	NCATS GSRS protein record ALTERNATIVE DEFINITION for [OZARELIX ACETATE] (None) subunit sequence	annotated
+ir-208	1	LGQGPEFLTYFQNEAQLEKS	High	NCATS GSRS protein record IR-208 (6532E45BS6) subunit sequence	annotated
+cibg-300	1	GRKKRRQRRRPPQXCWMSPRHLGTC	High	NCATS GSRS protein record CIBG-300 (X6HMT2EDH9) subunit sequence	annotated
+ir-401	1	GLRLIHYSVGAGITDQGEV	High	NCATS GSRS protein record IR-401 (VYD9GJM8HP) subunit sequence	annotated
+gp-100 peptide 209-217	1	ITDQVPFSV	High	NCATS GSRS protein record GP-100 peptide (209-217) (SZ4SE9C6KC) subunit sequence	annotated
+mecasermin	1		n/a		recombinant IGF-1 growth factor - not annotated
+mk-2640	1	GIVEQCCTSICSLYQLENYCN/FVNQHLCGSHLVEALYLVCGERGFFYTPKT	High	NCATS GSRS protein record MK-2640 (K9M5MM2857) subunit sequence	annotated
+lti-03	1		n/a		no sequence found
+atosiban	1	(Mpa)y(Et)ITNCP(Orn)G(NH2)	High	PubChem structure (CID 5311010) decomposed	annotated
+alanyl glutamine	1		n/a		nutritional dipeptide, not a peptide drug under test
+plecanatide	1	NDECELCVNVACTGCL	High	NCATS GSRS protein record PLECANATIDE (7IK8Z952OK) subunit sequence	annotated
+davunetide	1	NAPVSIPQ	High	ChEMBL structure CHEMBL2103826 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+kisspeptin-10	1	YNWNSFGLRF(NH2)	High	NCATS GSRS record KISSPEPTIN-10 (UNII) subunit sequence	annotated
+immucin	1	MTPGTQSPFFLLLLLTVLTVV	High	NCATS GSRS protein record IMMUCIN (YRY1GG3QHU) subunit sequence	annotated
+nangibotide	1	LQEEDAGEYGCM(NH2)	High	NCATS GSRS protein record NANGIBOTIDE (59HD7BLX9H) subunit sequence	annotated
+pegcetacoplan	1	(Ac)ICV(MeTrp)QDWGAHRCTK(PEG)/(Ac)ICV(MeTrp)QDWGAHRCTK(PEG)	High	NCATS GSRS protein record PEGCETACOPLAN (TO3JYR3BOU) subunit sequence	annotated
+macupatide	1	YXEGTFISDYSIXLDKXHQXDFVEXLLEAGPSSGAPPPS(NH2)	High	NCATS GSRS protein record Macupatide (YWF427CA5D) subunit sequence	annotated
+dirucotide	1	DENPVVHFFKNIVTPRT	High	NCATS GSRS protein record DIRUCOTIDE subunit sequence (the ChEMBL structure assigns a D-configuration at Ile which the GSRS record does not)	annotated
+gastrin-releasing peptide	1	APVSVGGGTVLAKMYPRGNHWAVGHLM	High	NCATS GSRS protein record GASTRIN-RELEASING PEPTIDE (WY6P2F47ZG) subunit sequence	generic
+felypressin	1	CFFQNCPKG(NH2)	High	NCATS GSRS protein record FELYPRESSIN (17N2918V6G) subunit sequence	annotated
+stromal cell-derived factor 1	1		n/a		chemokine, not a drug
+abarelix	1	(Ac)(d2Nal)(dCpa)(d3Pal)S(MeTyr)nLK(iPr)Pa(NH2)	High	ChEMBL structure CHEMBL1252 (bundle by_source/chembl.jsonl) decomposed into residues	annotated
+bofanglutide	1	HGEGTFTSDVSSYLEGQAAXEFIAWLVRGRG	High	NCATS GSRS protein record Bofanglutide (X9RLV48FDH) subunit sequence	annotated
+procalcitonin	1		n/a		precursor protein, not a drug
+carperitide	1	SLRRSSCFGGRMDRIGAQSGLGCNSFRY	High	NCATS GSRS protein record CARPERITIDE (GZ8FA500J0) subunit sequence	annotated
+cafraglutide	1	HAEGTFTSDYSSYLEEQAAKEFIAWLVKGGGGGGGSGGGGSGGGGSK	High	NCATS GSRS protein record Cafraglutide (G5D46XS399) subunit sequence	annotated
+insulin b-chain human	1	FVNQHLCGSHLVEALYLVCGERGFFYTPKT	High	NCATS GSRS protein record INSULIN B-CHAIN, HUMAN (26MWP75AKL) subunit sequence	generic
+oxyntomodulin	1	HSQGTFTSDYSKYLDSRRAQDFVQWLMNTKRNKNNIA	High	ChEMBL structure CHEMBL2401865 (bundle by_source/chembl.jsonl) decomposed into residues	generic
+telaprevir	1		n/a		peptidomimetic protease inhibitor - not a peptide drug
+danicopan	1		n/a		small molecule - not a peptide
+oprozomib	1		n/a		peptide epoxyketone - not representable
+vemircopan	1		n/a		small molecule - not a peptide
+bms-686117	1		n/a		peptidomimetic with multiple non-proteinogenic residues
+melanoma antigen recognized by t-cells	1		n/a		full-length antigen record, not the vaccine peptide
